@@ -32,8 +32,7 @@ public class Mascota {
 	private Date fecha;
 	private String especie;
 	private Boolean alta;
-	@OneToOne
-	private Zona zona;
+	private String zona;
 	
 	public String getId() {
 		return id;
@@ -71,10 +70,10 @@ public class Mascota {
 	public void setTamaño(String tamaño) {
 		this.tamaño = tamaño;
 	}
-	public Zona getZona() {
+	public String getZona() {
 		return zona;
 	}
-	public void setZona(Zona zona) {
+	public void setZona(String zona) {
 		this.zona = zona;
 	}
 	public Boolean getEncontrado() {
@@ -103,8 +102,7 @@ public class Mascota {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(alta, color, descripcion, encontrado, especie, fecha, id, nombre, raza, tamaño,
-				zona);
+		return Objects.hash(alta, color, descripcion, encontrado, especie, fecha, id, nombre, raza, tamaño, zona);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -119,15 +117,18 @@ public class Mascota {
 				&& Objects.equals(descripcion, other.descripcion) && Objects.equals(encontrado, other.encontrado)
 				&& Objects.equals(especie, other.especie) && Objects.equals(fecha, other.fecha)
 				&& Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(raza, other.raza)
-				&& Objects.equals(tamaño, other.tamaño) && Objects.equals(zona, other.zona);
+				&& Objects.equals(raza, other.raza) && Objects.equals(tamaño, other.tamaño)
+				&& Objects.equals(zona, other.zona);
 	}
 	@Override
 	public String toString() {
 		return "Mascota [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", color=" + color
-				+ ", raza=" + raza + ", tamaño=" + tamaño + ", zona=" + zona  + ", encontrado="
-				+ encontrado + ", fecha=" + fecha + ", especie=" + especie + ", alta=" + alta + "]";
+				+ ", raza=" + raza + ", tamaño=" + tamaño + ", encontrado=" + encontrado + ", fecha=" + fecha
+				+ ", especie=" + especie + ", alta=" + alta + ", zona=" + zona + "]";
 	}
+	
+	
+	
 	
 	
 }
