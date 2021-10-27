@@ -35,6 +35,9 @@ public class Mascota {
 	@OneToOne
 	private Zona zona;
 	
+	
+	public Mascota() {
+	}
 	public String getId() {
 		return id;
 	}
