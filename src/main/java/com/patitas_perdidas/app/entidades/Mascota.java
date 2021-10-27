@@ -35,7 +35,11 @@ public class Mascota {
 	@OneToOne
 	private Foto foto;
 	private String zona;
+
 	
+	public Mascota() {
+	
+	}
 	public Foto getFoto() {
 		return foto;
 	}
