@@ -32,8 +32,16 @@ public class Mascota {
 	private Date fecha;
 	private String especie;
 	private Boolean alta;
+	@OneToOne
+	private Foto foto;
 	private String zona;
 	
+	public Foto getFoto() {
+		return foto;
+	}
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
 	public String getId() {
 		return id;
 	}
