@@ -26,7 +26,7 @@ public class Mascota {
 	private String raza;
 	private String tamaño;
 	private Boolean encontrado;
-//para pasar de string (lo que toma del html) a date	
+	//para pasar de string (lo que toma del html a date	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date fecha;
