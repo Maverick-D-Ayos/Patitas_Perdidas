@@ -31,9 +31,8 @@ public class PersonaControlador {
 	}
 	
 	@GetMapping("/registro")
-	public String formulario(){
-		
-		return "form-persona";
+	public String formulario(){	
+		return "registro.html";
 	}
 	
 	@PostMapping("/registro")
@@ -42,10 +41,10 @@ public class PersonaControlador {
 		try {
 			personaServicio.guardar(id, nombre, telefono, mail, clave, alta);
 			modelo.put("exito", "Registro exitoso");
-			return "form-persona";
+			return "registro.html";
 		} catch (Exception e) {
 			modelo.put("error", "Registro fallido");
-			return "form-persona";
+			return "registro.html";
 		}
 		
 	}
@@ -70,6 +69,7 @@ public class PersonaControlador {
 		}
 			
 	}
+}
 	
 	
 	
