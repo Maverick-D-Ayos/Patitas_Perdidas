@@ -1,0 +1,20 @@
+body{
+    background-color: #454545;
+    color: rgb(253, 251, 247);
+    margin: 1%;
+    padding: 10px;
+}
+.formulario-registro{
+    background-color: rgba(12, 4, 4, 0);
+    width: 50%;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 2px solid white;
+}
+.formulario-registro label input{
+    padding: 2%;
+    justify-content: center;
+}

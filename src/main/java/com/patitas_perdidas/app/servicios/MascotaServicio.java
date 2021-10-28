@@ -18,8 +18,8 @@ public class MascotaServicio {
 	
 	@Autowired
 	private MascotaRepositorio mr;
-	@Autowired
-	private FotoServicio fs;
+	//@Autowired
+	//private FotoServicio fs;
 	
 	public void crearMascota(String nombre, String descripcion, String color, String raza, String tamaño,
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo) {
@@ -35,7 +35,7 @@ public class MascotaServicio {
 		m.setEspecie(especie);
 		m.setAlta(true);
 		m.setZona(zona);
-		m.setFoto(fs.guardarFoto(archivo));
+		//m.setFoto(fs.guardarFoto(archivo));
 		
 		mr.save(m);	
 	}
@@ -46,7 +46,7 @@ public class MascotaServicio {
 	}
 	
 	public void modificarMascota(String id,String nombre, String descripcion, String color, String raza, String tamaño,
-			Boolean encontrado, Date fecha, String especie, Zona zona, MultipartFile archivo) {
+			Boolean encontrado, Date fecha, String especie, String zona , MultipartFile archivo) {
 		Mascota m=mr.getById(id);
 		
 		m.setNombre(nombre);
@@ -59,7 +59,7 @@ public class MascotaServicio {
 		m.setEspecie(especie);
 		m.setAlta(true);
 		m.setZona(zona);
-		m.setFoto(fs.guardarFoto(archivo));
+		//m.setFoto(fs.guardarFoto(archivo));
 		
 		mr.save(m);	
 	}
