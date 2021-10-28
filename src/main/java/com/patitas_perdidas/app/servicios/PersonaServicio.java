@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.patitas_perdidas.app.entidades.Persona;
+import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
 import com.patitas_perdidas.app.repositorios.PersonaRepositorio;
 
 
@@ -21,7 +22,7 @@ public class PersonaServicio {
 	
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void guardar(String id, String nombre, Long telefono, String mail, String clave, Boolean alta) throws Exception {
+	public void guardar(String id, String nombre, Long telefono, String mail, String clave, Boolean alta) throws PersonaExcepcion {
 		
 		validar(id,nombre,telefono,mail,clave,alta);
 		
@@ -47,7 +48,7 @@ public class PersonaServicio {
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-	public Persona baja(String id) throws Exception {
+	public Persona baja(String id) throws PersonaExcepcion {
 		
 		Persona entidad = personaRepositorio.findById(id).get();
 		entidad.setAlta(false);
@@ -65,31 +66,32 @@ public class PersonaServicio {
 		return personaRepositorio.buscarListaPersonas();
 	}
 	
-	public void validar(String id, String nombre, Long telefono, String mail, String clave, Boolean alta) throws Exception {
+	public void validar(String id, String nombre, Long telefono, String mail, String clave, Boolean alta)
+			throws PersonaExcepcion {
 
 		if (id == null || id.isEmpty() || id.contains("  ")) {
-			throw new Exception();
+			throw new PersonaExcepcion();
 		}
-		
+
 		if (nombre == null || nombre.isEmpty() || nombre.contains("  ")) {
-			throw new Exception();
+			throw new PersonaExcepcion();
 		}
-		
+
 		if (telefono == null) {
-			throw new Exception();
+			throw new PersonaExcepcion();
 		}
-		
+
 		if (mail == null || mail.isEmpty() || mail.contains("  ")) {
-			throw new Exception();
+			throw new PersonaExcepcion();
 		}
-		
+
 		if (clave == null || clave.isEmpty() || clave.contains("  ")) {
-			throw new Exception();
-	}
-		
+			throw new PersonaExcepcion();
+		}
+
 		if (alta == null) {
-			throw new Exception();
-	}
+			throw new PersonaExcepcion();
+		}
 	}
 	
 
