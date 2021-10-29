@@ -1,77 +1,63 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="registro.css">
-    <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/registro.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <title>Registro | Patitas perdidas</title>
 </head>
+
 <body>
     <h2>Hola, para que puedas subir los datos de tu perro perdido necesitamos que te registres</h2>
-    <form class="formulario-registro" novalidate>
-        <div>
 
-            <label for="">Nombre</label>
-            <input type="text" placeholder="Nombre" required>
-            </div>
-            <div>
-                <label for="">Apellido</label>
-                <input type="text" placeholder="Apellido" required>
-            </div>
-            <div>
-                <label for="">Nombre de la mascota</label>
-            <input type="text" placeholder="Nombre de la mascota" required>
-            </div>
-            
+    <form class="formulario-registro" role="form" action="/persona/registro" method="POST">
+        <div>
             <div>
                 <label for="">Nombre de usuario</label>
-                <input type="text" placeholder="Nombre de usuario" required>
+                <input type="text" placeholder="Ingrese nombre" name="nombre" maxlength="255" required>
             </div>
-            
+
+            <div>
+                <label for="">Telefono</label>
+                <input type="tel" placeholder="Ingrese numero" name="telefono" maxlength="10" required>
+            </div>
+
+            <div>
+                <label for="">Email</label>
+                <input type="email" placeholder="Ingrese email" name="mail" maxlength="255" required>
+            </div>
+
             <div>
                 <label for="">Contraseña</label>
-                <input type="text" placeholder="contraseña" required>
+                <input type="password" placeholder="Ingrese contraseña" name="clave" maxlength="255" required>
             </div>
-            
-            <div>
-                <select class="barrio">
-                <option selected > <p class="font-weight-bold">Barrio</p> </option>
-                <option value="1">Arroyito</option>
-                <option value="2">Pichincha</option>
-                <option value="3">Mártin</option>
-                <option value="4">Agote</option>
-                <option value="5">Alberdi</option>
-                <option value="6">La ceramica</option>
-                <option value="7">Rucci</option>
-                <option value="8">Parque field</option>
-                <option value="9">Ludueña</option>
-                <option value="10">Lisandro de la torre</option>
-                <option value="11">Las malvinas</option>
-                <option value="12">Celedonio escalada</option>
-                </select>
-            </div>
-            <div>
-                <label for="">Foto de perfil</label>
-                <input type="text" placeholder="subir foto" required>
-            </div>
-            <div>
-                <label for="">Cargar Foto de mascota perdida</label>
-                <input type="text" placeholder="subir foto">
-            </div>
+
             <button class="btn btn-primary m-2" type="submit">Registrarse</button>
-        	</div>
+        </div>
+        <div class="alert alert-primary" role="alert" th:text="${exito}" th:if="${exito}"></div>
+        <!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
+        <!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
     </form>
+    <p></p>
     <footer class="footer">
         <section class="derechos">
             <p> © 2021 Patitas Perdidas. Todos los derechos reservados.</p>
-            <p>  Desarrollado por César Gómez, Tomas Petitti, David Gimenez, 
-                Juan Pablo Ayala, Nuria Romeu, 
-                Miranda Candela Sandoval Altuna,Tomas Vergara, Fabian Sassola y Facundo Ferreira Da Camara. </p> 
-    </section> 
-    <span ><p class="mr-10">DISEÑO Y DESARROLLO WEB.</p></span>
+            <p> Desarrollado por César Gómez, Tomas Petitti, David Gimenez,
+                Juan Pablo Ayala, Nuria Romeu,
+                Miranda Candela Sandoval Altuna,Tomas Vergara, Fabian Sassola y Facundo Ferreira Da Camara. </p>
+        </section>
+        <span>
+            <p class="mr-10">DISEÑO Y DESARROLLO WEB.</p>
+        </span>
     </footer>
 </body>
+
 </html>

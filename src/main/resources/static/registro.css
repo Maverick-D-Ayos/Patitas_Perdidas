@@ -1,36 +1,52 @@
-body{
-    background-color: #454545;
-    color: rgb(253, 251, 247);
-    margin: 1%;
-    padding: 10px;
+body {
+	background-color: #454545;
+	color: rgb(253, 251, 247);
+	margin: 1%;
+	padding: 10px;
 }
+
 h2 {
-    width: 30%;
-    text-align: center;
+	width: 50%;
+	text-align: center;
+	align-items: center;
+	margin: 0 auto;
 }
-.formulario-registro{
-    background-color: rgba(12, 4, 4, 0);
-    margin: 0 auto;
-    width: 20%;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid white;
+
+nav li .nav-item {
+	justify-content: flex-end;
 }
-.formulario-registro label input{
-    padding: 2%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
+
+.formulario-registro {
+	background-color: rgba(12, 4, 4, 0);
+	margin: 0 auto;
+	width: 20%;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
+	border: 2px solid white;
 }
-select.barrio {
-    padding: 2%;
-    margin: 10px;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
+.formulario-registro .alert{
+	text-align: center;
+	align-items: center;
+	margin: 0 auto;
+	padding: 10px;
+	align-items: center;
+	
+}
+.formulario-registro div label {
+	display: flex;
+	padding: 2%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.formulario-registro div label input {
+	padding: 2%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }

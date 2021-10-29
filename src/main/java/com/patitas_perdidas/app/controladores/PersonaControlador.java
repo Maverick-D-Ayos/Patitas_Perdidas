@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.patitas_perdidas.app.entidades.Persona;
+import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
 import com.patitas_perdidas.app.servicios.PersonaServicio;
 
 @Controller
@@ -20,60 +22,54 @@ public class PersonaControlador {
 
 	@Autowired
 	private PersonaServicio personaServicio;
-	
+
 	@GetMapping("/lista")
 	public String lista(ModelMap modelo) {
-		
-		List<Persona>todos = personaServicio.listarTodos();
-		modelo.addAttribute("personas",todos);
-		
+
+		List<Persona> todos = personaServicio.listarTodos();
+		modelo.addAttribute("personas", todos);
+
 		return "list-persona";
 	}
-	
+
 	@GetMapping("/registro")
-	public String formulario(){	
+	public String formulario() {
 		return "registro.html";
 	}
-	
+
 	@PostMapping("/registro")
-	public String guardar(ModelMap modelo, @RequestParam String id, @RequestParam String nombre, @RequestParam Long telefono, @RequestParam String mail, @RequestParam String clave, @RequestParam Boolean alta) {
-		
+	public String guardar(RedirectAttributes redirAttrs, @RequestParam String nombre, @RequestParam Long telefono,
+			@RequestParam String mail, @RequestParam String clave) {
+
 		try {
-			personaServicio.guardar(id, nombre, telefono, mail, clave, alta);
-			modelo.put("exito", "Registro exitoso");
-			return "registro.html";
-		} catch (Exception e) {
-			modelo.put("error", "Registro fallido");
-			return "registro.html";
+			personaServicio.guardar(nombre, telefono, mail, clave);
+		} catch (PersonaExcepcion e) {
+			redirAttrs.addFlashAttribute("error", e.getMessage());
+			return ("redirect:./registro");
 		}
-		
+		redirAttrs.addFlashAttribute("exito", "Se ha registrado sastifactoriamente. Ahora puede ir a iniciar sesion.");
+		return ("redirect:./registro");
+
 	}
-	
+
 	@GetMapping("/baja/id")
-	public String baja (@PathVariable String id) {
-		try { 
+	public String baja(@PathVariable String id) {
+		try {
 			personaServicio.baja(id);
 			return "redirect:/persona/lista";
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return "redirect:/";
 		}
 	}
-	
+
 	@GetMapping("/alta/id")
-	public String alta (@PathVariable String id){
+	public String alta(@PathVariable String id) {
 		try {
 			personaServicio.alta(id);
 			return "redirect:/persona/lista";
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return "redirect:/";
 		}
-			
+
 	}
 }
-	
-	
-	
-	
-
-	
-
