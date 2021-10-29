@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.patitas_perdidas.app.entidades.Mascota;
 import com.patitas_perdidas.app.excepciones.MascotaExcepcion;
@@ -24,18 +25,48 @@ public class MascotaControlador {
 	@Autowired
 	private MascotaServicio ms;
 	
-	@GetMapping("/registro")
-	public String muestraRegistro() {
-		return " ";
+	//el metodo de encontrada y perdida podria ser uno solo pero cuando puse que retorne al index se mostraba mal.
+	@GetMapping("/registroencontrada")
+	public String registroencontrada() {
+		return "form-encontrada.html";
+	}	
+	
+
+
+	@PostMapping("/registroencontrada")
+	public String registroencontrada(ModelMap modelo,String nombre, String descripcion, String color, String raza, String tamaño,
+			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo, RedirectAttributes redirAttrs) throws ParseException {
+		Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
+		try {
+		ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
+		} catch (MascotaExcepcion e) {
+		    redirAttrs.addFlashAttribute("error","Ocurrio un error al añadir la mascota");
+			return("redirect:./registroencontrada");
+			// Esto es para que aparezcan unas alertas al completar el formulario
+		}
+	    redirAttrs.addFlashAttribute("exito","Se añadio la mascota con exito");
+		return("redirect:./registroencontrada");
+	}	
+	
+	@GetMapping("/registroperdida")
+	public String registroperdida() {
+		return "form-perdida.html";
 	}
 	
-	@PostMapping("/registro")
-	public String registra(ModelMap modelo,String nombre, String descripcion, String color, String raza, String tamaño,
-			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo) throws ParseException {
+	
+	@PostMapping("/registroperdida")
+	public String registroperdida(ModelMap modelo,String nombre, String descripcion, String color, String raza, String tamaño,
+			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo, RedirectAttributes redirAttrs) throws ParseException {
 		Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
+		try {
 		ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
-		modelo.put("Exito", "Registro exitoso");
-		return " ";
+		} catch (MascotaExcepcion e) {
+		    redirAttrs.addFlashAttribute("error","Ocurrio un error al añadir la mascota");
+			return("redirect:./registroperdida");
+		}
+	    redirAttrs.addFlashAttribute("exito","Se añadio la mascota con exito");
+		return("redirect:./registroperdida");
+
 	}
 	
 	@GetMapping("/actualizar/{id}")
