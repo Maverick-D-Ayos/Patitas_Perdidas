@@ -17,4 +17,5 @@ public interface PersonaRepositorio extends JpaRepository<Persona, String> {
 	@Query("SELECT p FROM Persona p WHERE p.alta = true and p.nombre LIKE %:nombre%")
 	public List<Persona> buscarListaPersonasNombre(@Param("nombre") String nombre);
 
+
 }
