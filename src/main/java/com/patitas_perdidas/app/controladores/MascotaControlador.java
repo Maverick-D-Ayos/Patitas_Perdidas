@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.patitas_perdidas.app.entidades.Mascota;
+import com.patitas_perdidas.app.excepciones.MascotaExcepcion;
 import com.patitas_perdidas.app.servicios.MascotaServicio;
 
 @Controller
@@ -46,10 +47,10 @@ public class MascotaControlador {
 	
 	@PostMapping("/actualizar/{id}")
 	public String actualiza(ModelMap modelo,String id, String nombre, String descripcion, String color, String raza, String tamaño,
-			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo) throws ParseException {
+			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo) throws ParseException, MascotaExcepcion {
 		Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
 		ms.modificarMascota(id, nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
-		modelo.put("Exito", "Actualizacion exitosa");
+		modelo.put("Exito", "Actualoizacion exitosa");
 		return " ";
 	}
 	
@@ -61,9 +62,29 @@ public class MascotaControlador {
 	
 	@GetMapping("/lista")
 	public String listar(ModelMap modelo) {
-		List<Mascota> muestraMascotas= ms.listarMascotas();
+		List<Mascota> muestraMascotas= ms.listarTodasMascotas();
 		modelo.addAttribute("listaMascota", muestraMascotas);
 		return "";
 	}
 	
+	@GetMapping("/listar")
+	public String listarActivos(ModelMap modelo) {
+		List<Mascota> muestraMascotas=ms.listarMascotasActivasPerdidas();
+		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
+		return "";
+	}
+	
+	@GetMapping("/listar/{raza}")
+	public String listarPorRaza(ModelMap modelo, @PathVariable String raza) {
+		List<Mascota> muestraMascotas=ms.listarMascotasPorRaza(raza);
+		modelo.addAttribute("listaMascotasxRaza", muestraMascotas);
+		return "";
+	}
+	
+	@GetMapping("/listar/{color}")
+	public String listarPorColor(ModelMap modelo, @PathVariable String color) {
+		List<Mascota> muestraMascotas=ms.listarMascotasColor(color);
+		modelo.addAttribute("listaMascotasxColor", muestraMascotas);
+		return "";
+	}
 }
