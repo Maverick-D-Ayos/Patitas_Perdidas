@@ -1,6 +1,7 @@
 package com.patitas_perdidas.app.repositorios;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,16 @@ public interface PersonaRepositorio extends JpaRepository<Persona, String> {
 	@Query("SELECT p FROM Persona p WHERE p.alta = true and p.nombre LIKE %:nombre%")
 	public List<Persona> buscarListaPersonasNombre(@Param("nombre") String nombre);
 
+<<<<<<< HEAD
 	
 
+=======
+	// Devuelve una persona por su nombre.
+	@Query("SELECT p FROM Persona p WHERE p.nombre = :nombre")
+	public Optional<Persona> buscarPorNombre(@Param("nombre") String nombre);
+	
+	// Devuelve una persona por su email.
+	@Query("SELECT p FROM Persona p WHERE p.mail = :mail")
+	public Optional<Persona> buscarPorMail(@Param("mail") String mail);
+>>>>>>> f46c39d104ec7c37514ced200ef6659eeb5b4405
 }

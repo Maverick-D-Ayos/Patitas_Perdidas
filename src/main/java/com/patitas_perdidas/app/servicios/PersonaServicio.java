@@ -1,8 +1,7 @@
 package com.patitas_perdidas.app.servicios;
 
-
-
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,89 +12,81 @@ import com.patitas_perdidas.app.entidades.Persona;
 import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
 import com.patitas_perdidas.app.repositorios.PersonaRepositorio;
 
-
 @Service
 public class PersonaServicio {
-	
-	@Autowired 
+
+	@Autowired
 	private PersonaRepositorio personaRepositorio;
-	
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void guardar(String id, String nombre, Long telefono, String mail, String clave, Boolean alta) throws PersonaExcepcion {
-		
-		validar(id,nombre,telefono,mail,clave,alta);
-		
-		Persona entidad = new Persona();
+	public void guardar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
 
-		entidad.setId(id);
+		validar(nombre, telefono, mail, clave);
+
+		Persona entidad = new Persona();
 		entidad.setNombre(nombre);
 		entidad.setTelefono(telefono);
 		entidad.setMail(mail);
 		entidad.setClave(clave);
 		entidad.setAlta(true);
-			
+		personaRepositorio.save(entidad);
 	}
-
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Persona alta(String id) throws Exception {
-		
+
 		Persona entidad = personaRepositorio.findById(id).get();
 		entidad.setAlta(true);
-		
+
 		return personaRepositorio.save(entidad);
 	}
-	
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Persona baja(String id) throws PersonaExcepcion {
-		
+
 		Persona entidad = personaRepositorio.findById(id).get();
 		entidad.setAlta(false);
-		
+
 		return personaRepositorio.save(entidad);
 	}
 
 	@Transactional(readOnly = true)
-	public List<Persona> listarTodos() { 
+	public List<Persona> listarTodos() {
 		return personaRepositorio.findAll();
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Persona> listarActivos() { 
+	public List<Persona> listarActivos() {
 		return personaRepositorio.buscarListaPersonas();
 	}
-	
-	public void validar(String id, String nombre, Long telefono, String mail, String clave, Boolean alta)
-			throws PersonaExcepcion {
 
-		if (id == null || id.isEmpty() || id.contains("  ")) {
-			throw new PersonaExcepcion();
-		}
-
+	public void validar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
 		if (nombre == null || nombre.isEmpty() || nombre.contains("  ")) {
-			throw new PersonaExcepcion();
+			throw new PersonaExcepcion("No ingreso correctamente el nombre.");
 		}
 
 		if (telefono == null) {
-			throw new PersonaExcepcion();
+			throw new PersonaExcepcion("No ingreso correctamente el telefono.");
 		}
 
 		if (mail == null || mail.isEmpty() || mail.contains("  ")) {
-			throw new PersonaExcepcion();
+			throw new PersonaExcepcion("No ingreso correctamente el mail.");
 		}
 
 		if (clave == null || clave.isEmpty() || clave.contains("  ")) {
-			throw new PersonaExcepcion();
+			throw new PersonaExcepcion("No ingreso correctamente la clave.");
+		}
+		// Si el mail ya esta en la base de datos retorna un PersonaExcepcion
+		Optional<Persona> rsp_nombre = personaRepositorio.buscarPorNombre(nombre);
+		if (rsp_nombre.isPresent()) {
+			throw new PersonaExcepcion("Ya existe el usuario con el nombre: " + nombre);
+		}
+		// Si el nombre ya esta en la base de datos retorna un PersonaExcepcion
+		Optional<Persona> rsp_mail = personaRepositorio.buscarPorMail(mail);
+		if (rsp_mail.isPresent()) {
+			throw new PersonaExcepcion("Ya existe el usuario con el mail: " + mail);
 		}
 
-		if (alta == null) {
-			throw new PersonaExcepcion();
-		}
 	}
-	
 
-	
 }
-	
-
