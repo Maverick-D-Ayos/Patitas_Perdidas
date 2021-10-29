@@ -10,7 +10,7 @@
         <div class="row">
 			<div class="col-md-12">
 				<h1>Formulario de mascota encontrada</h1>
-				<form action="/mascota/registro" method="POST">
+				<form action="/mascota/registroencontrada" method="POST">
 					<div class="form-group">
 						<label for="nombre">Nombre</label> <input type="text"
 							class="form-control" name="nombre" id="nombre"
@@ -34,6 +34,7 @@
 						</select>
 					</div>
 					<div class="form-group">
+					<!--  Poner otra forma de seleccionar la fecgha  -->
 						<label class="control-label" for="fecha">Fecha en que se encontro</label> <input class="form-control" id="fecha" name="fecha"
 							placeholder="DD/MM/YYYY" type="text">
 					</div>
@@ -49,9 +50,17 @@
 						 <input type="hidden" id="encontrado" name="encontrado" value=true>
 					</div>
 					<div>
-					<button type="submit" class="bt btn-primary">
-						<strong>Enviar</strong><strong></strong>
-					</button>
+						<button type="submit" class="bt btn-primary">
+							<strong>Añadir autor</strong><strong></strong>
+						</button>
+						<br></br>
+						<div class="alert alert-primary" role="alert" th:text="${exito}"
+							th:if="${exito}"></div>
+						<!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
+						<!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
+						<div class="alert alert-danger" role="alert" th:text="${error}"
+							th:if="${error}"></div>
+					</div> 
 					</div>
 			</form>
             </div>

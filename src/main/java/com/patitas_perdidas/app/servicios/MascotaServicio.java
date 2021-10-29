@@ -26,7 +26,7 @@ public class MascotaServicio {
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void crearMascota(String nombre, String descripcion, String color, String raza, String tamaño,
-			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo) {
+			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo) throws MascotaExcepcion {
 		Mascota m=new Mascota();
 		
 		m.setNombre(nombre);
