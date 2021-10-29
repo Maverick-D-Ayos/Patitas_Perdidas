@@ -1,5 +1,7 @@
 package com.patitas_perdidas.app.controladores;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -21,41 +23,43 @@ public class MascotaControlador {
 	@Autowired
 	private MascotaServicio ms;
 	
-	@GetMapping("/mascota/registro")
+	@GetMapping("/registro")
 	public String muestraRegistro() {
 		return " ";
 	}
 	
-	@PostMapping("/mascota/registro")
+	@PostMapping("/registro")
 	public String registra(ModelMap modelo,String nombre, String descripcion, String color, String raza, String tamaño,
-			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo) {
-		ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, fecha, especie, zona, archivo);
+			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo) throws ParseException {
+		Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
+		ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
 		modelo.put("Exito", "Registro exitoso");
 		return " ";
 	}
 	
-	@GetMapping("/mascota/actualizar/{id}")
+	@GetMapping("/actualizar/{id}")
 	public String muestraActualiza(ModelMap modelo,@PathVariable String id) throws Exception {
 		Mascota m=ms.buscaPorId(id);
 		modelo.addAttribute(m);
 		return " ";
 	}
 	
-	@PostMapping("/mascota/actualizar/{id}")
+	@PostMapping("/actualizar/{id}")
 	public String actualiza(ModelMap modelo,String id, String nombre, String descripcion, String color, String raza, String tamaño,
-			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo) {
-		ms.modificarMascota(id, nombre, descripcion, color, raza, tamaño, encontrado, fecha, especie, zona, archivo);
+			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo) throws ParseException {
+		Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
+		ms.modificarMascota(id, nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
 		modelo.put("Exito", "Actualizacion exitosa");
 		return " ";
 	}
 	
-	@GetMapping("/mascota/eliminar/{id}")
+	@GetMapping("/eliminar/{id}")
 	public String elimina(ModelMap modelo, @PathVariable String id) {
 		ms.eliminarMascota(id);
 		return "";
 	}
 	
-	@GetMapping("/mascota/lista")
+	@GetMapping("/lista")
 	public String listar(ModelMap modelo) {
 		List<Mascota> muestraMascotas= ms.listarMascotas();
 		modelo.addAttribute("listaMascota", muestraMascotas);
