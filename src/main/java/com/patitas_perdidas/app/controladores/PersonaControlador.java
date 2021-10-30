@@ -70,18 +70,6 @@ public class PersonaControlador {
 		} catch (Exception e) {
 			return "redirect:/";
 		}
-<<<<<<< HEAD
 			
-	}
-}
-	
-	
-	
-	
-
-	
-=======
->>>>>>> f46c39d104ec7c37514ced200ef6659eeb5b4405
-
 	}
 }
