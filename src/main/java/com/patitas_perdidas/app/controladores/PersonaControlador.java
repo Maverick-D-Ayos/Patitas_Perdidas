@@ -70,6 +70,6 @@ public class PersonaControlador {
 		} catch (Exception e) {
 			return "redirect:/";
 		}
-			
+
 	}
 }
