@@ -78,6 +78,13 @@ public class MascotaServicio {
 		List<Mascota> lm= mr.buscarListaPerdidos();
 		return lm;
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Mascota> listarMascotasActivasEncontradas(){
+		List<Mascota> lm= mr.buscarListaEncontrados();
+		return lm;
+	}
+		
 	@Transactional(readOnly = true)
 	public List<Mascota> listarMascotasPorRaza(String raza){
 		List<Mascota> lm= mr.buscarListaRaza(raza);

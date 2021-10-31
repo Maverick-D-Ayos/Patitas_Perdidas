@@ -105,6 +105,16 @@ public class MascotaControlador {
 		return "";
 	}
 	
+	@GetMapping("/listarE")
+	public String listarActivos1(ModelMap modelo) {
+		List<Mascota> muestraMascotas=ms.listarMascotasActivasEncontradas();
+		modelo.addAttribute("listaMascotasEncontradas", muestraMascotas);
+		return "mascotasEncontradas.html";
+	}
+	
+	
+	
+	
 	@GetMapping("/listar/{raza}")
 	public String listarPorRaza(ModelMap modelo, @PathVariable String raza) {
 		List<Mascota> muestraMascotas=ms.listarMascotasPorRaza(raza);
