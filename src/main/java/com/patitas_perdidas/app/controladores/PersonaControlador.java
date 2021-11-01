@@ -74,16 +74,16 @@ public class PersonaControlador {
 	}
 	
 	@GetMapping("/perfil/{id}")
-	public String perfilUsuario(ModelMap modelo, @PathVariable String id) {
-		Persona usuario = personaServicio.findById(id);
+	public String perfilUsuario(ModelMap modelo, @PathVariable String id) throws PersonaExcepcion {
+		Persona usuario = personaServicio.buscaPorId(id);
 		modelo.addAttribute("usuario", usuario);
 		return "perfil.html";
 	}
 	
 	@GetMapping("/modificar/{id}")
-	public String preModificar(ModelMap model, @PathVariable String id) {
+	public String preModificar(ModelMap model, @PathVariable String id) throws PersonaExcepcion {
 					
-		    Persona usuario = personaServicio.findById(id);
+		    Persona usuario = personaServicio.buscaPorId(id);
 		    model.addAttribute("usuario", usuario);
 			return "modificar-usuario";
 		
@@ -94,7 +94,7 @@ public class PersonaControlador {
 		System.out.println(id+ nombre+ telefono+ mail+ clave);
 		try {	
 			personaServicio.modificar(id, nombre, telefono, mail, clave);
-			Persona usuario = personaServicio.findById(id);
+			Persona usuario = personaServicio.buscaPorId(id);
 			modelo.addAttribute("usuario", usuario);
 			modelo.put("exito", "Perfirl modificado");
 			redirAttrs.addAttribute("id", id);
