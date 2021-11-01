@@ -16,36 +16,42 @@
 
 <body>
     <h2>Hola, para que puedas subir los datos de tu perro perdido necesitamos que te registres</h2>
-
-    <form class="formulario-registro" role="form" action="/persona/registro" method="POST">
+	<div class="text-center">
+    <form class="formulario-registro text-center" role="form" action="/persona/registro" method="POST">
         <div>
-            <div>
-                <label for="">Nombre de usuario</label>
-                <input type="text" placeholder="Ingrese nombre" name="nombre" maxlength="255" required>
-            </div>
+			<div class="form-floating mb-3">
+				<input type="text" class="form-control" id="floatingInput"
+					placeholder="name@example.com" name="nombre"> 
+					<label for="floatingInput">Nombre</label>
+			</div>
 
-            <div>
-                <label for="">Telefono</label>
-                <input type="tel" placeholder="Ingrese numero" name="telefono" maxlength="10" required>
-            </div>
+			<div class="form-floating mb-3">
+				<input type="tel" class="form-control" id="floatingInput"
+					placeholder="Telefono" name="telefono"
+				> <label for="floatingInput">Telefono</label>
+			</div>
 
-            <div>
-                <label for="">Email</label>
-                <input type="email" placeholder="Ingrese email" name="mail" maxlength="255" required>
-            </div>
+			<div class="form-floating mb-3">
+				<input type="email" class="form-control" id="floatingInput"
+					placeholder="name@example.com" name="mail"
+				> <label for="floatingInput">E-mail</label>
+			</div>
 
-            <div>
-                <label for="">Contraseña</label>
-                <input type="password" placeholder="Ingrese contraseña" name="clave" maxlength="255" required>
-            </div>
+			<div class="form-floating mb-3">
+				<input type="password" class="form-control" id="floatingPassword"
+					placeholder="Password" name="clave"
+				> <label for="floatingPassword">Contraseña</label>
+			</div>
 
-            <button class="btn btn-primary m-2" type="submit">Registrarse</button>
+			<button class="btn btn-primary m-2" type="submit">Registrarse</button>
+			<a class="btn btn-danger" href="/../" role="button">Volver</a>
         </div>
         <div class="alert alert-primary" role="alert" th:text="${exito}" th:if="${exito}"></div>
         <!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
         <!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
         <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
     </form>
+    </div>
     <p></p>
     <footer class="footer">
         <section class="derechos">

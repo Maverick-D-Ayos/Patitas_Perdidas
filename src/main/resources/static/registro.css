@@ -19,9 +19,9 @@ nav li .nav-item {
 .formulario-registro {
 	background-color: rgba(12, 4, 4, 0);
 	margin: 0 auto;
-	width: 20%;
+	width: 30%;
 	padding: 10px;
-	display: flex;
+/* 	display: flex; */
 	justify-content: center;
 	flex-wrap: wrap;
 	flex-direction: column;

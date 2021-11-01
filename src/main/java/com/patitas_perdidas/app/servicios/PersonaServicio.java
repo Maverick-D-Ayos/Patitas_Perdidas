@@ -2,12 +2,10 @@ package com.patitas_perdidas.app.servicios;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.patitas_perdidas.app.entidades.Persona;
 import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
 import com.patitas_perdidas.app.repositorios.PersonaRepositorio;
@@ -73,13 +71,19 @@ public class PersonaServicio {
 		return personaRepositorio.buscarListaPersonas();
 	}
 	
-	public Persona findById(String id) {
-		Persona persona = personaRepositorio.getById(id);
-		return persona;
+	@Transactional(readOnly = true)
+	public Persona buscaPorId(String id) throws PersonaExcepcion{
+		Optional<Persona> oPersona = personaRepositorio.findById(id);
+		if(oPersona.isPresent()) {
+			Persona person = oPersona.get();
+			return person;
+		}else {
+			throw new PersonaExcepcion("No se encuentra la Persona");
+		}
 	} 
 
 	public void validar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
-		if (nombre == null || nombre.isEmpty() || nombre.contains("  ")) {
+		if (nombre == null || nombre.isEmpty() || nombre.strip() == null) {
 			throw new PersonaExcepcion("No ingreso correctamente el nombre.");
 		}
 
@@ -87,19 +91,14 @@ public class PersonaServicio {
 			throw new PersonaExcepcion("No ingreso correctamente el telefono.");
 		}
 
-		if (mail == null || mail.isEmpty() || mail.contains("  ")) {
+		if (mail == null || mail.isEmpty() || mail.strip() == null) {
 			throw new PersonaExcepcion("No ingreso correctamente el mail.");
 		}
 
-		if (clave == null || clave.isEmpty() || clave.contains("  ")) {
+		if (clave == null || clave.isEmpty() || clave.strip() == null) {
 			throw new PersonaExcepcion("No ingreso correctamente la clave.");
 		}
 		// Si el mail ya esta en la base de datos retorna un PersonaExcepcion
-		Optional<Persona> rsp_nombre = personaRepositorio.buscarPorNombre(nombre);
-		if (rsp_nombre.isPresent()) {
-			throw new PersonaExcepcion("Ya existe el usuario con el nombre: " + nombre);
-		}
-		// Si el nombre ya esta en la base de datos retorna un PersonaExcepcion
 		Optional<Persona> rsp_mail = personaRepositorio.buscarPorMail(mail);
 		if (rsp_mail.isPresent()) {
 			throw new PersonaExcepcion("Ya existe el usuario con el mail: " + mail);
