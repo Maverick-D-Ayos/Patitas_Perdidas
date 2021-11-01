@@ -33,36 +33,38 @@
       </div>
     </nav>
     <!---iniciar sesion Modal --->
- 
-    
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Iniciar sesion</h5>
-        <button type="" class="close rounded" data-dismiss="modal" aria-label="Close">
-          <img src="./imagenes/cerrar.png" alt="">
-        </button>
-      </div>
-      <div class="modal-body">
-        <div>
-          <label for="">Nombre de usuario:</label>
-          <input type="text" placeholder="nombre de usuario">
-        </div>
-        <div>
-          <label for="">Contraseña:</label>
-          <input type="text" placeholder="contraseña">
-        </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-secondary">Ingresar</button>
-      </div>
-    </div>
-  </div>
-</div>
-    <!---terminar sesion Modal --->
+
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel" style="color: white;">Iniciar sesion</h5>
+						<button type="" class="close rounded" data-dismiss="modal" aria-label="Close">
+							<img src="./imagenes/cerrar.png" alt="">
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-floating mb-3">
+							<input type="email" class="form-control" id="floatingInput"
+								placeholder="name@example.com"
+							> <label for="floatingInput">E-mail</label>
+						</div>
+						<div class="form-floating">
+							<input type="password" class="form-control" id="floatingPassword"
+								placeholder="Password"
+							> <label for="floatingPassword">Contraseña</label>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-warning">Ingresar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!---terminar sesion Modal --->
       
       <div class="buscador">
         <h2>Encontrá tu mascota de la forma más fácil, nosotros te ayudamos</h2>
