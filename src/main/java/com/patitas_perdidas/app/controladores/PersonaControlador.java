@@ -72,4 +72,42 @@ public class PersonaControlador {
 		}
 
 	}
+	
+	@GetMapping("/perfil/{id}")
+	public String perfilUsuario(ModelMap modelo, @PathVariable String id) {
+		Persona usuario = personaServicio.findById(id);
+		modelo.addAttribute("usuario", usuario);
+		return "perfil.html";
+	}
+	
+	@GetMapping("/modificar/{id}")
+	public String preModificar(ModelMap model, @PathVariable String id) {
+					
+		    Persona usuario = personaServicio.findById(id);
+		    model.addAttribute("usuario", usuario);
+			return "modificar-usuario";
+		
+	}
+	
+	@PostMapping("/modificar")
+	public String modificar(RedirectAttributes redirAttrs, ModelMap modelo, @PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono, @RequestParam String mail, @RequestParam String clave) {
+		System.out.println(id+ nombre+ telefono+ mail+ clave);
+		try {	
+			personaServicio.modificar(id, nombre, telefono, mail, clave);
+			Persona usuario = personaServicio.findById(id);
+			modelo.addAttribute("usuario", usuario);
+			modelo.put("exito", "Perfirl modificado");
+			redirAttrs.addAttribute("id", id);
+			
+			return "redirect:/persona/perfil/{id}";
+		} catch (Exception e) {
+			modelo.put("error", "Falto ingresar el nombre");
+			System.out.println("Error desconocido");
+			redirAttrs.addAttribute("id", id);
+			
+			return "redirect:/persona/perfil/{id}";
+		}
+	}
+	
+	
 }
