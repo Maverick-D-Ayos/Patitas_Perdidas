@@ -31,6 +31,19 @@ public class PersonaServicio {
 		entidad.setAlta(true);
 		personaRepositorio.save(entidad);
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public void modificar(String id, String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
+
+		validar(nombre, telefono, mail, clave);
+		Persona usuario = personaRepositorio.findById(id).get();
+		
+		usuario.setNombre(nombre);
+		usuario.setTelefono(telefono);
+		usuario.setMail(mail);
+		usuario.setClave(clave);
+		personaRepositorio.save(usuario);
+	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Persona alta(String id) throws Exception {
@@ -59,6 +72,11 @@ public class PersonaServicio {
 	public List<Persona> listarActivos() {
 		return personaRepositorio.buscarListaPersonas();
 	}
+	
+	public Persona findById(String id) {
+		Persona persona = personaRepositorio.getById(id);
+		return persona;
+	} 
 
 	public void validar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
 		if (nombre == null || nombre.isEmpty() || nombre.contains("  ")) {
