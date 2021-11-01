@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import javax.mail.Multipart;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,8 +19,8 @@ public class MascotaServicio {
 	
 	@Autowired
 	private MascotaRepositorio mr;
-	//@Autowired
-	//private FotoServicio fs;
+	@Autowired
+	private FotoServicio fs;
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void crearMascota(String nombre, String descripcion, String color, String raza, String tamaño,
@@ -39,7 +37,7 @@ public class MascotaServicio {
 		m.setEspecie(especie);
 		m.setAlta(true);
 		m.setZona(zona);
-		//m.setFoto(fs.guardarFoto(archivo));
+		m.setFoto(fs.guardarFoto(archivo));
 		
 		mr.save(m);	
 	}
@@ -65,7 +63,7 @@ public class MascotaServicio {
 		m.setEspecie(especie);
 		m.setAlta(true);
 		m.setZona(zona);
-		//m.setFoto(fs.guardarFoto(archivo));
+		m.setFoto(fs.actualizarFoto(id,archivo));
 		
 		mr.save(m);	
 	}
@@ -80,6 +78,13 @@ public class MascotaServicio {
 		List<Mascota> lm= mr.buscarListaPerdidos();
 		return lm;
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Mascota> listarMascotasActivasEncontradas(){
+		List<Mascota> lm= mr.buscarListaEncontrados();
+		return lm;
+	}
+		
 	@Transactional(readOnly = true)
 	public List<Mascota> listarMascotasPorRaza(String raza){
 		List<Mascota> lm= mr.buscarListaRaza(raza);

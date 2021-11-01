@@ -11,13 +11,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-    <title>Registro | Patitas perdidas</title>
+    <title>Editar Perfil | Patitas perdidas</title>
 </head>
 
 <body>
-    <h2>Hola, para que puedas subir los datos de tu perro perdido necesitamos que te registres</h2>
+    <h2>Complete los siguientes campos para editar su perfil!</h2>
+    <h4>En caso de no querer editar un campo simplemente reingrese sus datos como aparecen actualmente en la pagina</h4>
 
-    <form class="formulario-registro" role="form" action="/persona/registro" method="POST">
+    <form class="formulario-registro" role="form" action="/persona/modificar/" method="POST">
         <div>
             <div>
                 <label for="">Nombre de usuario</label>
@@ -39,7 +40,8 @@
                 <input type="password" placeholder="Ingrese contraseña" name="clave" maxlength="255" required>
             </div>
 
-            <button class="btn btn-primary m-2" type="submit">Registrarse</button>
+            <button class="btn btn-primary m-2" type="submit"><a th:href="@{/persona/perfil/__${usuario.id}__}">
+            Editar</a></button>
         </div>
         <div class="alert alert-primary" role="alert" th:text="${exito}" th:if="${exito}"></div>
         <!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->

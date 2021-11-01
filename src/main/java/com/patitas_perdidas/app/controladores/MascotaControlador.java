@@ -81,7 +81,7 @@ public class MascotaControlador {
 			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo) throws ParseException, MascotaExcepcion {
 		Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
 		ms.modificarMascota(id, nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
-		modelo.put("Exito", "Actualizacion exitosa");
+		modelo.put("Exito", "Actualoizacion exitosa");
 		return " ";
 	}
 	
@@ -98,4 +98,34 @@ public class MascotaControlador {
 		return "";
 	}
 	
+	@GetMapping("/listar")
+	public String listarActivos(ModelMap modelo) {
+		List<Mascota> muestraMascotas=ms.listarMascotasActivasPerdidas();
+		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
+		return "";
+	}
+	
+	@GetMapping("/listarE")
+	public String listarActivos1(ModelMap modelo) {
+		List<Mascota> muestraMascotas=ms.listarMascotasActivasEncontradas();
+		modelo.addAttribute("listaMascotasEncontradas", muestraMascotas);
+		return "mascotasEncontradas.html";
+	}
+	
+	
+	
+	
+	@GetMapping("/listar/{raza}")
+	public String listarPorRaza(ModelMap modelo, @PathVariable String raza) {
+		List<Mascota> muestraMascotas=ms.listarMascotasPorRaza(raza);
+		modelo.addAttribute("listaMascotasxRaza", muestraMascotas);
+		return "";
+	}
+	
+	@GetMapping("/listar/{color}")
+	public String listarPorColor(ModelMap modelo, @PathVariable String color) {
+		List<Mascota> muestraMascotas=ms.listarMascotasColor(color);
+		modelo.addAttribute("listaMascotasxColor", muestraMascotas);
+		return "";
+	}
 }
