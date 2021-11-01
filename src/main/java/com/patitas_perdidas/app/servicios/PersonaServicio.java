@@ -83,20 +83,29 @@ public class PersonaServicio {
 	} 
 
 	public void validar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
-		if (nombre == null || nombre.isEmpty() || nombre.strip() == null) {
+		if (nombre == null || nombre.strip().isEmpty()) {
 			throw new PersonaExcepcion("No ingreso correctamente el nombre.");
 		}
 
 		if (telefono == null) {
 			throw new PersonaExcepcion("No ingreso correctamente el telefono.");
 		}
+		
+		if (String.valueOf(telefono).length() < 6)
+		{
+			throw new PersonaExcepcion("El formato del telefono es incorrecto");
+		}
 
-		if (mail == null || mail.isEmpty() || mail.strip() == null) {
+		if (mail == null || mail.strip().isEmpty()) {
 			throw new PersonaExcepcion("No ingreso correctamente el mail.");
 		}
 
-		if (clave == null || clave.isEmpty() || clave.strip() == null) {
+		if (clave == null || clave.strip().isEmpty()) {
 			throw new PersonaExcepcion("No ingreso correctamente la clave.");
+		}
+		if (clave.length() < 6)
+		{
+			throw new PersonaExcepcion("La clave tiene que tener mas de 6 digitos");
 		}
 		// Si el mail ya esta en la base de datos retorna un PersonaExcepcion
 		Optional<Persona> rsp_mail = personaRepositorio.buscarPorMail(mail);
