@@ -17,7 +17,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand m-2" href="#"><img class="ml-2"src="./imagenes/huella.png" alt=""></a>
+      <a class="navbar-brand m-2" href="#"><img class="col-md-5 logo"src="./imagenes/logo.png" alt=""></a>
       
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <a class="nav-link" href="#"><h1>Patitas Perdidas</h1></a>
@@ -32,52 +32,50 @@
         
       </div>
     </nav>
-    <!---iniciar sesion Modal --->
-
-
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel" style="color: white;">Iniciar sesion</h5>
-						<button type="" class="close rounded" data-dismiss="modal" aria-label="Close">
-							<img src="./imagenes/cerrar.png" alt="">
-						</button>
-					</div>
-					<form action="#" method="POST">
-					<div class="modal-body">
-						<div class="form-floating mb-3">
-							<input type="email" class="form-control" id="floatingInput"
-								placeholder="name@example.com"
-							> <label for="floatingInput">E-mail</label>
-						</div>
-						<div class="form-floating">
-							<input type="password" class="form-control" id="floatingPassword"
-								placeholder="Password"
-							> <label for="floatingPassword">Contraseña</label>
-						</div>
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-						<button type="button" class="btn btn-warning">Ingresar</button>
-					</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!---terminar sesion Modal --->
-      
+    <!---inicia sesion Modal --->
+ 
+    
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " id="exampleModalLabel">Iniciar sesion</h5>
+        <button type="" class="close rounded" data-dismiss="modal" aria-label="Close">
+          <img src="./imagenes/cerrar.png" alt="">
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <label for="">Nombre de usuario:</label>
+          <input type="text" class="text-dark" placeholder="nombre de usuario">
+        </div>
+        <div>
+          <label for="">Contraseña:</label>
+          <input type="text" class="text-dark" placeholder="contraseña">
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary">Ingresar</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!---Termina sesion Modal --->
+    
+    <!-- Buscador -->  
       <div class="buscador">
         <h2>Encontrá tu mascota de la forma más fácil, nosotros te ayudamos</h2>
         <form class="form-inline my-1 my-lg-0 input-group">
-          <input class="input-busqueda " type="search" placeholder="Buscar" aria-label="Search">
+          <input class="input-busqueda text-dark" type="search" placeholder="Buscar" aria-label="Search">
           <button class="btn btn-outline-success boton" type="submit"><a class="nav-link active" href="/mascota/listarE">Buscar mascota</a></button>
         </form>
       </div>
   </div>
-  
+  <!-- Fin Buscador -->
 
+<!-- Inicia Carousel -->
     <div><div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <ol class="carousel-indicators">
           <li type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></li>
@@ -104,7 +102,7 @@
           <span class="visually-hidden mr-10">Next</span>
         </button>
       </div>
- 
+ <!-- Fin Carousel -->
 
     
       </div>

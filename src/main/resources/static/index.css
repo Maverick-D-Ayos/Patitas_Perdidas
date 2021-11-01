@@ -10,6 +10,10 @@ h1{
     
 }
 
+/*INICIO MENU*/
+.logo {
+	border-radius: 35%;
+}
 .menu {
     margin:1%;
     background-color: rgba(0, 0, 0, .3);
@@ -36,6 +40,9 @@ li .nav-item{
     color:#f8f9fa;
     justify-content: flex-end;
 }
+/*FIN MENU*/
+
+/*INICIO BUSCADOR*/
 
 .buscador{
     margin-bottom: 30%;
@@ -44,7 +51,7 @@ li .nav-item{
     background-color: rgba(0, 0, 0, .3);
     display: block;
     align-items: center;
-    width: 50% !important;
+    width: 55% !important;
     border-radius: 1%;
 }
 .buscador h2{
@@ -62,14 +69,24 @@ li .nav-item{
     margin-bottom: 4%;
     border-radius: 2%; 
 }
-button.btn.btn-outline-success.boton{
+button.btn.btn-outline-success.boton {
     background-color: rgb(5, 126, 85) !important;
-    color: white;
     border-radius: 2%; 
     margin-bottom: 4%;
+    margin-right: 2%;
 }
+button.btn.btn-outline-success.boton a{
+	color: white;
+}
+/* FIN BUSCADOR*/
 .footer{
     background-color: rgba(0, 0, 0, .3);
+}
+
+/*CAROUSEL*/
+
+.carousel-item-next, .carousel-item-prev, .carousel-item.active{
+    background-color: #454545;
 }
 .carousel .slide{
     background-color: rgba(0, 0, 0, .3);
@@ -88,6 +105,8 @@ button.btn.btn-outline-success.boton{
     background-color: rgba(0, 0, 0, .3);
     border-radius: 100%;
 }
+/*FIN CAROUSEL*/
+
 .derechos {
     padding: 20px 10px;
     background-color: rgba(0, 0, 0, .3);
@@ -97,6 +116,9 @@ button.btn.btn-outline-success.boton{
 .derechos p {
     font-size: 12px;
   }
+  
+  
+ /*INCIO MODAL*/
 .modal {
     display: flex;
    background-color: rgba(0, 0, 0, .6);
@@ -118,5 +140,5 @@ button.btn.btn-outline-success.boton{
     margin: 2px;
     background-color: rgba(0, 0, 0, 0)!important;
 }
-
+/*FIN MODAL*/
   
