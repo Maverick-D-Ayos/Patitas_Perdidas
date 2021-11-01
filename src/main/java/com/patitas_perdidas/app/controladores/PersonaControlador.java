@@ -89,9 +89,8 @@ public class PersonaControlador {
 		
 	}
 	
-	@PostMapping("/modificar")
+	@PostMapping("/modificar/{id}")
 	public String modificar(RedirectAttributes redirAttrs, ModelMap modelo, @PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono, @RequestParam String mail, @RequestParam String clave) {
-		System.out.println(id+ nombre+ telefono+ mail+ clave);
 		try {	
 			personaServicio.modificar(id, nombre, telefono, mail, clave);
 			Persona usuario = personaServicio.buscaPorId(id);
@@ -102,7 +101,6 @@ public class PersonaControlador {
 			return "redirect:/persona/perfil/{id}";
 		} catch (Exception e) {
 			modelo.put("error", "Falto ingresar el nombre");
-			System.out.println("Error desconocido");
 			redirAttrs.addAttribute("id", id);
 			
 			return "redirect:/persona/perfil/{id}";
