@@ -35,14 +35,17 @@ public class MascotaControlador {
 
 	@PostMapping("/registroencontrada")
 	public String registroencontrada(ModelMap modelo,String nombre, String descripcion, String color, String raza, String tamaño,
-			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo, RedirectAttributes redirAttrs) throws ParseException {
-		Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
+			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo, RedirectAttributes redirAttrs){
 		try {
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
 		ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
 		} catch (MascotaExcepcion e) {
-		    redirAttrs.addFlashAttribute("error","Ocurrio un error al añadir la mascota");
+		    redirAttrs.addFlashAttribute("error", e.getMessage());
 			return("redirect:./registroencontrada");
 			// Esto es para que aparezcan unas alertas al completar el formulario
+		} catch (ParseException e) {
+			 redirAttrs.addFlashAttribute("error", "Revise la fecha introducida");
+				return("redirect:./registroencontrada");
 		}
 	    redirAttrs.addFlashAttribute("exito","Se añadio la mascota con exito");
 		return("redirect:./registroencontrada");
@@ -56,18 +59,18 @@ public class MascotaControlador {
 	
 	@PostMapping("/registroperdida")
 	public String registroperdida(ModelMap modelo,String nombre, String descripcion, String color, String raza, String tamaño,
-			Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo, RedirectAttributes redirAttrs) throws ParseException {
-		Date date = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
+			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo, RedirectAttributes redirAttrs) throws ParseException {
 		try {
-		ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
+		ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, fecha, especie, zona, archivo);
 		} catch (MascotaExcepcion e) {
-		    redirAttrs.addFlashAttribute("error","Ocurrio un error al añadir la mascota");
+		    redirAttrs.addFlashAttribute("error","Error al añadir la mascota");
 			return("redirect:./registroperdida");
 		}
 	    redirAttrs.addFlashAttribute("exito","Se añadio la mascota con exito");
 		return("redirect:./registroperdida");
 
 	}
+	
 	
 	@GetMapping("/actualizar/{id}")
 	public String muestraActualiza(ModelMap modelo,@PathVariable String id) throws Exception {

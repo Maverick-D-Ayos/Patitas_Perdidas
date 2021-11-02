@@ -1,0 +1,16 @@
+.required{
+	color: red;
+}
+
+.card{
+padding-left: 20px;
+padding-right: 20px;
+box-shadow: 0 0px 20px 0 rgba(0,0,0,0.2);
+transition: 0.3s;
+}
+
+body {
+	background-image: url("https://c.wallhere.com/photos/20/36/beagle_dog_blackandwhite_penf_normallens_monochrome_dof_head-719532.jpg!d");
+	background-size: auto auto;
+	background-repeat: no-repeat;
+}

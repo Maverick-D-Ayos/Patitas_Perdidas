@@ -25,6 +25,18 @@ public class MascotaServicio {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void crearMascota(String nombre, String descripcion, String color, String raza, String tamaño,
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo) throws MascotaExcepcion {
+
+		if(especie == null || especie == "") {
+			throw new MascotaExcepcion("Es necesario introducir de que especie es la mascota");
+		}
+		if(color == null || color == "") {
+			throw new MascotaExcepcion("Es necesario introducir el color de la mascota");
+		}
+		if(tamaño == null || tamaño == "") {
+			throw new MascotaExcepcion("Es necesario introducir el color de la mascota");
+		}
+		
+			
 		Mascota m=new Mascota();
 		
 		m.setNombre(nombre);
