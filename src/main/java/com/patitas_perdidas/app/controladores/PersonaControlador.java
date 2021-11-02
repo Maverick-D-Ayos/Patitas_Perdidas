@@ -36,6 +36,7 @@ public class PersonaControlador {
 	public String formulario() {
 		return "registro.html";
 	}
+	
 
 	@PostMapping("/registro")
 	public String guardar(RedirectAttributes redirAttrs, @RequestParam String nombre, @RequestParam Long telefono,
@@ -53,6 +54,7 @@ public class PersonaControlador {
 	}
 
 	@GetMapping("/baja/id")
+	
 	public String baja(@PathVariable String id) {
 		try {
 			personaServicio.baja(id);
