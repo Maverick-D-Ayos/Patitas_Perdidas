@@ -1,3 +1,6 @@
+*{
+	color:#f8f9fa;  
+}
 .vista-principal{
    background-image: url(https://www.tuotrodiario.com/images/025c-0f2d43853899-b429df8f59c3-1000/horizontal-1150/perros-callejeros.jpg);
     background-size:cover;
@@ -107,16 +110,6 @@ button.btn.btn-outline-success.boton a{
 }
 /*FIN CAROUSEL*/
 
-.derechos {
-    padding: 20px 10px;
-    background-color: rgba(0, 0, 0, .3);
-    display: flex;
-    justify-content: space-around;
-  }
-.derechos p {
-    font-size: 12px;
-  }
-  
   
  /*INCIO MODAL*/
 .modal {
@@ -141,4 +134,18 @@ button.btn.btn-outline-success.boton a{
     background-color: rgba(0, 0, 0, 0)!important;
 }
 /*FIN MODAL*/
+
+/* DERECHOS */
+.derechos {
+    padding: 20px 10px;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    justify-content: space-around;
+  }
+.derechos p {
+    font-size: 12px;
+  }
+
+/* FIN DERECHOS */
+
   
