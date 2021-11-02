@@ -4,11 +4,15 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.patitas_perdidas.app.enums.Rol;
 
 @Entity
 public class Persona {
@@ -23,7 +27,8 @@ public class Persona {
 	private Boolean alta;
 	@OneToMany
 	private List<Mascota> mascotas;
-	
+	@Enumerated(EnumType.STRING)
+	private Rol rol;
 	
 	public Boolean getAlta() {
 		return alta;
@@ -66,7 +71,14 @@ public class Persona {
 	}
 	public void setMascotas(List<Mascota> mascotas) {
 		this.mascotas = mascotas;
+	}	
+	public Rol getRol() {
+		return rol;
 	}
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(alta, clave, id, mail, mascotas, nombre, telefono);

@@ -21,6 +21,7 @@
 
 </head>
 <body>
+
 	<div class="vista-principal">
 		<nav class="navbar navbar-expand-lg navbar-light menu">
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -55,114 +56,32 @@
 				</div>
 			<ul class="menu-registro">
 					<li class="nav-item ">
-						<a class="btn btn-primary iniciar" href="/persona/registro" role="button">Registrarse</a>						
+						<a class="btn btn-primary iniciar" role="button" th:href="@{/persona/perfil/__${session.clientesession.id}__}" th:text="${session.clientesession.nombre}"></a>						
 					</li>
 					<li class="nav-item ">						
-							<a class="btn btn-primary iniciar" role="button" data-toggle="modal" data-target="#exampleModal">Iniciar sesion</a>						
+							<a class="btn btn-primary iniciar" role="button" href="/logout">Cerrar sesion</a>						
 					</li>					
 				</ul>
 		</nav>
 		
-		<!---inicia sesion Modal --->
-
-
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title " id="exampleModalLabel">Iniciar
-							sesion</h5>
-						<button type="" class="close rounded" data-dismiss="modal"
-							aria-label="Close"
-						>
-							<img src="./imagenes/cerrar.png" alt="">
-						</button>
-					</div>
-					<form action="/logincheck" method="POST">
-						<div class="modal-body">
-							<div class="form-floating mb-3">
-								<input type="email" class="form-control" id="floatingInput"
-									placeholder="name@example.com" name="mail"
-								> <label for="floatingInput">E-mail</label>
-							</div>
-							<div class="form-floating mb-3">
-								<input type="password" class="form-control"
-									id="floatingPassword" placeholder="Password" name="clave"
-								> <label for="floatingPassword">Contraseña</label>
-							</div>
-						</div>
-						
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-							<button type="submit" class="btn btn-warning">Ingresar</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!---Termina sesion Modal --->
-
-		<!-- Buscador -->
+			<!-- Buscador -->
 		<div class="buscador">
 			<h2>Encontrá tu mascota de la forma más fácil, nosotros te
 				ayudamos</h2>
-			<form class="form-inline my-1 my-lg-0 input-group align-items-center">
+			<form class="form-inline my-1 my-lg-0 input-group">
 				<input class="input-busqueda text-dark" type="search"
 					placeholder="Buscar" aria-label="Search"
 				>
-				 <a class="col nav-link active" href="/mascota/listarE"><img alt="" src="./imagenes/lupa.png" class="col-md-8 "> <p class="text-dark">Buscar mascota</p> </a>
+				<button class="btn btn-outline-success boton" type="submit">
+					<a class="nav-link active" href="/mascota/listarE">Buscar
+						mascota</a>
+				</button>
 			</form>
 		</div>
 	</div>
 	<!-- Fin Buscador -->
 
-	<!-- Inicia Carousel -->
-	<div>
-		<div id="carouselExampleIndicators" class="carousel slide"
-			data-bs-ride="carousel"
-		>
-			<ol class="carousel-indicators">
-				<li type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="0" class="active" aria-current="true"
-					aria-label="Slide 1"
-				></li>
-				<li type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="1" aria-label="Slide 2"
-				></li>
-				<li type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="2" aria-label="Slide 3"
-				></li>
-			</ol>
-			<div class="carousel-inner carousel">
-				<div class="carousel-item active">
-					<img src="./imagenes/carousel1.png" class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="./imagenes/carousel2.png" class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="./imagenes/carousel3.png" class="d-block w-100" alt="...">
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"
-			>
-				<img src="./imagenes/previous.png" alt=""> <span
-					class="visually-hidden ml-1"
-				>Previous</span>
-			</button>
-			<button class="carousel-control-next mr-10" type="button"
-				data-bs-target="#carouselExampleIndicators" data-bs-slide="next"
-			>
-				<img src="./imagenes/next-button.png" alt=""> <span
-					class="visually-hidden mr-10"
-				>Next</span>
-			</button>
-		</div>
-		<!-- Fin Carousel -->
-
-
+	
 	</div>
 	<footer class="footer">
 		<section class="derechos">
