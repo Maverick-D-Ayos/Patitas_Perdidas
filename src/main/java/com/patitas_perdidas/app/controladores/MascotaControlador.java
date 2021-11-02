@@ -44,7 +44,7 @@ public class MascotaControlador {
 			return("redirect:./registroencontrada");
 			// Esto es para que aparezcan unas alertas al completar el formulario
 		} catch (ParseException e) {
-			 redirAttrs.addFlashAttribute("error", "Revise la fecha introducida");
+			 redirAttrs.addFlashAttribute("error", "Revise la fecha añadida");
 				return("redirect:./registroencontrada");
 		}
 	    redirAttrs.addFlashAttribute("exito","Se añadio la mascota con exito");
