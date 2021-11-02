@@ -5,12 +5,19 @@
 .card{
 padding-left: 20px;
 padding-right: 20px;
-box-shadow: 0 0px 20px 0 rgba(0,0,0,0.2);
+padding-top: 10px;
+background-color: rgba(0,0,0, 0.6);
+box-shadow: 0px 0px 10px 0 rgba(0,0,0,0.7);
 transition: 0.3s;
+backdrop-filter: blur(10px);
 }
 
-body {
-	background-image: url("https://c.wallhere.com/photos/20/36/beagle_dog_blackandwhite_penf_normallens_monochrome_dof_head-719532.jpg!d");
-	background-size: auto auto;
-	background-repeat: no-repeat;
+
+
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: black;
 }
+
