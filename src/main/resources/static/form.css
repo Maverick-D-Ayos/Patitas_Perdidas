@@ -21,3 +21,7 @@ input[type="date"]::-webkit-datetime-edit-year-field {
   color: black;
 }
 
+
+.select {
+    color:black
+}
