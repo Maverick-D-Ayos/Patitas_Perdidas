@@ -9,53 +9,82 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link
-        href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+	href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+	rel="stylesheet"
+>
+</head>
     <title>Registro | Patitas perdidas</title>
 </head>
 
 <body>
-    <h2>Hola, para que puedas subir los datos de tu perro perdido necesitamos que te registres</h2>
+	<!-- MENU -->
+	<nav class="navbar navbar-expand-lg navbar-light menu">
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarTogglerDemo03"
+				aria-controls="navbarTogglerDemo03" aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand m-2" href="#"><img class="col-md-5 logo"
+				src="./imagenes/logo.png" alt=""
+			></a>
 
-    <form class="formulario-registro" role="form" action="/persona/registro" method="POST">
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+				<a class="nav-link text-light" href="/../"><h1>Patitas Perdidas</h1></a>
+			</div>
+		</nav>
+	<!-- FIN MENU -->
+	<div class="formulario">
+	<h2>Hola, para que puedas subir los datos de tu perro perdido necesitamos que te registres</h2>
+	<div class="formulario-dentro">
+    <form class="formulario-registro text-center" role="form" action="/persona/registro" method="POST">
         <div>
-            <div>
-                <label for="">Nombre de usuario</label>
-                <input type="text" placeholder="Ingrese nombre" name="nombre" maxlength="255" required>
-            </div>
+			<div class="form-floating mb-3">
+				<input type="text" class="form-control" id="floatingInput"
+					placeholder="name@example.com" name="nombre"> 
+					<label for="floatingInput">Nombre</label>
+			</div>
 
-            <div>
-                <label for="">Telefono</label>
-                <input type="tel" placeholder="Ingrese numero" name="telefono" maxlength="10" required>
-            </div>
+			<div class="form-floating mb-3">
+				<input type="tel" class="form-control" id="floatingInput"
+					placeholder="Telefono" name="telefono"
+				> <label for="floatingInput">Telefono</label>
+			</div>
 
-            <div>
-                <label for="">Email</label>
-                <input type="email" placeholder="Ingrese email" name="mail" maxlength="255" required>
-            </div>
+			<div class="form-floating mb-3">
+				<input type="email" class="form-control" id="floatingInput"
+					placeholder="name@example.com" name="mail"
+				> <label for="floatingInput">E-mail</label>
+			</div>
 
-            <div>
-                <label for="">Contraseña</label>
-                <input type="password" placeholder="Ingrese contraseña" name="clave" maxlength="255" required>
-            </div>
+			<div class="form-floating mb-3">
+				<input type="password" class="form-control" id="floatingPassword"
+					placeholder="Password" name="clave"
+				> <label for="floatingPassword">Contraseña</label>
+			</div>
 
-            <button class="btn btn-primary m-2" type="submit">Registrarse</button>
+			<button class="btn btn-primary m-2" type="submit">Registrarse</button>
+			<a class="btn btn-danger" href="/../" role="button">Volver</a>
         </div>
         <div class="alert alert-primary" role="alert" th:text="${exito}" th:if="${exito}"></div>
         <!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
         <!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
         <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
     </form>
+    </div>
+	</div>
+    
     <p></p>
     <footer class="footer">
-        <section class="derechos">
+        <section class="derechos text-light">
             <p> © 2021 Patitas Perdidas. Todos los derechos reservados.</p>
             <p> Desarrollado por César Gómez, Tomas Petitti, David Gimenez,
                 Juan Pablo Ayala, Nuria Romeu,
                 Miranda Candela Sandoval Altuna,Tomas Vergara, Fabian Sassola y Facundo Ferreira Da Camara. </p>
         </section>
         <span>
-            <p class="mr-10">DISEÑO Y DESARROLLO WEB.</p>
+            <p class="mr-10 text-light">DISEÑO Y DESARROLLO WEB.</p>
         </span>
     </footer>
 </body>

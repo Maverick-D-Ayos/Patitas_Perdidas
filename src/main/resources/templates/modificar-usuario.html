@@ -18,30 +18,36 @@
     <h2>Complete los siguientes campos para editar su perfil!</h2>
     <h4>En caso de no querer editar un campo simplemente reingrese sus datos como aparecen actualmente en la pagina</h4>
 
-    <form class="formulario-registro" role="form" action="/persona/modificar/" method="POST">
+ <form class="formulario-registro text-center" role="form" th:action="@{/persona/modificar/{id}(id=${usuario.id})}" method="POST">
         <div>
-            <div>
-                <label for="">Nombre de usuario</label>
-                <input type="text" placeholder="Ingrese nombre" name="nombre" maxlength="255" required>
+        	<label for="floatingInput">Nombre de usuario</label>  
+            <div class="form-floating mb-3">  
+                <input type="text" class="form-control" id="floatingInput"  th:placeholder="${usuario.nombre}" name="nombre" maxlength="255" required>				      
+				<label for="floatingInput"><span th:text="${usuario.nombre}"></span></label>             
+            </div>
+            
+
+            <label for="floatingInput">Telefono</label>  
+            <div class="form-floating mb-3">  
+                <input type="text" class="form-control" id="floatingInput"  th:placeholder="${usuario.telefono}" name="nombre" maxlength="255" required>				      
+				<label for="floatingInput"><span th:text="${usuario.telefono}"></span></label>             
             </div>
 
-            <div>
-                <label for="">Telefono</label>
-                <input type="tel" placeholder="Ingrese numero" name="telefono" maxlength="10" required>
+             <label for="floatingInput">Email</label>  
+            <div class="form-floating mb-3">  
+                <input type="text" class="form-control" id="floatingInput"  th:placeholder="${usuario.mail}" name="nombre" maxlength="255" required>				      
+				<label for="floatingInput"><span th:text="${usuario.mail}"></span></label>             
             </div>
 
-            <div>
-                <label for="">Email</label>
-                <input type="email" placeholder="Ingrese email" name="mail" maxlength="255" required>
+            <label for="floatingInput">Clave</label>  
+            <div class="form-floating mb-3">  
+                <input type="text" class="form-control" id="floatingInput"  name="nombre" maxlength="255" required>				      
+				<label for="floatingInput">*******</label>             
             </div>
 
-            <div>
-                <label for="">Contraseña</label>
-                <input type="password" placeholder="Ingrese contraseña" name="clave" maxlength="255" required>
-            </div>
 
-            <button class="btn btn-primary m-2" type="submit"><a th:href="@{/persona/perfil/__${usuario.id}__}">
-            Editar</a></button>
+            <button class="btn btn-primary m-2" type="submit">
+            Editar</button>
         </div>
         <div class="alert alert-primary" role="alert" th:text="${exito}" th:if="${exito}"></div>
         <!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
