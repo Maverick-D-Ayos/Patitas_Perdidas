@@ -1,11 +1,52 @@
 body {
-	background-color: #454545;
+	background-image: url(https://media.diariouno.com.ar/p/f54249878a58173518d1bc7ec8f5814e/adjuntos/298/imagenes/008/806/0008806731/1200x0/smart/perro-callejerojpg.jpg);
 	color: rgb(253, 251, 247);
 	margin: 1%;
 	padding: 10px;
+	background-size:cover;
+	
+	
 }
-
+.formulario {
+	display:flex;
+	justify-content: flex-end;
+	flex-direction:column;
+	width:70%;
+	
+}
+/*INICIO MENU*/
+.logo {
+	border-radius: 35%;
+}
+.menu {
+    margin:1%;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    color:#f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+.menu-registro{
+    text-decoration: none;
+    list-style: none;
+    margin-right: 20px;
+    display: flex;
+}
+.menu-registro button{
+    margin-left: 3px;
+    margin-right: 3px;
+}
+li .nav-item{
+    justify-content: flex-end;
+}
+.menu-registro .nav-item a.nav-link.active{
+    text-align: right;
+    color:#f8f9fa;
+    justify-content: flex-end;
+}
+/*FIN MENU*/
 h2 {
+	color: rgb(253, 251, 247);
 	width: 50%;
 	text-align: center;
 	align-items: center;
@@ -21,7 +62,6 @@ nav li .nav-item {
 	margin: 0 auto;
 	width: 30%;
 	padding: 10px;
-/* 	display: flex; */
 	justify-content: center;
 	flex-wrap: wrap;
 	flex-direction: column;
@@ -50,3 +90,16 @@ nav li .nav-item {
 	align-items: center;
 	flex-direction: column;
 }
+
+/* DERECHOS */
+.derechos {
+    padding: 20px 10px;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    justify-content: space-around;
+  }
+.derechos p {
+    font-size: 12px;
+  }
+
+/* FIN DERECHOS */
