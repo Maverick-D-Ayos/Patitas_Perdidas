@@ -1,5 +1,7 @@
 package com.patitas_perdidas.app.servicios;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.patitas_perdidas.app.entidades.Mascota;
@@ -16,29 +19,27 @@ import com.patitas_perdidas.app.repositorios.MascotaRepositorio;
 
 @Service
 public class MascotaServicio {
-	
+
 	@Autowired
 	private MascotaRepositorio mr;
-	@Autowired
-	private FotoServicio fs;
-	
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void crearMascota(String nombre, String descripcion, String color, String raza, String tamaño,
-			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo) throws MascotaExcepcion {
+			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
+			throws MascotaExcepcion, IOException {
 
-		if(especie == null || especie == "") {
+		if (especie == null || especie == "") {
 			throw new MascotaExcepcion("Es necesario introducir de que especie es la mascota");
 		}
-		if(color == null || color == "") {
+		if (color == null || color == "") {
 			throw new MascotaExcepcion("Es necesario introducir el color de la mascota");
 		}
-		if(tamaño == null || tamaño == "") {
+		if (tamaño == null || tamaño == "") {
 			throw new MascotaExcepcion("Es necesario introducir el color de la mascota");
 		}
-		
-			
-		Mascota m=new Mascota();
-		
+
+		Mascota m = new Mascota();
+
 		m.setNombre(nombre);
 		m.setDescripcion(descripcion);
 		m.setColor(color);
@@ -48,23 +49,32 @@ public class MascotaServicio {
 		m.setFecha(fecha);
 		m.setEspecie(especie);
 		m.setAlta(true);
+		String archivoNombre = StringUtils.cleanPath(archivo.getOriginalFilename());
+		if (archivoNombre.contains("..")) {
+			throw new IOException("El archivo no es valido");
+		}
+		try {
+			m.setImage(Base64.getEncoder().encodeToString(archivo.getBytes()));
+		} catch (IOException e) {
+			throw new IOException("El archivo no es valido");
+		}
 		m.setZona(zona);
-		m.setFoto(fs.guardarFoto(archivo));
-		
-		mr.save(m);	
+
+		mr.save(m);
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void eliminarMascota(String id) {
-		Mascota m=mr.getById(id);
+		Mascota m = mr.getById(id);
 		mr.delete(m);
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void modificarMascota(String id,String nombre, String descripcion, String color, String raza, String tamaño,
-		Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo) throws MascotaExcepcion {
-		Mascota m=mr.getById(id);
-		
+	public void modificarMascota(String id, String nombre, String descripcion, String color, String raza, String tamaño,
+			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
+			throws MascotaExcepcion, IOException {
+		Mascota m = mr.getById(id);
+
 		m.setNombre(nombre);
 		m.setDescripcion(descripcion);
 		m.setColor(color);
@@ -74,50 +84,59 @@ public class MascotaServicio {
 		m.setFecha(fecha);
 		m.setEspecie(especie);
 		m.setAlta(true);
+		String archivoNombre = StringUtils.cleanPath(archivo.getOriginalFilename());
+		if (archivoNombre.contains("..")) {
+			throw new IOException("El archivo no es valido");
+		}
+		try {
+			m.setImage(Base64.getEncoder().encodeToString(archivo.getBytes()));
+		} catch (IOException e) {
+			throw new IOException("El archivo no es valido");
+		}
 		m.setZona(zona);
-		m.setFoto(fs.actualizarFoto(id,archivo));
-		
-		mr.save(m);	
+
+		mr.save(m);
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Mascota> listarTodasMascotas(){
-		List<Mascota> lm= mr.findAll();
+	public List<Mascota> listarTodasMascotas() {
+		List<Mascota> lm = mr.findAll();
 		return lm;
 	}
+
 	@Transactional(readOnly = true)
-	public List<Mascota> listarMascotasActivasPerdidas(){
-		List<Mascota> lm= mr.buscarListaPerdidos();
+	public List<Mascota> listarMascotasActivasPerdidas() {
+		List<Mascota> lm = mr.buscarListaPerdidos();
 		return lm;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Mascota> listarMascotasActivasEncontradas(){
-		List<Mascota> lm= mr.buscarListaEncontrados();
+	public List<Mascota> listarMascotasActivasEncontradas() {
+		List<Mascota> lm = mr.buscarListaEncontrados();
 		return lm;
 	}
-		
+
 	@Transactional(readOnly = true)
-	public List<Mascota> listarMascotasPorRaza(String raza){
-		List<Mascota> lm= mr.buscarListaRaza(raza);
+	public List<Mascota> listarMascotasPorRaza(String raza) {
+		List<Mascota> lm = mr.buscarListaRaza(raza);
 		return lm;
 	}
+
 	@Transactional(readOnly = true)
-	public List<Mascota> listarMascotasColor(String color){
-		List<Mascota> lm= mr.buscarListaColor(color);
+	public List<Mascota> listarMascotasColor(String color) {
+		List<Mascota> lm = mr.buscarListaColor(color);
 		return lm;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public Mascota buscaPorId(String id) throws MascotaExcepcion{
-		Optional<Mascota> oMascota=mr.findById(id);
-		if(oMascota.isPresent()) {
+	public Mascota buscaPorId(String id) throws MascotaExcepcion {
+		Optional<Mascota> oMascota = mr.findById(id);
+		if (oMascota.isPresent()) {
 			Mascota mascota = oMascota.get();
 			return mascota;
-		}else {
+		} else {
 			throw new MascotaExcepcion("No se encuentra la mascota");
 		}
 	}
-	
-	
+
 }
