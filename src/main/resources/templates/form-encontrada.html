@@ -220,32 +220,7 @@
 								<!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
 								<div class="alert alert-danger" role="alert" th:text="${error}"
 									th:if="${error}"></div>
-							</div>
-
-						</div>
-						<div class="form-group">
-							<label for="descripcion">Descripción</label>
-							<textarea class="form-control" name="descripcion"
-								id="descripcion" rows=3> </textarea>
-						</div>
-						<div class="form-group mt-2">
-							<label for="foto">Subi la Foto de tu mascota</label> <input
-								type="file" class="form-control-file" name="foto" id="foto">
-							<input type="hidden" id="encontrado" name="encontrado" value=true>
-						</div>
-						<div>
-							<button type="submit" class="btn btn-primary mt-2">
-								<strong>Añadir mascota</strong>
-							</button>
-							<button type="Reset" class="btn btn-danger mt-2"><strong>Limpiar formulario</strong></button>
-							<br></br>
-							<div class="alert alert-sucess" role="alert" th:text="${exito}"
-								th:if="${exito}"></div>
-							<!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
-							<!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
-							<div class="alert alert-danger" role="alert" th:text="${error}"
-								th:if="${error}"></div>
-						</div>
+							</div>						
 				</form>
 				</div>
 			</div>
