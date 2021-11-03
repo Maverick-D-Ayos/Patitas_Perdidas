@@ -59,9 +59,9 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Formulario de mascota perdida</h2>
-				<form action="/mascota/registroperdida" method="POST" enctype="multipart/form-data">
+				<form action="/mascota/registroperdida" method="POST" enctype="multipart/form-data" class = "form-anticlear">
 					<div class="form-group">
-						<label for="nombre">Nombre</label> <input type="text" class="form-control" name="nombre"
+						<label for="nombre"><span class="required">*</span>Nombre de la mascota</label> <input type="text" class="form-control" name="nombre"
 							id="nombre" placeholder="Nombre">
 					</div>
 					<div class="form-group">
@@ -69,7 +69,7 @@
 						<textarea class="form-control" name="descripcion" id="descripcion" rows=3> </textarea>
 					</div>
 					<div class="form-group">
-						<label for="color">Color</label> <input type="text" class="form-control" name="color" id="color"
+						<label for="color"><span class="required">*</span>Color</label> <input type="text" class="form-control" name="color" id="color"
 							placeholder="Color">
 					</div>
 					<div class="form-group">
@@ -78,7 +78,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="foto">Tamaño de tu mascota</label>
+						<label for="foto"><span class="required">*</span>Tamaño de tu mascota</label>
 						<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="tamaño">
 							<option selected>Seleccione el tamaño de su mascota</option>
 							<option value="Pequeño">Pequeño</option>
@@ -92,7 +92,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="color">Especie de la mascota</label>
+						<label for="color"><span class="required">*</span>Especie de la mascota</label>
 						<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="especie">
 							<option selected>Seleccione la especie de su mascota</option>
 							<option value="Gato">Gato</option>
@@ -100,7 +100,7 @@
 						</select>
 					</div>
 					<div>
-						<label for="color">Zona donde se perdio</label>
+						<label for="color"><span class="required">*</span>Zona donde se perdio</label>
 						<select class="form-select form-select-sm" name="zona">
 							<option selected>
 								<p class="font-weight-bold">Barrio</p>
@@ -146,6 +146,7 @@
 		</div>
 	</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/gh/akjpro/form-anticlear/base.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>

@@ -28,6 +28,9 @@ public class MascotaServicio {
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
 			throws MascotaExcepcion, IOException {
 
+		if (nombre == null && encontrado == false || nombre.isEmpty() && encontrado == false || nombre.strip() == null && encontrado == false) {
+			throw new MascotaExcepcion("Es necesario introducir el nombre de su mascota");
+		}
 		if (especie == null || especie.isEmpty() || especie.strip() == null) {
 			throw new MascotaExcepcion("Es necesario introducir de que especie es la mascota");
 		}

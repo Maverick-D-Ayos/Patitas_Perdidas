@@ -62,12 +62,16 @@ public class MascotaControlador {
 	public String registroperdida(ModelMap modelo, String nombre, String descripcion, String color, String raza,
 			String tamaño,Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo,
 			RedirectAttributes redirAttrs) throws ParseException, IOException {
+	
 		try {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
 			ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
 		} catch (MascotaExcepcion e) {
-			redirAttrs.addFlashAttribute("error", "Error al añadir la mascota");
+			redirAttrs.addFlashAttribute("error", e.getMessage());
 			return ("redirect:./registroperdida");
+		} catch (ParseException e) {
+			redirAttrs.addFlashAttribute("error", "Revise la fecha añadida");
+			return ("redirect:./registroencontrada");
 		}
 		redirAttrs.addFlashAttribute("exito", "Se añadio la mascota con exito");
 		return ("redirect:./registroperdida");

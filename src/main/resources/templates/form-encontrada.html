@@ -51,13 +51,18 @@
 		<div class="card w-50" style="margin: 0 auto">
 			<div class="row mb-4">
 				<div class="col">
-					<div class="form">
+					<div class="form-anticlear">
 						<h2>Formulario de mascota encontrada</h2>
 						<form action="/mascota/registroencontrada" method="POST">
 							<div class="form-group">
-								<label for="nombre">Nombre</label> <input type="text"
+								<label for="nombre">Nombre de la mascota</label> <input type="text"
 									class="form-control" name="nombre" id="nombre"
 									placeholder="Nombre">
+							</div>
+							<div class="form-group">
+								<label for="descripcion">Descripción</label>
+								<textarea class="form-control" name="descripcion"
+									id="descripcion" rows=3> </textarea>
 							</div>
 							<div class="form-group">
 								<label for="especie"><span class="required">*</span>Especie</label>
@@ -196,11 +201,6 @@
 										max="3000-01-01"
 										onfocus="this.max=new Date().toISOString().split('T')[0]">
 								</div>
-							</div>
-							<div class="form-group">
-								<label for="descripcion">Descripción</label>
-								<textarea class="form-control" name="descripcion"
-									id="descripcion" rows=3> </textarea>
 							</div>
 							<div class="form-group mt-2">
 								<label for="foto">Subi la Foto de tu mascota</label> <input
