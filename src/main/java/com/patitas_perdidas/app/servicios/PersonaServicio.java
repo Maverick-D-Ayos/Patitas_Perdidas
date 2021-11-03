@@ -35,7 +35,7 @@ public class PersonaServicio implements UserDetailsService {
 	public void guardar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
 
 		validar(nombre, telefono, mail, clave);
-
+		validarMail(mail);
 		Persona entidad = new Persona();
 		entidad.setNombre(nombre);
 		entidad.setTelefono(telefono);
@@ -48,11 +48,14 @@ public class PersonaServicio implements UserDetailsService {
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void modificar(String id, String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
-
 		validar(nombre, telefono, mail, clave);
-		Persona usuario = personaRepositorio.findById(id).get();
-		
+		Persona usuario = buscaPorId(id);	
+		if(!usuario.getMail().equals(mail))
+		{
+			validarMail(mail);
+		}
 		usuario.setNombre(nombre);
+		System.out.println(usuario.getNombre() + "sasd");
 		usuario.setTelefono(telefono);
 		usuario.setMail(mail);
 		usuario.setClave(encriptarClave(clave));
@@ -129,6 +132,9 @@ public class PersonaServicio implements UserDetailsService {
 		{
 			throw new PersonaExcepcion("La clave tiene que tener mas de 6 digitos");
 		}
+	}
+	public void validarMail(String mail) throws PersonaExcepcion
+	{
 		// Si el mail ya esta en la base de datos retorna un PersonaExcepcion
 		Optional<Persona> rsp_mail = personaRepositorio.buscarPorMail(mail);
 		if (rsp_mail.isPresent()) {
