@@ -1,0 +1,144 @@
+body {
+	background-image: url(https://media.diariouno.com.ar/p/f54249878a58173518d1bc7ec8f5814e/adjuntos/298/imagenes/008/806/0008806731/1200x0/smart/perro-callejerojpg.jpg);
+	color: rgb(253, 251, 247);
+	margin: 1%;
+	padding: 10px;
+	background-size:cover;
+	
+	
+}
+.formulario {
+	display:flex;
+	justify-content: flex-end;
+	flex-direction:column;
+	width:70%;
+	
+}
+/*INICIO MENU*/
+.logo {
+	border-radius: 35%;
+}
+.menu {
+    margin:1%;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    color:#f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+.menu-registro{
+    text-decoration: none;
+    list-style: none;
+    margin-right: 20px;
+    display: flex;
+}
+.menu-registro button{
+    margin-left: 3px;
+    margin-right: 3px;
+}
+li .nav-item{
+    justify-content: flex-end;
+}
+.menu-registro .nav-item a.nav-link.active{
+    text-align: right;
+    color:#f8f9fa;
+    justify-content: flex-end;
+}
+/*FIN MENU*/
+h2 {
+	color: rgb(253, 251, 247);
+	width: 50%;
+	text-align: center;
+	align-items: center;
+	margin: 0 auto;
+	text-decoration: underline;
+}
+
+nav li .nav-item {
+	justify-content: flex-end;
+}
+
+.formulario-registro {
+	background-color: #524f45bd;
+	margin: 0 auto;
+	width: 30%;
+	padding: 10px;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
+	border: 2px solid #212529;
+}
+.formulario-registro .alert{
+	text-align: center;
+	align-items: center;
+	margin: 0 auto;
+	padding: 10px;
+	align-items: center;
+	
+}
+.formulario-registro div label {
+	color:#141414;
+	display: flex;
+	padding: 2%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-weight: bold;
+}
+
+h4{
+	color:#141414;
+	padding: 10px;
+    margin-bottom: 30px;
+}
+
+.cabecera{
+	background-color: #524f45bd;
+	border-bottom: dashed;
+    border-top: solid;
+    border-left: solid;
+    border-right: solid;
+    margin-bottom: 15px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+label{
+	color:#141414;
+	display: flex;
+	padding: 2%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-weight: bold;
+}
+
+.formulario-registro div label input {
+	padding: 2%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.form-gris{
+	background-color: #524f45bd;
+}
+
+button{
+	padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* DERECHOS */
+.derechos {
+    padding: 20px 10px;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    justify-content: space-around;
+  }
+.derechos p {
+    font-size: 12px;
+  }
+
+/* FIN DERECHOS */
