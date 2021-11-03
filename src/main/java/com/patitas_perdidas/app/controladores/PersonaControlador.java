@@ -2,7 +2,10 @@ package com.patitas_perdidas.app.controladores;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,9 +55,9 @@ public class PersonaControlador {
 		return ("redirect:./registro");
 
 	}
-
-	@GetMapping("/baja/id")
 	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@GetMapping("/baja/id")	
 	public String baja(@PathVariable String id) {
 		try {
 			personaServicio.baja(id);
@@ -74,29 +77,45 @@ public class PersonaControlador {
 		}
 
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/perfil/{id}")
-	public String perfilUsuario(ModelMap modelo, @PathVariable String id) throws PersonaExcepcion {
+	public String perfilUsuario(HttpSession session, ModelMap modelo, @PathVariable String id) throws PersonaExcepcion {
+		Persona person = (Persona) session.getAttribute("clientesession");
+		if(person == null || !person.getId().equals(id))
+		{
+			return "redirect:/inicio";
+		}
 		Persona usuario = personaServicio.buscaPorId(id);
 		modelo.addAttribute("usuario", usuario);
 		return "perfil.html";
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/modificar/{id}")
-	public String preModificar(ModelMap model, @PathVariable String id) throws PersonaExcepcion {
-					
-		    Persona usuario = personaServicio.buscaPorId(id);
-		    model.addAttribute("usuario", usuario);
-			return "modificar-usuario";
+	public String preModificar(HttpSession session, ModelMap model, @PathVariable String id) throws PersonaExcepcion {
+		Persona person = (Persona) session.getAttribute("clientesession");
+		if(person == null || !person.getId().equals(id))
+		{
+			return "redirect:/inicio";
+		}
 		
+		Persona usuario = personaServicio.buscaPorId(id);
+		model.addAttribute("usuario", usuario);
+		return "modificar-usuario";
+
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@PostMapping("/modificar/{id}")
-	public String modificar(RedirectAttributes redirAttrs, ModelMap modelo, @PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono, @RequestParam String mail, @RequestParam String clave) {
-		try {	
+	public String modificar(HttpSession session, RedirectAttributes redirAttrs, ModelMap modelo, @PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono, @RequestParam String mail, @RequestParam String clave) {
+		try {
+			Persona person = (Persona) session.getAttribute("clientesession");
+			if(person == null || !person.getId().equals(id))
+			{
+				return "redirect:/inicio";
+			}
 			personaServicio.modificar(id, nombre, telefono, mail, clave);
 			Persona usuario = personaServicio.buscaPorId(id);
 			modelo.addAttribute("usuario", usuario);
+			session.setAttribute("clientesession", usuario);
 			modelo.put("exito", "Perfirl modificado");
 			redirAttrs.addAttribute("id", id);
 			
