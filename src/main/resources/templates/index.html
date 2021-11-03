@@ -16,6 +16,10 @@
 	crossorigin="anonymous"
 >
 <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+<link
 	href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
 	rel="stylesheet">
 
@@ -26,19 +30,29 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarTogglerDemo03"
 				aria-controls="navbarTogglerDemo03" aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<img class="img-thumbnail" src="./imagenes/logo.png" height="120px" width="120px" alt="">
-	
+			<a href="/"
+						class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+						<img class="logo" src="./imagenes/logo.png" alt="">
+					</a>
+			<h1 class="text-center m-5"><a class="nav-link align-center text-light animate__animated animate__slideInLeft" href="/../">Patitas Perdidas</a></h1>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-				
-				<h1><a class="nav-link" href="/../">Patitas Perdidas</a></h1>
+				<ul></ul>
+				<ul class="menu-registro ">
+					<li class="nav-item ">
+						<a class="btn btn-primary iniciar" href="/persona/registro" role="button">Registrarse</a>						
+					</li>
+					<li class="nav-item ">						
+							<a class="btn btn-primary iniciar" role="button" data-toggle="modal" data-target="#exampleModal">Iniciar sesion</a>						
+					</li>					
+				</ul>
+			
 			</div>
 			
 				
-				<div th:if="${error}">
+				<div th:if="${error}" >
 				<!-- Hasta la linea 52, todo esto es para el icono de exclamacion de la alerta-->
 				<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
    					<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -53,14 +67,7 @@
 					<div th:text="${error}"></div>
 				</div>
 				</div>
-			<ul class="menu-registro">
-					<li class="nav-item ">
-						<a class="btn btn-primary iniciar" href="/persona/registro" role="button">Registrarse</a>						
-					</li>
-					<li class="nav-item ">						
-							<a class="btn btn-primary iniciar" role="button" data-toggle="modal" data-target="#exampleModal">Iniciar sesion</a>						
-					</li>					
-				</ul>
+			
 		</nav>
 		
 		<!---inicia sesion Modal --->
@@ -71,7 +78,7 @@
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title " id="exampleModalLabel">Iniciar
+						<h5 class="modal-title text-light" id="exampleModalLabel">Iniciar
 							sesion</h5>
 						<button type="" class="close rounded" data-dismiss="modal"
 							aria-label="Close"
@@ -104,14 +111,14 @@
 		<!---Termina sesion Modal --->
 
 		<!-- Buscador -->
-		<div class="buscador">
+		<div class="buscador text-light">
 			<h2>Encontrá tu mascota de la forma más fácil, nosotros te
 				ayudamos</h2>
 			<form class="form-inline my-1 my-lg-0 input-group align-items-center">
 				<input class="input-busqueda text-dark" type="search"
 					placeholder="Buscar" aria-label="Search"
 				>
-				 <a class="col nav-link active" href="/mascota/listarE"><img alt="" src="./imagenes/lupa.png" class="col-md-8 "> <p class="text-dark">Buscar mascota</p> </a>
+				 <a class="col nav-link active" href="/mascota/listarE"><img alt="" src="./imagenes/lupa.png" class="lupita"> <p class="text-dark">Buscar mascota</p> </a>
 			</form>
 		</div>
 	</div>
@@ -119,9 +126,10 @@
 
 	<!-- Inicia Carousel -->
 	<div>
+		
 		<div id="carouselExampleIndicators" class="carousel slide"
-			data-bs-ride="carousel"
-		>
+			data-bs-ride="carousel">
+			<h2>Reencuentros felices</h2>
 			<ol class="carousel-indicators">
 				<li type="button" data-bs-target="#carouselExampleIndicators"
 					data-bs-slide-to="0" class="active" aria-current="true"
@@ -164,8 +172,8 @@
 
 
 	</div>
-	<footer class="footer">
-		<section class="derechos">
+	<footer class="footer ">
+		<section class="derechos text-light">
 			<p>© 2021 Patitas Perdidas. Todos los derechos reservados.</p>
 			<p>Desarrollado por César Gómez, Tomas Petitti, David Gimenez,
 				Juan Pablo Ayala, Nuria Romeu, Miranda Candela Sandoval Altuna,Tomas
