@@ -21,6 +21,11 @@ h1{
 .navbar-collapse {
 	justify-content:flex-end;
 }
+.nav-principal {
+	background-color: rgba(0, 0, 0, .7);
+	backdrop-filter: blur(10px)
+	
+}
 .menu {
     margin:1%;
     background-color: rgba(0, 0, 0, .3);
@@ -59,7 +64,7 @@ li .nav-item{
     background-color: rgba(0, 0, 0, .3);
     display: block;
     align-items: center;
-    width: 55% !important;
+    width: 48% !important;
     border-radius: 1%;
 }
 .buscador h2{
