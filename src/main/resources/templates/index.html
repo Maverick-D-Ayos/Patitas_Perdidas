@@ -50,9 +50,8 @@
 				</ul>
 			
 			</div>
-			
-				
-				<div th:if="${error}" >
+
+				<div th:if="${error}">
 				<!-- Hasta la linea 52, todo esto es para el icono de exclamacion de la alerta-->
 				<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
    					<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -63,11 +62,21 @@
 					role="alert">
 					<svg class="bi flex-shrink-0 me-2" width="24" height="24"
 						role="img" aria-label="Danger:"	>
-						<use xlink:href="#exclamation-triangle-fill" /></svg>
+						<use xlink:href="#exclamation-triangle-fill"/></svg>
 					<div th:text="${error}"></div>
 				</div>
 				</div>
-			
+
+			<ul class="menu-registro">
+					<li class="nav-item ">
+						<a class="btn btn-primary iniciar" href="/persona/registro" role="button" th:if="${session.clientesession == null}">Registrarme</a>						
+						<a class="btn btn-primary iniciar" href="/persona/registro" role="button" th:unless="${session.clientesession == null}" th:text="${session.clientesession?.nombre}"></a>						
+					</li>
+					<li class="nav-item ">						
+							<a class="btn btn-primary iniciar" role="button" data-toggle="modal" data-target="#exampleModal" th:if="${session.clientesession == null}">Iniciar sesion</a>	
+							<a class="btn btn-primary iniciar" role="button" href="/logout" th:unless="${session.clientesession == null}" th:text="'Cerrar sesion'"></a>						
+					</li>					
+				</ul>
 		</nav>
 		
 		<!---inicia sesion Modal --->
