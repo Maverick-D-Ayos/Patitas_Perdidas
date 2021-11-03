@@ -20,29 +20,24 @@
 
  <form class="formulario-registro text-center" role="form" th:action="@{/persona/modificar/{id}(id=${usuario.id})}" method="POST">
         <div>
-        	<label for="floatingInput">Nombre de usuario</label>  
-            <div class="form-floating mb-3">  
-                <input type="text" class="form-control" id="floatingInput"  th:placeholder="${usuario.nombre}" name="nombre" maxlength="255" required>				      
-				<label for="floatingInput"><span th:text="${usuario.nombre}"></span></label>             
+        	 <div class="form-floating mb-3">  
+                <input type="text" class="form-control" id="floatingInput" placeholder="Nombre" th:value="${usuario.nombre}" name="nombre" maxlength="255" required>				      
+				<label for="floatingInput">Nombre</span></label>             
             </div>
             
-
-            <label for="floatingInput">Telefono</label>  
             <div class="form-floating mb-3">  
-                <input type="text" class="form-control" id="floatingInput"  th:placeholder="${usuario.telefono}" name="nombre" maxlength="255" required>				      
-				<label for="floatingInput"><span th:text="${usuario.telefono}"></span></label>             
+                <input type="text" class="form-control" id="floatingInput"  placeholder="Telefono" th:value="${usuario.telefono}" name="telefono" maxlength="255" required>				      
+				<label for="floatingInput">Telefono</label>             
+            </div>
+  
+            <div class="form-floating mb-3">  
+                <input type="email" class="form-control" id="floatingInput"  th:value="${usuario.mail}" name="mail" maxlength="255" required>				      
+				<label for="floatingInput">E-mail</label>             
             </div>
 
-             <label for="floatingInput">Email</label>  
             <div class="form-floating mb-3">  
-                <input type="text" class="form-control" id="floatingInput"  th:placeholder="${usuario.mail}" name="nombre" maxlength="255" required>				      
-				<label for="floatingInput"><span th:text="${usuario.mail}"></span></label>             
-            </div>
-
-            <label for="floatingInput">Clave</label>  
-            <div class="form-floating mb-3">  
-                <input type="text" class="form-control" id="floatingInput"  name="nombre" maxlength="255" required>				      
-				<label for="floatingInput">*******</label>             
+                <input type="password" class="form-control" id="floatingInput"  name="clave" maxlength="255" required>				      
+				<label for="floatingInput">Clave</label>             
             </div>
 
 
