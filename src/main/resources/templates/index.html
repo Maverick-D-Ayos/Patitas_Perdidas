@@ -27,7 +27,7 @@
 <body>
 	<div class="vista-principal">
 		<nav class="navbar navbar-expand-lg navbar-light menu">
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+			<button class="navbar-toggler m-1" type="button" data-toggle="collapse"
 				data-target="#navbarTogglerDemo03"
 				aria-controls="navbarTogglerDemo03" aria-expanded="false"
 				aria-label="Toggle navigation">
@@ -172,19 +172,10 @@
 
 
 	</div>
-	<footer class="footer ">
-		<section class="derechos text-light">
-			<p>© 2021 Patitas Perdidas. Todos los derechos reservados.</p>
-			<p>Desarrollado por César Gómez, Tomas Petitti, David Gimenez,
-				Juan Pablo Ayala, Nuria Romeu, Miranda Candela Sandoval Altuna,Tomas
-				Vergara, Fabian Sassola y Facundo Ferreira Da Camara.</p>
-		</section>
-		<span><p class="mr-10">DISEÑO Y DESARROLLO WEB.</p></span>
-	</footer>
+	<footer th:replace= "/fragments/footer :: footer"></footer>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"
-	>
+		crossorigin="anonymous">
     </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
