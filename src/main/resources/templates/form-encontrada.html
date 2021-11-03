@@ -53,7 +53,7 @@
 				<div class="col">
 					<div class="form-anticlear">
 						<h2>Formulario de mascota encontrada</h2>
-						<form action="/mascota/registroencontrada" method="POST">
+						<form action="/mascota/registroencontrada" method="POST" enctype="multipart/form-data" class = "form-anticlear">
 							<div class="form-group">
 								<label for="nombre">Nombre de la mascota</label> <input type="text"
 									class="form-control" name="nombre" id="nombre"
@@ -66,8 +66,11 @@
 							</div>
 							<div class="form-group">
 								<label for="especie"><span class="required">*</span>Especie</label>
-								<input type="text" class="form-control" name="especie"
-									id="especie" placeholder="Especie (Ejemplo: Gato, Perro, etc)">
+								<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="especie" id="especie">
+									<option selected>Seleccione la especie de su mascota</option>
+									<option value="Gato">Gato</option>
+									<option value="Perro">Perro</option>
+								</select>
 							</div>
 							<div class="form-group">
 								<label for="raza">Raza</label> <input type="text"
@@ -193,19 +196,14 @@
 
 							</div>
 							<div class="fecha">
-								<!--  Poner otra forma de seleccionar la fecgha  -->
-								<label for="fecha">Selecccione la fecha en donde
-									encontro la mascota</label>
-								<div>
-									<input type="date" name="fecha" step="1" min="1900-01-01"
-										max="3000-01-01"
-										onfocus="this.max=new Date().toISOString().split('T')[0]">
-								</div>
+								<label class="control-label">Fecha en que se perdio</label>
+								<input class="form-control" name="fecha" type="text" id="datepicker">
 							</div>
 							<div class="form-group mt-2">
-								<label for="foto">Subi la Foto de tu mascota</label> <input
-									type="file" class="form-control-file" name="foto" id="foto">
-								<input type="hidden" id="encontrado" name="encontrado"
+								<div class="form-group mt-2">
+									<label for="foto">Subi la Foto de tu mascota</label>
+									<input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg">
+									<input type="hidden" id="encontrado" name="encontrado"
 									value=true>
 							</div>
 							<div>
@@ -230,6 +228,17 @@
 		</div>
 	</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/gh/akjpro/form-anticlear/base.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$(function () {
+			$("#datepicker").datepicker({
+				maxDate: "0",
+				dateFormat: "yy-mm-dd"
+			});
+		});
+	</script>
 	<footer th:replace= "/fragments/footer :: footer"></footer>
 </body>
 <script src="https://cdn.jsdelivr.net/gh/akjpro/form-anticlear/base.js"></script>
