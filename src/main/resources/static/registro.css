@@ -11,7 +11,7 @@ body {
 	display:flex;
 	justify-content: flex-end;
 	flex-direction:column;
-	width:70%;
+/* 	width:70%; */
 	
 }
 /*INICIO MENU*/
@@ -48,9 +48,9 @@ li .nav-item{
 h2 {
 	color: rgb(253, 251, 247);
 	width: 50%;
-	text-align: center;
-	align-items: center;
-	margin: 0 auto;
+	text-align: left;
+	align-items: left;
+	margin: 2px;
 }
 
 nav li .nav-item {
@@ -59,13 +59,14 @@ nav li .nav-item {
 
 .formulario-registro {
 	background-color: rgba(12, 4, 4, 0);
-	margin: 0 auto;
-	width: 30%;
+	margin: 2px;
+	max-width: 400px;
+/* 	width: 30%; */
 	padding: 10px;
-	justify-content: center;
+	justify-content: left;
 	flex-wrap: wrap;
 	flex-direction: column;
-	align-items: center;
+	align-items: left;
 	border: 2px solid white;
 }
 .formulario-registro .alert{
