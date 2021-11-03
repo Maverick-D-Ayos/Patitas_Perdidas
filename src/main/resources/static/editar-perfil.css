@@ -11,7 +11,7 @@ body {
 	display:flex;
 	justify-content: flex-end;
 	flex-direction:column;
-/* 	width:70%; */
+	width:70%;
 	
 }
 /*INICIO MENU*/
@@ -48,9 +48,10 @@ li .nav-item{
 h2 {
 	color: rgb(253, 251, 247);
 	width: 50%;
-	text-align: left;
-	align-items: left;
-	margin: 2px;
+	text-align: center;
+	align-items: center;
+	margin: 0 auto;
+	text-decoration: underline;
 }
 
 nav li .nav-item {
@@ -58,16 +59,15 @@ nav li .nav-item {
 }
 
 .formulario-registro {
-	background-color: rgba(12, 4, 4, 0);
-	margin: 2px;
-	max-width: 400px;
-/* 	width: 30%; */
+	background-color: #524f45bd;
+	margin: 0 auto;
+	width: 30%;
 	padding: 10px;
-	justify-content: left;
+	justify-content: center;
 	flex-wrap: wrap;
 	flex-direction: column;
-	align-items: left;
-	border: 2px solid white;
+	align-items: center;
+	border: 2px solid #212529;
 }
 .formulario-registro .alert{
 	text-align: center;
@@ -78,11 +78,40 @@ nav li .nav-item {
 	
 }
 .formulario-registro div label {
+	color:#141414;
 	display: flex;
 	padding: 2%;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	font-weight: bold;
+}
+
+h4{
+	color:#141414;
+	padding: 10px;
+    margin-bottom: 30px;
+}
+
+.cabecera{
+	background-color: #524f45bd;
+	border-bottom: dashed;
+    border-top: solid;
+    border-left: solid;
+    border-right: solid;
+    margin-bottom: 15px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+label{
+	color:#141414;
+	display: flex;
+	padding: 2%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-weight: bold;
 }
 
 .formulario-registro div label input {
@@ -90,6 +119,15 @@ nav li .nav-item {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+}
+
+.form-gris{
+	background-color: #524f45bd;
+}
+
+button{
+	padding-left: 20px;
+    padding-right: 20px;
 }
 
 /* DERECHOS */
