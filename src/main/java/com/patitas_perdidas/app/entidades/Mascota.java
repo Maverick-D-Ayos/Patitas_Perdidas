@@ -26,7 +26,7 @@ public class Mascota {
 	private String descripcion;
 	private String color;
 	private String raza;
-	private String tamaño;
+	private String tamanio;
 	private Boolean encontrado;
 	// para pasar de string (lo que toma del html a date
 	@Temporal(TemporalType.DATE)
@@ -83,12 +83,12 @@ public class Mascota {
 		this.raza = raza;
 	}
 
-	public String getTamaño() {
-		return tamaño;
+	public String getTamanio() {
+		return tamanio;
 	}
 
-	public void setTamaño(String tamaño) {
-		this.tamaño = tamaño;
+	public void setTamanio(String tamanio) {
+		this.tamanio = tamanio;
 	}
 
 	public Boolean getEncontrado() {
@@ -141,7 +141,7 @@ public class Mascota {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(alta, color, descripcion, encontrado, especie, fecha, id, image, nombre, raza, tamaño,
+		return Objects.hash(alta, color, descripcion, encontrado, especie, fecha, id, image, nombre, raza, tamanio,
 				zona);
 	}
 
@@ -159,13 +159,13 @@ public class Mascota {
 				&& Objects.equals(especie, other.especie) && Objects.equals(fecha, other.fecha)
 				&& Objects.equals(id, other.id) && Objects.equals(image, other.image)
 				&& Objects.equals(nombre, other.nombre) && Objects.equals(raza, other.raza)
-				&& Objects.equals(tamaño, other.tamaño) && Objects.equals(zona, other.zona);
+				&& Objects.equals(tamanio, other.tamanio) && Objects.equals(zona, other.zona);
 	}
 
 	@Override
 	public String toString() {
 		return "Mascota [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", color=" + color
-				+ ", raza=" + raza + ", tamaño=" + tamaño + ", encontrado=" + encontrado + ", fecha=" + fecha
+				+ ", raza=" + raza + ", tamaño=" + tamanio + ", encontrado=" + encontrado + ", fecha=" + fecha
 				+ ", especie=" + especie + ", alta=" + alta + ", image=" + image + ", zona=" + zona + "]";
 	}
 

@@ -24,7 +24,7 @@ public class MascotaServicio {
 	private MascotaRepositorio mr;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void crearMascota(String nombre, String descripcion, String color, String raza, String tamaño,
+	public void crearMascota(String nombre, String descripcion, String color, String raza, String tamanio,
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
 			throws MascotaExcepcion, IOException {
 
@@ -37,7 +37,7 @@ public class MascotaServicio {
 		if (color == null || color.isEmpty() || color.strip() == null) {
 			throw new MascotaExcepcion("Es necesario introducir el color de la mascota");
 		}
-		if (tamaño == null || tamaño.isEmpty() || tamaño.strip() == null) {
+		if (tamanio == null || tamanio.isEmpty() || tamanio.strip() == null) {
 			throw new MascotaExcepcion("Es necesario introducir el tamaño de la mascota");
 		}
 		if (zona == null || zona.isEmpty() || zona.strip() == null) {
@@ -49,7 +49,7 @@ public class MascotaServicio {
 		m.setDescripcion(descripcion);
 		m.setColor(color);
 		m.setRaza(raza);
-		m.setTamaño(tamaño);
+		m.setTamanio(tamanio);
 		m.setEncontrado(encontrado);
 		m.setFecha(fecha);
 		m.setEspecie(especie);
@@ -84,7 +84,7 @@ public class MascotaServicio {
 		m.setDescripcion(descripcion);
 		m.setColor(color);
 		m.setRaza(raza);
-		m.setTamaño(tamaño);
+		m.setTamanio(tamaño);
 		m.setEncontrado(encontrado);
 		m.setFecha(fecha);
 		m.setEspecie(especie);

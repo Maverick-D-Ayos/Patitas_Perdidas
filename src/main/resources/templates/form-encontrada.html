@@ -54,11 +54,13 @@
 					<div class="form-anticlear">
 						<h2>Formulario de mascota encontrada</h2>
 						<form action="/mascota/registroencontrada" method="POST" enctype="multipart/form-data" class = "form-anticlear">
-							<div class="form-group">
-								<label for="nombre">Nombre de la mascota</label> <input type="text"
-									class="form-control" name="nombre" id="nombre"
-									placeholder="Nombre">
+								
+								<div class="form-group">
+								 <input type="text"
+									class="form-control" name="nombre" id="nombre" placeholder="Nombre" hidden>
 							</div>
+							
+							
 							<div class="form-group">
 								<label for="descripcion">Descripción</label>
 								<textarea class="form-control" name="descripcion"

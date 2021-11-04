@@ -36,11 +36,14 @@ public class MascotaControlador {
 
 	@PostMapping("/registroencontrada")
 	public String registroencontrada(ModelMap modelo, String nombre, String descripcion, String color, String raza,
-			String tamaño, Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo,
+			String tamanio, Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo,
 			RedirectAttributes redirAttrs) throws IOException {
 		try {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-			ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
+			if(nombre==null || nombre.isEmpty() || nombre==" ") {
+				nombre = "Sin nombre";
+			}
+			ms.crearMascota(nombre, descripcion, color, raza, tamanio, encontrado, date, especie, zona, archivo);
 		} catch (MascotaExcepcion e) {
 			redirAttrs.addFlashAttribute("error", e.getMessage());
 			return ("redirect:./registroencontrada");
@@ -60,12 +63,12 @@ public class MascotaControlador {
 
 	@PostMapping("/registroperdida")
 	public String registroperdida(ModelMap modelo, String nombre, String descripcion, String color, String raza,
-			String tamaño,Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo,
+			String tamanio,Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo,
 			RedirectAttributes redirAttrs) throws ParseException, IOException {
 	
 		try {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-			ms.crearMascota(nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
+			ms.crearMascota(nombre, descripcion, color, raza, tamanio, encontrado, date, especie, zona, archivo);
 		} catch (MascotaExcepcion e) {
 			redirAttrs.addFlashAttribute("error", e.getMessage());
 			return ("redirect:./registroperdida");
@@ -87,10 +90,10 @@ public class MascotaControlador {
 
 	@PostMapping("/actualizar/{id}")
 	public String actualiza(ModelMap modelo, String id, String nombre, String descripcion, String color, String raza,
-			String tamaño, Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo)
+			String tamanio, Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo)
 			throws ParseException, MascotaExcepcion, IOException {
 		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-		ms.modificarMascota(id, nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
+		ms.modificarMascota(id, nombre, descripcion, color, raza, tamanio, encontrado, date, especie, zona, archivo);
 		modelo.put("Exito", "Actualizacion exitosa");
 		return " ";
 	}
@@ -112,7 +115,7 @@ public class MascotaControlador {
 	public String listarActivos(ModelMap modelo) {
 		List<Mascota> muestraMascotas = ms.listarMascotasActivasPerdidas();
 		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
-		return "";
+		return "mascotasPerdidas.html";
 	}
 
 	@GetMapping("/listarE")
