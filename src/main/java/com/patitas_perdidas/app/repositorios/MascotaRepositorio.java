@@ -23,8 +23,8 @@ public interface MascotaRepositorio extends JpaRepository<Mascota, String> {
 	public List<Mascota> buscarListaRaza(@Param("raza") String raza);
 
 	// Busca una lista de mascota tamaño, retorna una lista de mascotas
-	@Query("SELECT m FROM Mascota m WHERE m.alta = true and m.tamaño = :tamaño")
-	public List<Mascota> buscarListaTamaño(@Param("tamaño") String tamaño);
+	@Query("SELECT m FROM Mascota m WHERE m.alta = true and m.tamanio = :tamanio")
+	public List<Mascota> buscarListaTamaño(@Param("tamanio") String tamao);
 
 	// Busca una lista de mascota color, retorna una lista de mascotas
 	@Query("SELECT m FROM Mascota m WHERE m.alta = true and m.color = :color")
