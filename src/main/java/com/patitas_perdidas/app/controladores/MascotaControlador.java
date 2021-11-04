@@ -91,7 +91,7 @@ public class MascotaControlador {
 			throws ParseException, MascotaExcepcion, IOException {
 		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
 		ms.modificarMascota(id, nombre, descripcion, color, raza, tamaño, encontrado, date, especie, zona, archivo);
-		modelo.put("Exito", "Actualoizacion exitosa");
+		modelo.put("Exito", "Actualizacion exitosa");
 		return " ";
 	}
 

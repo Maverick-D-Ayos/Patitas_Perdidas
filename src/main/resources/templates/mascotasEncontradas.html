@@ -18,7 +18,12 @@
                             <th>Descripcion</th>
                             <th>Fecha</th>
                             <th>Nombre</th>     
-                            <th>Raza</th>                   
+                            <th>Raza</th>
+                            <th>Especie</th>
+                   
+                            <th>Barrio</th>  
+                            <th>Imagen</th>
+                   
                         </tr>
                     </thead>
     <tr th:each="mascota:${listaMascotasEncontradas}">
@@ -27,6 +32,13 @@
                             <td th:text="${mascota.fecha}"></td>
                             <td th:text="${mascota.nombre}"></td>
                             <td th:text="${mascota.raza}"></td>
+                            <td th:text="${mascota.especie}"></td>
+                          
+                            <td th:text="${mascota.zona}"></td>
+                           <td><img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"></td>
+
+
+                           
     
     </tr>
     </h3>
