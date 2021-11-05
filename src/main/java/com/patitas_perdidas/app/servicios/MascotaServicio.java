@@ -27,24 +27,8 @@ public class MascotaServicio {
 	public void crearMascota(String nombre, String descripcion, String color, String raza, String tamanio,
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
 			throws MascotaExcepcion, IOException {
-
-		if (nombre == null && encontrado == false || nombre.isEmpty() && encontrado == false || nombre.strip() == null && encontrado == false) {
-			throw new MascotaExcepcion("Es necesario introducir el nombre de su mascota");
-		}
-		if (especie == null || especie.isEmpty() || especie.strip() == null) {
-			throw new MascotaExcepcion("Es necesario introducir de que especie es la mascota");
-		}
-		if (color == null || color.isEmpty() || color.strip() == null) {
-			throw new MascotaExcepcion("Es necesario introducir el color de la mascota");
-		}
-		if (tamanio == null || tamanio.isEmpty() || tamanio.strip() == null) {
-			throw new MascotaExcepcion("Es necesario introducir el tamaño de la mascota");
-		}
-		if (zona == null || zona.isEmpty() || zona.strip() == null) {
-			throw new MascotaExcepcion("Seleccione un barrio");
-		}
-			
-		Mascota m=new Mascota();
+		validar(nombre, descripcion, color, raza, tamanio, especie, zona, archivo);
+		Mascota m = new Mascota();
 		m.setNombre(nombre);
 		m.setDescripcion(descripcion);
 		m.setColor(color);
@@ -54,15 +38,13 @@ public class MascotaServicio {
 		m.setFecha(fecha);
 		m.setEspecie(especie);
 		m.setAlta(true);
-		String archivoNombre = StringUtils.cleanPath(archivo.getOriginalFilename());
-		if (archivoNombre.contains("..")) {
-			throw new IOException("El archivo no es valido");
-		}
+
 		try {
 			m.setImage(Base64.getEncoder().encodeToString(archivo.getBytes()));
 		} catch (IOException e) {
 			throw new IOException("El archivo no es valido");
 		}
+
 		m.setZona(zona);
 
 		mr.save(m);
@@ -78,6 +60,7 @@ public class MascotaServicio {
 	public void modificarMascota(String id, String nombre, String descripcion, String color, String raza, String tamaño,
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
 			throws MascotaExcepcion, IOException {
+		validar(nombre, descripcion, color, raza, tamaño, especie, zona, archivo);
 		Mascota m = mr.getById(id);
 
 		m.setNombre(nombre);
@@ -89,15 +72,13 @@ public class MascotaServicio {
 		m.setFecha(fecha);
 		m.setEspecie(especie);
 		m.setAlta(true);
-		String archivoNombre = StringUtils.cleanPath(archivo.getOriginalFilename());
-		if (archivoNombre.contains("..")) {
-			throw new IOException("El archivo no es valido");
-		}
+
 		try {
 			m.setImage(Base64.getEncoder().encodeToString(archivo.getBytes()));
 		} catch (IOException e) {
 			throw new IOException("El archivo no es valido");
 		}
+
 		m.setZona(zona);
 
 		mr.save(m);
@@ -144,4 +125,39 @@ public class MascotaServicio {
 		}
 	}
 
+	public void validar(String nombre, String descripcion, String color, String raza, String tamaño, String especie,
+			String zona, MultipartFile archivo) throws MascotaExcepcion, IOException {
+		if (nombre == null || nombre.isEmpty() || nombre.strip() == "") {
+			throw new MascotaExcepcion("Es necesario introducir el nombre de su mascota");
+		}
+
+		if (descripcion == null || descripcion.isEmpty() || descripcion.strip() == "") {
+			throw new MascotaExcepcion("Es necesario introducir la descripcion de la mascota");
+		}
+
+		if (color == null || color.isEmpty() || color.strip() == "") {
+			throw new MascotaExcepcion("Es necesario introducir el color de la mascota");
+		}
+
+		if (raza == null || raza.isEmpty() || raza.strip() == "") {
+			throw new MascotaExcepcion("Es necesario introducir la raza de la mascota");
+		}
+
+		if (tamaño == null || tamaño.isEmpty() || tamaño.strip() == "") {
+			throw new MascotaExcepcion("Es necesario introducir el tamaño de la mascota");
+		}
+
+		if (especie == null || especie.isEmpty() || especie.strip() == "") {
+			throw new MascotaExcepcion("Es necesario introducir de que especie es la mascota");
+		}
+
+		if (zona == null || zona.isEmpty() || zona.strip() == "") {
+			throw new MascotaExcepcion("Seleccione un barrio");
+		}
+
+		String archivoNombre = StringUtils.cleanPath(archivo.getOriginalFilename());
+		if (archivoNombre.contains("..")) {
+			throw new IOException("El archivo no es valido");
+		}
+	}
 }

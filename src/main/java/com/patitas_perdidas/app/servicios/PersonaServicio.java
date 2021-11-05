@@ -133,6 +133,7 @@ public class PersonaServicio implements UserDetailsService {
 			throw new PersonaExcepcion("La clave tiene que tener mas de 6 digitos");
 		}
 	}
+
 	public void validarMail(String mail) throws PersonaExcepcion
 	{
 		// Si el mail ya esta en la base de datos retorna un PersonaExcepcion
@@ -142,6 +143,7 @@ public class PersonaServicio implements UserDetailsService {
 		}
 
 	}
+
 	public Persona buscarPorEmail(String mail)
 	{
 		Optional<Persona> oPersona = personaRepositorio.buscarPorMail(mail);

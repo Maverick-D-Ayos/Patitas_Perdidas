@@ -1,0 +1,397 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+<!-- Formulario -->
+<div id="formulario" class="card w-50" style="margin: 0 auto">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="form-anticlear">
+
+                <!-- Titulo del formulario de Mascotas Encontradas -->
+                <h2 th:if="${encontrada}">Formulario de mascota encontrada</h2>
+
+                <!-- Titulo del formulario de Mascotas Perdidas -->
+                <h2 th:if="${perdida}">Formulario de mascota perdida</h2>
+
+                <!-- Formulario de Mascotas Encontradas -->
+                <form th:if="${encontrada}" action="/mascota/registroencontrada" method="POST"
+                    enctype="multipart/form-data" class="form-anticlear">
+
+                    <!-- Nombre -->
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" hidden
+                            value="Sin nombre">
+                    </div>
+                    <!-- FIN Nombre -->
+
+                    <!-- Descripcion -->
+                    <div class="form-group">
+                        <label for="descripcion"><span class="required">*</span>Descripción</label>
+                        <textarea class="form-control" name="descripcion" id="descripcion" rows=3 required> </textarea>
+                    </div>
+                    <!-- FIN Descripcion -->
+
+                    <!-- Especie -->
+                    <div class="form-group">
+                        <label for="especie"><span class="required">*</span>Especie</label>
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="especie"
+                            id="especie" required>
+                            <option selected value="">Seleccione la especie de su mascota</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Perro">Perro</option>
+                        </select>
+                    </div>
+                    <!-- FIN Especie -->
+
+                    <!-- Raza -->
+                    <div class="form-group">
+                        <label for="raza"><span class="required">*</span>Raza</label> <input type="text"
+                            class="form-control" name="raza" id="raza" placeholder="Raza" required>
+                    </div>
+                    <!-- FIN Raza -->
+
+                    <!-- Color -->
+                    <div class="form-group">
+                        <label for="color"><span class="required">*</span>Color</label>
+                        <input type="text" class="form-control" name="color" id="color" placeholder="Color" required>
+                    </div>
+                    <!-- FIN Color -->
+
+                    <!-- Tamaño -->
+                    <div class="form-group">
+                        <label for="tamaño"><span class="required">*</span>Tamaño
+                            de la mascota</label> <select class="form-select form-select-sm"
+                            aria-label=".form-select-sm example" name="tamanio" required>
+                            <option selected style="color: dimgray" value="">Seleccione
+                                el tamaño de su mascota</option>
+                            <option value="Pequeño" class="select">Pequeño</option>
+                            <option value="Mediano" class="select">Mediano</option>
+                            <option value="Grande" class="select">Grande</option>
+                        </select>
+                    </div>
+                    <!-- FIN Tamaño -->
+
+                    <!-- Zona -->
+                    <div class="form-group">
+                        <label for="zona"><span class="required">*</span>Barrio</label>
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="zona"
+                            required>
+                            <option selected style="color: dimgray" value="">Seleccione
+                                el barrio donde lo encontro</option>
+                            <option id='Altos de Mendoza' class="select">Altos de
+                                Mendoza</option>
+                            <option id='Alvear' class="select">Alvear</option>
+                            <option id='Arroyito' class="select">Arroyito</option>
+                            <option id='Azcuénaga' class="select">Azcuénaga</option>
+                            <option id='Bella Vista' class="select">Bella Vista</option>
+                            <option id='Carlos Pellegrini' class="select">Carlos
+                                Pellegrini</option>
+                            <option id='Centro' class="select">Centro</option>
+                            <option id='Cerámica' class="select">Cerámica</option>
+                            <option id='Cinco Esquinas' class="select">Cinco
+                                Esquinas</option>
+                            <option id='Country del Lago' class="select">Country
+                                del Lago</option>
+                            <option id='El Condado' class="select">El Condado</option>
+                            <option id='Empalme Graneros' class="select">Empalme
+                                Graneros</option>
+                            <option id='Fisherton' class="select">Fisherton</option>
+                            <option id='Floresta' class="select">Floresta</option>
+                            <option id='Godoy' class="select">Godoy</option>
+                            <option id='Juan Pablo II' class="select">Juan Pablo
+                                II</option>
+                            <option id='La Floresta' class="select">La Floresta</option>
+                            <option id='La Guardia' class="select">La Guardia</option>
+                            <option id='Larrea' class="select">Larrea</option>
+                            <option id='Las Delicias' class="select">Las Delicias</option>
+                            <option id='Las Heras' class="select">Las Heras</option>
+                            <option id='Latinoamérica' class="select">Latinoamérica</option>
+                            <option id='Los Unidos' class="select">Los Unidos</option>
+                            <option id='Ludueña' class="select">Ludueña</option>
+                            <option id='Magnano' class="select">Magnano</option>
+                            <option id='Martin' class="select">Martin</option>
+                            <option id='Moderno' class="select">Moderno</option>
+                            <option id='Molino Blanco' class="select">Molino
+                                Blanco</option>
+                            <option id='Newbery' class="select">Newbery</option>
+                            <option id='Nuevo Alberdi' class="select">Nuevo
+                                Alberdi</option>
+                            <option id='Parque' class="select">Parque</option>
+                            <option id='Parque Carlos Casado' class="select">Parque
+                                Carlos Casado</option>
+                            <option id='Parque Field' class="select">Parque Field</option>
+                            <option id='Parque Habitacional Bouchart' class="select">Parque
+                                Habitacional Bouchart</option>
+                            <option id='Parque Habitacional Ludueña' class="select">Parque
+                                Habitacional Ludueña</option>
+                            <option id='Parque Habitacional Newbery' class="select">Parque
+                                Habitacional Newbery</option>
+                            <option id='Parque Vicente López y Planes' class="select">Parque
+                                Vicente López y Planes</option>
+                            <option id='Pichincha' class="select">Pichincha</option>
+                            <option id='Plata' class="select">Plata</option>
+                            <option id='Portal de Aldea' class="select">Portal de
+                                Aldea</option>
+                            <option id='Puerto Norte' class="select">Puerto Norte</option>
+                            <option id='República de la Sexta' class="select">República
+                                de la Sexta</option>
+                            <option id='Roque Carranza' class="select">Roque
+                                Carranza</option>
+                            <option id='Rucci' class="select">Rucci</option>
+                            <option id='Saladillo' class="select">Saladillo</option>
+                            <option id='San Francisquito' class="select">San
+                                Francisquito</option>
+                            <option id='Sarmiento' class="select">Sarmiento</option>
+                            <option id='Tablada' class="select">Tablada</option>
+                        </select>
+                    </div>
+                    <!-- FIN Zona -->
+
+                    <!-- fecha -->
+                    <div class="form-group">
+                        <label class="control-label">Fecha en que se encontro</label>
+                        <input class="form-control" name="fecha" type="text" id="datepicker" required>
+                    </div>
+                    <!-- FIN fecha -->
+
+                    <!-- Foto -->
+                    <div class="form-group">
+                        <label for="foto">Subi la Foto de tu mascota</label>
+                        <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
+                            required>
+                    </div>
+                    <!-- FIN Foto -->
+
+                    <!-- Encontrado -->
+                    <div class="form-group">
+                        <input type="hidden" id="encontrado" name="encontrado" value=true>
+                    </div>
+                    <!-- FIN Encontrado -->
+
+                    <!-- Botones -->
+                    <div class="form-group mt-2">
+                        <div>
+                            <button type="submit" class="btn btn-primary mt-2">
+                                <strong>Añadir mascota</strong>
+                            </button>
+                            <button type="Reset" class="btn btn-danger mt-2">
+                                <strong>Limpiar formulario</strong>
+                            </button>
+                            <br></br>
+                            <div class="alert alert-success" role="alert" th:text="${exito}" th:if="${exito}"></div>
+                            <!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
+                            <!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
+                            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                        </div>
+                    </div>
+                    <!-- FIN Botones -->
+                </form>
+                <!-- FIN Formulario de Mascotas Encontradas -->
+
+                <!-- Formulario de Mascotas Perdidas -->
+                <form th:if="${perdida}" action="/mascota/registroperdida" method="POST" enctype="multipart/form-data"
+                    class="form-anticlear">
+
+                    <!-- Nombre -->
+                    <div class="form-group">
+                        <label for="nombre"><span class="required">*</span>Nombre de la mascota</label> <input
+                            type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
+                    </div>
+                    <!-- FIN Nombre -->
+
+                    <!-- Descripcion -->
+                    <div class="form-group">
+                        <label for="descripcion"><span class="required">*</span>Descripción</label>
+                        <textarea class="form-control" name="descripcion" id="descripcion" rows=3 required> </textarea>
+                    </div>
+                    <!-- FIN Descripcion -->
+
+                    <!-- Especie -->
+                    <div class="form-group">
+                        <label for="especie"><span class="required">*</span>Especie</label>
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="especie"
+                            id="especie" required>
+                            <option value="" selected>Seleccione la especie de su mascota</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Perro">Perro</option>
+                        </select>
+                    </div>
+                    <!-- FIN Especie -->
+
+                    <!-- Raza -->
+                    <div class="form-group">
+                        <label for="raza"><span class="required">*</span>Raza</label> <input type="text"
+                            class="form-control" name="raza" id="raza" placeholder="Raza" required>
+                    </div>
+                    <!-- FIN Raza -->
+
+                    <!-- Color -->
+                    <div class="form-group">
+                        <label for="color"><span class="required">*</span>Color</label>
+                        <input type="text" class="form-control" name="color" id="color" placeholder="Color" required>
+                    </div>
+                    <!-- FIN Color -->
+
+                    <!-- Tamaño -->
+                    <div class="form-group">
+                        <label for="tamaño"><span class="required">*</span>Tamaño
+                            de la mascota</label> <select class="form-select form-select-sm"
+                            aria-label=".form-select-sm example" name="tamanio" required>
+                            <option selected style="color: dimgray" value="">Seleccione
+                                el tamaño de su mascota</option>
+                            <option value="Pequeño" class="select">Pequeño</option>
+                            <option value="Mediano" class="select">Mediano</option>
+                            <option value="Grande" class="select">Grande</option>
+                        </select>
+                    </div>
+                    <!-- FIN Tamaño -->
+
+                    <!-- Zona -->
+                    <div class="form-group">
+                        <label for="zona"><span class="required">*</span>Barrio</label>
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="zona"
+                            required>
+                            <option selected style="color: dimgray" value="">Seleccione
+                                el barrio donde lo encontro</option>
+                            <option id='22 de Julio' class="select">22 de Julio</option>
+                            <option id='Abasto' class="select">Abasto</option>
+                            <option id='Aldea' class="select">Aldea</option>
+                            <option id='Altos de Mendoza' class="select">Altos de
+                                Mendoza</option>
+                            <option id='Alvear' class="select">Alvear</option>
+                            <option id='Antártida Argentina' class="select">Antártida
+                                Argentina</option>
+                            <option id='Arroyito' class="select">Arroyito</option>
+                            <option id='Azcuénaga' class="select">Azcuénaga</option>
+                            <option id='Belgrano' class="select">Belgrano</option>
+                            <option id='Bella Vista' class="select">Bella Vista</option>
+                            <option id='Bernardo de Irigoyen' class="select">Bernardo
+                                de Irigoyen</option>
+                            <option id='Carlos Pellegrini' class="select">Carlos
+                                Pellegrini</option>
+                            <option id='Centro' class="select">Centro</option>
+                            <option id='Cerámica' class="select">Cerámica</option>
+                            <option id='Cinco Esquinas' class="select">Cinco
+                                Esquinas</option>
+                            <option id='Country del Lago' class="select">Country
+                                del Lago</option>
+                            <option id='Cristalería' class="select">Cristalería</option>
+                            <option id='Echesortu' class="select">Echesortu</option>
+                            <option id='El Condado' class="select">El Condado</option>
+                            <option id='Empalme Graneros' class="select">Empalme
+                                Graneros</option>
+                            <option id='España y Hospitales' class="select">España
+                                y Hospitales</option>
+                            <option id='Fisherton' class="select">Fisherton</option>
+                            <option id='Floresta' class="select">Floresta</option>
+                            <option id='Godoy' class="select">Godoy</option>
+                            <option id='Grandoli' class="select">Grandoli</option>
+                            <option id='Gráfico' class="select">Gráfico</option>
+                            <option id='Industrial' class="select">Industrial</option>
+                            <option id='Jorge Cura' class="select">Jorge Cura</option>
+                            <option id='Juan Pablo II' class="select">Juan Pablo
+                                II</option>
+                            <option id='La Floresta' class="select">La Floresta</option>
+                            <option id='La Guardia' class="select">La Guardia</option>
+                            <option id='La Lagunita' class="select">La Lagunita</option>
+                            <option id='Larrea' class="select">Larrea</option>
+                            <option id='Las Delicias' class="select">Las Delicias</option>
+                            <option id='Las Flores' class="select">Las Flores</option>
+                            <option id='Las Heras' class="select">Las Heras</option>
+                            <option id='Latinoamérica' class="select">Latinoamérica</option>
+                            <option id='Los Unidos' class="select">Los Unidos</option>
+                            <option id='Los Unidos' class="select">Los Unidos</option>
+                            <option id='Lourdes' class="select">Lourdes</option>
+                            <option id='Ludueña' class="select">Ludueña</option>
+                            <option id='Luis Agote' class="select">Luis Agote</option>
+                            <option id='Magnano' class="select">Magnano</option>
+                            <option id='Martin' class="select">Martin</option>
+                            <option id='Matheu' class="select">Matheu</option>
+                            <option id='Moderno' class="select">Moderno</option>
+                            <option id='Molino Blanco' class="select">Molino
+                                Blanco</option>
+                            <option id='Newbery' class="select">Newbery</option>
+                            <option id='Nuevo Alberdi' class="select">Nuevo
+                                Alberdi</option>
+                            <option id='Parque' class="select">Parque</option>
+                            <option id='Parque Carlos Casado' class="select">Parque
+                                Carlos Casado</option>
+                            <option id='Parque Field' class="select">Parque Field</option>
+                            <option id='Parque Habitacional Bouchart' class="select">Parque
+                                Habitacional Bouchart</option>
+                            <option id='Parque Habitacional Ludueña' class="select">Parque
+                                Habitacional Ludueña</option>
+                            <option id='Parque Habitacional Newbery' class="select">Parque
+                                Habitacional Newbery</option>
+                            <option id='Parque Vicente López y Planes' class="select">Parque
+                                Vicente López y Planes</option>
+                            <option id='Pichincha' class="select">Pichincha</option>
+                            <option id='Plata' class="select">Plata</option>
+                            <option id='Portal de Aldea' class="select">Portal de
+                                Aldea</option>
+                            <option id='Puerto Norte' class="select">Puerto Norte</option>
+                            <option id='Refinería' class="select">Refinería</option>
+                            <option id='Remedios de Escalada de San Martín' class="select">Remedios
+                                de Escalada de San Martín</option>
+                            <option id='República de la Sexta' class="select">República
+                                de la Sexta</option>
+                            <option id='Roque Carranza' class="select">Roque
+                                Carranza</option>
+                            <option id='Rucci' class="select">Rucci</option>
+                            <option id='Saladillo' class="select">Saladillo</option>
+                            <option id='San Eduardo' class="select">San Eduardo</option>
+                            <option id='San Francisquito' class="select">San
+                                Francisquito</option>
+                            <option id='Sarmiento' class="select">Sarmiento</option>
+                            <option id='Sorrento' class="select">Sorrento</option>
+                            <option id='Tablada' class="select">Tablada</option>
+                            <option id='Tango' class="select">Tango</option>
+                        </select>
+                    </div>
+                    <!-- FIN Zona -->
+
+                    <!-- Fecha -->
+                    <div class="fecha">
+                        <label class="control-label"><span class="required">*</span>Fecha en que se encontro</label>
+                        <input class="form-control" name="fecha" type="text" id="datepicker" required>
+                    </div>
+                    <!-- FIN Fecha -->
+
+                    <!-- Foto -->
+                    <div class="form-group">
+                        <label for="foto"><span class="required">*</span>Subi la Foto de tu mascota</label>
+                        <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
+                            required>
+                    </div>
+                    <!-- FIN Foto -->
+
+                    <!-- Encontrado -->
+                    <div class="form-group">
+                        <input type="hidden" id="encontrado" name="encontrado" value=false>
+                    </div>
+                    <!-- FIN Encontrado -->
+
+                    <!-- Botones -->
+                    <div class="form-group mt-2">
+                        <div>
+                            <button type="submit" class="btn btn-primary mt-2">
+                                <strong>Añadir mascota</strong>
+                            </button>
+                            <button type="Reset" class="btn btn-danger mt-2">
+                                <strong>Limpiar formulario</strong>
+                            </button>
+                            <br></br>
+                            <div class="alert alert-success" role="alert" th:text="${exito}" th:if="${exito}"></div>
+                            <!-- 				https://knasmueller.net/how-to-set-a-flash-message-in-spring-boot-with-thymeleaf -->
+                            <!-- https://programandoointentandolo.com/2019/03/spring-boot-validacion-spring-mvc-y-thymeleaf.html -->
+                            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                        </div>
+                    </div>
+                    <!-- FIN Botones -->
+
+                </form>
+                <!-- FIN Formulario de Mascotas Perdidas -->
+            </div>
+        </div>
+    </div>
+</div>
