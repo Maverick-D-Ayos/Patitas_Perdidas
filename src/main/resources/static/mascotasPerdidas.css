@@ -1,0 +1,89 @@
+body {
+	background-color: #454545;
+	color: rgb(253, 251, 247);
+	margin: 1%;
+	padding: 10px;
+	background-image: url(/imagenes/pataFondo.png);
+    background-size: cover;
+}
+
+/*INICIO MENU*/
+.logo {
+	border-radius: 35%;
+	width:35%;
+	margin:2%;
+}
+.navbar-collapse {
+	justify-content:flex-end;
+}
+.nav-principal {
+	background-color: rgba(0, 0, 0, .7);
+	backdrop-filter: blur(10px)
+	
+}
+.menu {
+    margin:1%;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex-wrap;
+    color:#f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+.menu-registro{
+    text-decoration: none;
+    list-style: none;
+    margin-right: 20px;
+    display: flex;
+}
+.menu-registro button{
+    margin-left: 3px;
+    margin-right: 3px;
+}
+li .nav-item{
+    justify-content: flex-end;
+}
+.menu-registro .nav-item a.nav-link.active{
+    text-align: right;
+    color:#f8f9fa;
+    justify-content: flex-end;
+}
+/*FIN MENU*/
+
+
+h3{
+	width: 50%;
+	margin: 0 auto;
+}
+
+h5 {
+	margin-bottom: 30%;
+    margin-top: 10%;
+    margin-left: 2%;
+    background-color: rgba(0, 0, 0, .3);
+    display: block;
+    align-items: center;
+    width: 50% !important;
+    border-radius: 1%;
+    justify-content: flex-end;
+}
+
+button.btn.btn-outline-success.boton{
+    background-color: rgb(5, 126, 85) !important;
+    color: white;
+    border-radius: 2%; 
+    margin-bottom: 4%;
+}
+
+/* DERECHOS */
+.derechos {
+	color:#FFFFFF;
+    padding: 20px 10px;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    justify-content: space-around;
+  }
+.derechos p {
+    font-size: 12px;
+  }
+
+/* FIN DERECHOS */
