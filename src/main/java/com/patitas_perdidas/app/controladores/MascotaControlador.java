@@ -30,8 +30,10 @@ public class MascotaControlador {
 	// el metodo de encontrada y perdida podria ser uno solo pero cuando puse que
 	// retorne al index se mostraba mal.
 	@GetMapping("/registroencontrada")
-	public String registroencontrada() {
-		return "form-encontrada.html";
+	public String registroencontrada(Model modelo) {
+		String var = "encontrada";
+		modelo.addAttribute("encontrada", var);
+		return "registro-mascota.html";
 	}
 
 	@PostMapping("/registroencontrada")
@@ -40,16 +42,16 @@ public class MascotaControlador {
 			RedirectAttributes redirAttrs) throws IOException {
 		try {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-			if(nombre==null || nombre.isEmpty() || nombre==" ") {
-				nombre = "Sin nombre";
-			}
 			ms.crearMascota(nombre, descripcion, color, raza, tamanio, encontrado, date, especie, zona, archivo);
+		// Esto es para que aparezcan unas alertas al completar el formulario
 		} catch (MascotaExcepcion e) {
 			redirAttrs.addFlashAttribute("error", e.getMessage());
 			return ("redirect:./registroencontrada");
-			// Esto es para que aparezcan unas alertas al completar el formulario
 		} catch (ParseException e) {
 			redirAttrs.addFlashAttribute("error", "Revise la fecha añadida");
+			return ("redirect:./registroencontrada");
+		} catch (IOException e) {
+			redirAttrs.addFlashAttribute("error", "El archivo esta dañado.");
 			return ("redirect:./registroencontrada");
 		}
 		redirAttrs.addFlashAttribute("exito", "Se añadio la mascota con exito");
@@ -57,8 +59,10 @@ public class MascotaControlador {
 	}
 
 	@GetMapping("/registroperdida")
-	public String registroperdida() {
-		return "form-perdida.html";
+	public String registroperdida(Model modelo) {
+		String var = "perdida";
+		modelo.addAttribute("perdida", var);
+		return "registro-mascota.html";
 	}
 
 	@PostMapping("/registroperdida")
@@ -75,6 +79,9 @@ public class MascotaControlador {
 		} catch (ParseException e) {
 			redirAttrs.addFlashAttribute("error", "Revise la fecha añadida");
 			return ("redirect:./registroencontrada");
+		} catch (IOException e) {
+			redirAttrs.addFlashAttribute("error", "El archivo esta dañado.");
+			return ("redirect:./registroperdida");
 		}
 		redirAttrs.addFlashAttribute("exito", "Se añadio la mascota con exito");
 		return ("redirect:./registroperdida");
