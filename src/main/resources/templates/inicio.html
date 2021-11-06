@@ -21,82 +21,20 @@
 
 </head>
 <body>
-
-	<div class="vista-principal">
-		<nav class="navbar navbar-expand-lg navbar-light menu">
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarTogglerDemo03"
-				aria-controls="navbarTogglerDemo03" aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<img class="img-thumbnail" src="./imagenes/logo.png" height="120px" width="120px" alt="">
-	
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-				
-				<h1><a class="nav-link" href="/../">Patitas Perdidas</a></h1>
-			</div>
-			
-				
-				<div th:if="${error}">
-				<!-- Hasta la linea 52, todo esto es para el icono de exclamacion de la alerta-->
-				<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-   					<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
-    					<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-  					</symbol>
-				</svg>
-				<div class="alert alert-danger d-flex align-items-center"
-					role="alert">
-					<svg class="bi flex-shrink-0 me-2" width="24" height="24"
-						role="img" aria-label="Danger:"	>
-						<use xlink:href="#exclamation-triangle-fill" /></svg>
-					<div th:text="${error}"></div>
-				</div>
-				</div>
-			<ul class="menu-registro">
-					<li class="nav-item ">
-						<a class="btn btn-primary iniciar" role="button" th:href="@{/persona/perfil/__${session.clientesession.id}__}" th:text="${session.clientesession.nombre}"></a>						
-					</li>
-					<li class="nav-item ">						
-							<a class="btn btn-primary iniciar" role="button" href="/logout">Cerrar sesion</a>						
-					</li>					
-				</ul>
-		</nav>
+		<div class="vista-principal">
+		<!-- HEADER -->
+			<header th:replace= "/fragments/header :: header"></header>
+		<!-- FIN HEADER -->
 		
-			<!-- Buscador -->
-		<div class="buscador">
-			<h2>Encontrá tu mascota de la forma más fácil, nosotros te
-				ayudamos</h2>
-			<form class="form-inline my-1 my-lg-0 input-group">
-				<input class="input-busqueda text-dark" type="search"
-					placeholder="Buscar" aria-label="Search"
-				>
-				<button class="btn btn-outline-success boton" type="submit">
-					<a class="nav-link active" href="/mascota/listarE">Buscar
-						mascota</a>
-				</button>
-			</form>
-		</div>
-	</div>
-	<!-- Fin Buscador -->
+		
+		<!-- BUSCADOR -->
+			<buscar th:replace= "/fragments/buscar :: buscar"></buscar>
+		<!-- FIN BUSCADOR -->
 
 	
-	</div>
-	<footer class="footer">
-		<section class="derechos">
-			<p>© 2021 Patitas Perdidas. Todos los derechos reservados.</p>
-			<p>Desarrollado por César Gómez, Tomas Petitti, David Gimenez,
-				Juan Pablo Ayala, Nuria Romeu, Miranda Candela Sandoval Altuna,Tomas
-				Vergara, Fabian Sassola y Facundo Ferreira Da Camara.</p>
-		</section>
-		<span><p class="mr-10">DISEÑO Y DESARROLLO WEB.</p></span>
-	</footer>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"
-	>
-    </script>
+		</div>
+	<footer th:replace= "/fragments/footer :: footer"></footer>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
 		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
