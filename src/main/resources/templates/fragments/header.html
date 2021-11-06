@@ -1,60 +1,80 @@
 <!-- HEADER SIN LOGUEARSE -->
-<head><meta charset="UTF-8"></head>
+
+<head>
+	<meta charset="UTF-8">
+</head>
 <header th:if="${session.clientesession == null}">
-		<div class="px-3 py-2 nav-principal text-dark opacity-45">
-			<div class="container">
-				<div
-					class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-					<a href="/"
-						class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-						<img class="logo" src="./imagenes/logo.png" alt="">
-					</a>
+	<div class="px-3 py-2 nav-principal text-dark opacity-45">
+		<div class="container">
+			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+				<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+					<img class="logo" src="/imagenes/logo.png" alt="">
+				</a>
 
-					<ul
-						class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small text-white">
-						<li><a href="/../"class="nav-link text-light text-center"> 
-							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/home1.png" alt=""> 
-									 Inicio
+				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small text-white">
+					<li><a href="/../" class="nav-link text-light text-center">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/home1.png"
+								alt="">
+							Inicio
 						</a></li>
-						<li><a href="#" class="nav-link text-light text-center" data-toggle="modal" data-target="#exampleModal"> 
-									<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/acceso.png" alt=""> 
-									Iniciar sesion
+					<li><a href="#" class="nav-link text-light text-center" data-toggle="modal"
+							data-target="#exampleModal">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/acceso.png"
+								alt="">
+							Iniciar sesion
 						</a></li>
-						<li><a  class="nav-link text-light text-center" href="/persona/registro" > 
-						<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/firmar.png" alt=""> 
-									Registrarse
+					<li><a class="nav-link text-light text-center" href="/persona/registro">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/firmar.png"
+								alt="">
+							Registrarse
 						</a></li>
-						
-					</ul>
-				</div>
+
+				</ul>
 			</div>
 		</div>
-		
-	</header>
-	<header th:unless="${session.clientesession == null}">
-		<div class="px-3 py-2 nav-principal text-dark opacity-45">
-			<div class="container">
-				<div
-					class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-					<a href="/"
-						class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-						<img class="logo" src="./imagenes/logo.png" alt="">
-					</a>
+	</div>
 
-					<ul
-						class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small text-light">
-						<li><a href="/../" class="nav-link text-light text-center"> 
-							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/home1.png" alt=""> 
-									 Inicio
+</header>
+<header th:unless="${session.clientesession == null}">
+	<div class="px-3 py-2 nav-principal text-dark opacity-45">
+		<div class="container">
+			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+				<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+					<img class="logo" src="/imagenes/logo.png" alt="">
+				</a>
+
+				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small text-light">
+					<li><a href="/../" class="nav-link text-light text-center">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/home1.png"
+								alt="">
+							Inicio
 						</a></li>
-						<li><a href="#" class="nav-link text-light text-center"> 
-									<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/mascota1.png" alt=""> 
-									Mis Mascotas
+					<li><a href="#" class="nav-link text-light text-center">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/mascota1.png"
+								alt="">
+							Mis Mascotas
 						</a></li>
-						<li><a href="#" class="nav-link text-light text-center"> 
-						 	<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/perfil2.png" alt="" th:text="${session.clientesession.nombre}"></a></li>
-					</ul>
-				</div>
+					<li>
+						<!-- Añadi un dropdown para probar  -->
+						<div class="nav-link text-light text-center dropdown">
+							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								Añadir
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" th:href="
+								@{/mascota/registroperdida/{id} (id=${session.clientesession.id})}">Mascota Perdida</a></li>
+								<li><a class="dropdown-item" th:href="
+								@{/mascota/registroencontrada/{id} (id=${session.clientesession.id})}">Mascota encontrada</a></li>
+							</ul>
+						</div>
+					</li>
+					<li><a href="#"
+							class="nav-link text-light text-center">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/perfil2.png"
+								alt="" th:text="${session.clientesession.nombre}"></a></li>
+				</ul>
 			</div>
 		</div>
-		</header>
+	</div>
+</header>

@@ -14,7 +14,8 @@
                 <h2 th:if="${perdida}">Formulario de mascota perdida</h2>
 
                 <!-- Formulario de Mascotas Encontradas -->
-                <form th:if="${encontrada}" action="/mascota/registroencontrada" method="POST"
+                <form th:if="${encontrada}"
+                    th:action="@{/mascota/registroencontrada/{id}(id=${session.clientesession.id})}" method="POST"
                     enctype="multipart/form-data" class="form-anticlear">
 
                     <!-- Nombre -->
@@ -149,14 +150,14 @@
 
                     <!-- fecha -->
                     <div class="form-group">
-                        <label class="control-label">Fecha en que se encontro</label>
+                        <label class="control-label"><span class="required">*</span>Fecha en que se encontro</label>
                         <input class="form-control" name="fecha" type="text" id="datepicker" required>
                     </div>
                     <!-- FIN fecha -->
 
                     <!-- Foto -->
                     <div class="form-group">
-                        <label for="foto">Subi la Foto de tu mascota</label>
+                        <label for="foto"><span class="required">*</span>Subi la Foto de tu mascota</label>
                         <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
                             required>
                     </div>
@@ -188,9 +189,10 @@
                 </form>
                 <!-- FIN Formulario de Mascotas Encontradas -->
 
-                <!-- Formulario de Mascotas Perdidas -->
-                <form th:if="${perdida}" action="/mascota/registroperdida" method="POST" enctype="multipart/form-data"
-                    class="form-anticlear">
+                <!-- Formulario de Mascotas Perdidas-->
+                <form th:if="${perdida}"
+                    th:action="@{/mascota/registroperdida/{id}(id=${session.clientesession.id})}" method="POST"
+                    enctype="multipart/form-data" class="form-anticlear">
 
                     <!-- Nombre -->
                     <div class="form-group">
@@ -390,7 +392,7 @@
                     <!-- FIN Botones -->
 
                 </form>
-                <!-- FIN Formulario de Mascotas Perdidas -->
+                <!-- FIN Formulario de Mascotas Perdidas-->
             </div>
         </div>
     </div>

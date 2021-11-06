@@ -39,7 +39,6 @@ public class PersonaControlador {
 	public String formulario() {
 		return "registro.html";
 	}
-	
 
 	@PostMapping("/registro")
 	public String guardar(RedirectAttributes redirAttrs, @RequestParam String nombre, @RequestParam Long telefono,
@@ -55,9 +54,9 @@ public class PersonaControlador {
 		return ("redirect:./registro");
 
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
-	@GetMapping("/baja/id")	
+	@GetMapping("/baja/id")
 	public String baja(@PathVariable String id) {
 		try {
 			personaServicio.baja(id);
@@ -77,39 +76,41 @@ public class PersonaControlador {
 		}
 
 	}
+
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/perfil/{id}")
 	public String perfilUsuario(HttpSession session, ModelMap modelo, @PathVariable String id) throws PersonaExcepcion {
 		Persona person = (Persona) session.getAttribute("clientesession");
-		if(person == null || !person.getId().equals(id))
-		{
+		if (person == null || !person.getId().equals(id)) {
 			return "redirect:/inicio";
 		}
 		Persona usuario = personaServicio.buscaPorId(id);
 		modelo.addAttribute("usuario", usuario);
 		return "perfil.html";
 	}
+
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/modificar/{id}")
 	public String preModificar(HttpSession session, ModelMap model, @PathVariable String id) throws PersonaExcepcion {
 		Persona person = (Persona) session.getAttribute("clientesession");
-		if(person == null || !person.getId().equals(id))
-		{
+		if (person == null || !person.getId().equals(id)) {
 			return "redirect:/inicio";
 		}
-		
+
 		Persona usuario = personaServicio.buscaPorId(id);
 		model.addAttribute("usuario", usuario);
 		return "modificar-usuario";
 
 	}
+
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@PostMapping("/modificar/{id}")
-	public String modificar(HttpSession session, RedirectAttributes redirAttrs, ModelMap modelo, @PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono, @RequestParam String mail, @RequestParam String clave) {
+	public String modificar(HttpSession session, RedirectAttributes redirAttrs, ModelMap modelo,
+			@PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono,
+			@RequestParam String mail, @RequestParam String clave) {
 		try {
 			Persona person = (Persona) session.getAttribute("clientesession");
-			if(person == null || !person.getId().equals(id))
-			{
+			if (person == null || !person.getId().equals(id)) {
 				return "redirect:/inicio";
 			}
 			personaServicio.modificar(id, nombre, telefono, mail, clave);
@@ -118,15 +119,13 @@ public class PersonaControlador {
 			session.setAttribute("clientesession", usuario);
 			modelo.put("exito", "Perfirl modificado");
 			redirAttrs.addAttribute("id", id);
-			
+
 			return "redirect:/persona/perfil/{id}";
 		} catch (Exception e) {
 			modelo.put("error", "Falto ingresar el nombre");
 			redirAttrs.addAttribute("id", id);
-			
+
 			return "redirect:/persona/perfil/{id}";
 		}
 	}
-	
-	
 }
