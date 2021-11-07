@@ -5,7 +5,34 @@ body {
 	padding: 10px;
 	background-image: url(/imagenes/pataFondo.png);
     background-size: cover;
+      justify-content: space-between;
 }
+
+/*ITEMS*/
+
+h3{
+	width: 50%;
+	margin: auto;
+	border-radius: 2em;
+	   justify-content: space-between;
+}
+
+h3 > * {
+	display: block;
+    margin-top: 30px;
+    justify-content: space-between;
+    background-color:  #454545;;
+
+}
+
+.card-text, .card-link, .list-group-item{
+	font-size: 16px;
+	overflow: hidden;
+	justify-content: space-between;
+}
+
+
+
 
 /*INICIO MENU*/
 .logo {
@@ -50,16 +77,13 @@ li .nav-item{
 /*FIN MENU*/
 
 
-h3{
-	width: 50%;
-	margin: 0 auto;
-}
 
-h5 {
+h5{
 	margin-bottom: 30%;
     margin-top: 10%;
     margin-left: 2%;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: #454545;
+    color: aliceblue;
     display: block;
     align-items: center;
     width: 50% !important;
@@ -72,13 +96,14 @@ button.btn.btn-outline-success.boton{
     color: white;
     border-radius: 2%; 
     margin-bottom: 4%;
+    margin-left: 4%;
 }
 
 /* DERECHOS */
 .derechos {
 	color:#FFFFFF;
     padding: 20px 10px;
-    background-color: rgba(0, 0, 0, .3);
+    background-color:#454545;
     display: flex;
     justify-content: space-around;
   }
