@@ -10,14 +10,21 @@
 
 <body>
  <header th:replace = "/fragments/header2 :: header"></header>	
- <h3>   
-   <div class="card-group">
+ 
+ <!--
+	ITEMS
+	-->
+ <h3>
+
+  <div class="card-group">
   <tr th:each="mascota:${listaMascotasEncontradas}">
 
  <div class="card flex" style="width: 18rem;">
   <img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"
    class="card-img-top">
-  <div class="card-body">
+  <div class="card-b
+  .cody">
+ 
     <p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
   </div>
   <ul class="list-group list-group-flush">
@@ -25,13 +32,16 @@
     <li class="list-group-item">Raza: <span th:text="${mascota.raza}"></span></li>
     <li class="list-group-item">Color: <span th:text="${mascota.color}"></span></li>
     <li class="list-group-item">Fecha en que se perdio: <span th:text="${mascota.fecha}"></span></li>
-    <li class="list-group-item">zona en que se perdio: <span th:text="${mascota.zona}"></span></li>
+    <li class="list-group-item">Zona en que se perdio: <span th:text="${mascota.zona}"></span></li>
   </ul>
   <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Contacto</a>
   </div>
 </div>
-</div>
+</div>    
+    </tr>
+    </h3>
+    </div>
 
   <!-- 
  <table class="table table-striped">
