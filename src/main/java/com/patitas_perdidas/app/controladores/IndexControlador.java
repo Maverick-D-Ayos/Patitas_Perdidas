@@ -29,7 +29,16 @@ public class IndexControlador {
 	}
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/inicio")
-	public String inicio() {
-		return "inicio.html";
+	public String inicio(@RequestParam(required = false) String error, ModelMap model) {
+		if(error != null)
+		{
+			model.put("error", "Usuario o clave incorrectos");
+			return "index.html";
+		}
+		else
+		{
+			return "inicio.html";
+		}
+		
 	}
 }

@@ -173,13 +173,11 @@ public class PersonaServicio implements UserDetailsService {
 	}
 
 	// METODO QUE CARGA EL USUARIO PARA LOGUEARSE
-	// Override porque se implementa userdetailservice y hay que sobreescribir el
-	// metodo
-	@Override
-	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 
-		// accedemos a la persona por el email, ya que el mail sera el "usuario"
-		Persona persona = buscarPorEmail(mail);
+	// Override porque se implementa userdetailservice y hay que sobreescribir el metodo
+		@Transactional
+		@Override
+		public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 
 		// si no existe se retorna null
 		if (persona == null) {
@@ -195,10 +193,13 @@ public class PersonaServicio implements UserDetailsService {
 		GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + persona.getRol());
 		permisos.add(p1);
 
-		// Se extraen atributos de contexto del navegador -> INVESTIGAR
-
-		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
+			// Se crea una autorizacion basada en el rol del cliente
+			// Despues vemos en los proximos dias el tema del concatenado, asi se respeta para los otros metodos
+			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + persona.getRol());
+			permisos.add(p1);
+		
+			// Se extraen atributos de contexto del navegador -> INVESTIGAR
+ 
 		// Se crea la sesion y se agrega el cliente a la misma
 		HttpSession session = attr.getRequest().getSession(true);
 		session.setAttribute("clientesession", persona);
@@ -210,8 +211,9 @@ public class PersonaServicio implements UserDetailsService {
 		// y se guarda la sesion correspondiente, el navegador despues se organiza (el
 		// nav sapbee)
 
-		// Se retorna el usuario con sesion "iniciada" y con permisos
-		return new User(mail, persona.getClave(), permisos);
+			// Se retorna el usuario con sesion "iniciada" y con permisos
+			User user = new User(persona.getMail(), persona.getClave(), permisos);
+			return user;
 
 	}
 
