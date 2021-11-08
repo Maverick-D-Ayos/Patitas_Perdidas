@@ -158,6 +158,7 @@ public class PersonaServicio implements UserDetailsService {
 	}
 	// METODO QUE CARGA EL USUARIO PARA LOGUEARSE
 	// Override porque se implementa userdetailservice y hay que sobreescribir el metodo
+		@Transactional
 		@Override
 		public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 
@@ -176,7 +177,7 @@ public class PersonaServicio implements UserDetailsService {
 			// Despues vemos en los proximos dias el tema del concatenado, asi se respeta para los otros metodos
 			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + persona.getRol());
 			permisos.add(p1);
-
+			
 			// Se extraen atributos de contexto del navegador -> INVESTIGAR
 			
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -190,7 +191,8 @@ public class PersonaServicio implements UserDetailsService {
 			// y se guarda la sesion correspondiente, el navegador despues se organiza (el nav sapbee)
 
 			// Se retorna el usuario con sesion "iniciada" y con permisos
-			return new User(mail, persona.getClave(), permisos);
+			User user = new User(persona.getMail(), persona.getClave(), permisos);
+			return user;
 
 		}
 

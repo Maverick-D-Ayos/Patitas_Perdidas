@@ -31,7 +31,40 @@
 		<!-- FIN BUSCADOR -->
 	</div>	
 		<!---inicia sesion Modal --->
-			<modal th:replace= "/fragments/modal :: modal"></modal>		
+			<modal class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-light" id="exampleModalLabel">Iniciar
+							sesion</h5>
+						<button type="" class="close rounded" data-dismiss="modal"
+							aria-label="Close">
+							<img src="./imagenes/cerrar.png" alt="">
+						</button>
+					</div>
+					<form action="/logincheck" method="POST">
+						<div class="modal-body">
+							<div class="form-floating mb-3">
+								<input type="email" class="form-control" id="floatingInput"
+									placeholder="name@example.com" name="mail"> <label
+									for="floatingInput">E-mail</label>
+							</div>
+							<div class="form-floating mb-3">
+								<input type="password" class="form-control"
+									id="floatingPassword" placeholder="Password" name="clave">
+								<label for="floatingPassword">Contraseña</label>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-warning">Ingresar</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>							
+						</div>
+					</form>
+				</div>
+			</div>
+		</modal>	
 		<!---Termina sesion Modal --->
 
 		
