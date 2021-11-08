@@ -24,11 +24,12 @@ public class MascotaServicio {
 	private MascotaRepositorio mr;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void crearMascota(String nombre, String descripcion, String color, String raza, String tamanio,
+	public void crearMascota(String id, String nombre, String descripcion, String color, String raza, String tamanio,
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
 			throws MascotaExcepcion, IOException {
 		validar(nombre, descripcion, color, raza, tamanio, especie, zona, archivo);
 		Mascota m = new Mascota();
+		m.setId(id);
 		m.setNombre(nombre);
 		m.setDescripcion(descripcion);
 		m.setColor(color);

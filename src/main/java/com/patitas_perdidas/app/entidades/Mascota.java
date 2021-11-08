@@ -5,22 +5,17 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class Mascota {
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 	private String nombre;
 	private String descripcion;
@@ -34,6 +29,7 @@ public class Mascota {
 	private Date fecha;
 	private String especie;
 	private Boolean alta;
+	//Se usa para almacenar un archivo a la base de datos
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private String image;
@@ -162,11 +158,11 @@ public class Mascota {
 				&& Objects.equals(tamanio, other.tamanio) && Objects.equals(zona, other.zona);
 	}
 
+	// Imagen no se mostrara en toString (muchas lienas de caracteres)
 	@Override
 	public String toString() {
 		return "Mascota [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", color=" + color
 				+ ", raza=" + raza + ", tamaño=" + tamanio + ", encontrado=" + encontrado + ", fecha=" + fecha
-				+ ", especie=" + especie + ", alta=" + alta + ", image=" + image + ", zona=" + zona + "]";
+				+ ", especie=" + especie + ", alta=" + alta + ", zona=" + zona + "]";
 	}
-
 }

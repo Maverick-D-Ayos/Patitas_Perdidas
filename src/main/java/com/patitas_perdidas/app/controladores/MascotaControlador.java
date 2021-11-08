@@ -6,7 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,12 +17,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.patitas_perdidas.app.entidades.Mascota;
+import com.patitas_perdidas.app.entidades.Persona;
 import com.patitas_perdidas.app.excepciones.MascotaExcepcion;
+import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
 import com.patitas_perdidas.app.servicios.MascotaServicio;
+import com.patitas_perdidas.app.servicios.PersonaServicio;
 
 @Controller
 @RequestMapping("/mascota")
@@ -27,67 +34,106 @@ public class MascotaControlador {
 	@Autowired
 	private MascotaServicio ms;
 
+	@Autowired
+	private PersonaServicio personaServicio;
+
 	// el metodo de encontrada y perdida podria ser uno solo pero cuando puse que
 	// retorne al index se mostraba mal.
-	@GetMapping("/registroencontrada")
-	public String registroencontrada(Model modelo) {
-		String var = "encontrada";
-		modelo.addAttribute("encontrada", var);
-		return "registro-mascota.html";
+	//06-11 // puse el id de la persona para poder usarala
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@GetMapping("/registroencontrada/{id_persona}")
+	public String registroencontrada(HttpSession session, ModelMap model, Model modelo, @PathVariable String id_persona)
+			throws PersonaExcepcion {
+		Persona person = (Persona) session.getAttribute("clientesession");
+		if (person == null || !person.getId().equals(id_persona)) {
+			return "redirect:/inicio";
+		}
+
+		Persona usuario = personaServicio.buscaPorId(id_persona);
+		model.addAttribute("usuario", usuario);
+		modelo.addAttribute("encontrada", "encontrada");
+		return "registro-mascota";
 	}
 
-	@PostMapping("/registroencontrada")
-	public String registroencontrada(ModelMap modelo, String nombre, String descripcion, String color, String raza,
-			String tamanio, Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo,
-			RedirectAttributes redirAttrs) throws IOException {
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PostMapping("/registroencontrada/{id_persona}")
+	public String registroencontrada(HttpSession session, RedirectAttributes redirAttrs, ModelMap modelo,
+			@PathVariable String id_persona, @RequestParam String nombre, @RequestParam String descripcion,
+			@RequestParam String color, @RequestParam String raza, @RequestParam String tamanio,
+			@RequestParam Boolean encontrado, @RequestParam String fecha, @RequestParam String especie,
+			@RequestParam String zona, @RequestParam MultipartFile archivo) throws PersonaExcepcion {
 		try {
+			Persona person = (Persona) session.getAttribute("clientesession");
+			if (person == null || !person.getId().equals(id_persona)) {
+				return "redirect:/inicio";
+			}
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-			ms.crearMascota(nombre, descripcion, color, raza, tamanio, encontrado, date, especie, zona, archivo);
-		// Esto es para que aparezcan unas alertas al completar el formulario
+			personaServicio.aniadirMascota(id_persona, nombre, descripcion, color, raza, tamanio, encontrado, date,
+					especie, zona, archivo);
+			Persona usuario = personaServicio.buscaPorId(id_persona);
+			modelo.addAttribute("usuario", usuario);
+			redirAttrs.addFlashAttribute("exito", "Se añadio la mascota con exito");
+
+			return "redirect:/mascota/registroencontrada/{id_persona}";
 		} catch (MascotaExcepcion e) {
 			redirAttrs.addFlashAttribute("error", e.getMessage());
-			return ("redirect:./registroencontrada");
+			return ("redirect:/mascota/registroencontrada/{id_persona}");
 		} catch (ParseException e) {
 			redirAttrs.addFlashAttribute("error", "Revise la fecha añadida");
-			return ("redirect:./registroencontrada");
+			return ("redirect:/mascota/registroencontrada/{id_persona}");
 		} catch (IOException e) {
 			redirAttrs.addFlashAttribute("error", "El archivo esta dañado.");
-			return ("redirect:./registroencontrada");
+			return ("redirect:/mascota/registroencontrada/{id_persona}");
 		}
-		redirAttrs.addFlashAttribute("exito", "Se añadio la mascota con exito");
-		return ("redirect:./registroencontrada");
 	}
-
-	@GetMapping("/registroperdida")
-	public String registroperdida(Model modelo) {
-		String var = "perdida";
-		modelo.addAttribute("perdida", var);
-		return "registro-mascota.html";
-	}
-
-	@PostMapping("/registroperdida")
-	public String registroperdida(ModelMap modelo, String nombre, String descripcion, String color, String raza,
-			String tamanio,Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo,
-			RedirectAttributes redirAttrs) throws ParseException, IOException {
 	
-		try {
-			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-			ms.crearMascota(nombre, descripcion, color, raza, tamanio, encontrado, date, especie, zona, archivo);
-		} catch (MascotaExcepcion e) {
-			redirAttrs.addFlashAttribute("error", e.getMessage());
-			return ("redirect:./registroperdida");
-		} catch (ParseException e) {
-			redirAttrs.addFlashAttribute("error", "Revise la fecha añadida");
-			return ("redirect:./registroencontrada");
-		} catch (IOException e) {
-			redirAttrs.addFlashAttribute("error", "El archivo esta dañado.");
-			return ("redirect:./registroperdida");
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@GetMapping("/registroperdida/{id_persona}")
+	public String registroperdida(HttpSession session, ModelMap model, Model modelo, @PathVariable String id_persona)
+			throws PersonaExcepcion {
+		Persona person = (Persona) session.getAttribute("clientesession");
+		if (person == null || !person.getId().equals(id_persona)) {
+			return "redirect:/inicio";
 		}
-		redirAttrs.addFlashAttribute("exito", "Se añadio la mascota con exito");
-		return ("redirect:./registroperdida");
 
+		Persona usuario = personaServicio.buscaPorId(id_persona);
+		model.addAttribute("usuario", usuario);
+		modelo.addAttribute("perdida", "perdida");
+		return "registro-mascota";
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PostMapping("/registroperdida/{id_persona}")
+	public String perdida(HttpSession session, RedirectAttributes redirAttrs, ModelMap modelo,
+			@PathVariable String id_persona, @RequestParam String nombre, @RequestParam String descripcion,
+			@RequestParam String color, @RequestParam String raza, @RequestParam String tamanio,
+			@RequestParam Boolean encontrado, @RequestParam String fecha, @RequestParam String especie,
+			@RequestParam String zona, @RequestParam MultipartFile archivo) throws PersonaExcepcion {
+		try {
+			Persona person = (Persona) session.getAttribute("clientesession");
+			if (person == null || !person.getId().equals(id_persona)) {
+				return "redirect:/inicio";
+			}
+			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+			personaServicio.aniadirMascota(id_persona, nombre, descripcion, color, raza, tamanio, encontrado, date,
+					especie, zona, archivo);
+			Persona usuario = personaServicio.buscaPorId(id_persona);
+			modelo.addAttribute("usuario", usuario);
+			redirAttrs.addFlashAttribute("exito", "Se añadio la mascota con exito");
+
+			return "redirect:/mascota/registroperdida/{id_persona}";
+		} catch (MascotaExcepcion e) {
+			redirAttrs.addFlashAttribute("error", e.getMessage());
+			return ("redirect:/mascota/registroperdida/{id_persona}");
+		} catch (ParseException e) {
+			redirAttrs.addFlashAttribute("error", "Revise la fecha añadida");
+			return ("redirect:/mascota/registroperdida/{id_persona}");
+		} catch (IOException e) {
+			redirAttrs.addFlashAttribute("error", "El archivo esta dañado.");
+			return ("redirect:/mascota/registroperdida/{id_persona}");
+		}
+	}
+	
 	@GetMapping("/actualizar/{id}")
 	public String muestraActualiza(ModelMap modelo, @PathVariable String id) throws Exception {
 		Mascota m = ms.buscaPorId(id);

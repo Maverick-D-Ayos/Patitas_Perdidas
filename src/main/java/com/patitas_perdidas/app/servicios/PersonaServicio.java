@@ -1,8 +1,11 @@
 package com.patitas_perdidas.app.servicios;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,9 +22,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.patitas_perdidas.app.entidades.Persona;
 import com.patitas_perdidas.app.enums.Rol;
+import com.patitas_perdidas.app.excepciones.MascotaExcepcion;
 import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
 import com.patitas_perdidas.app.repositorios.PersonaRepositorio;
 
@@ -30,6 +35,9 @@ public class PersonaServicio implements UserDetailsService {
 
 	@Autowired
 	private PersonaRepositorio personaRepositorio;
+
+	@Autowired
+	private MascotaServicio mascotaServicio;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void guardar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
@@ -45,13 +53,12 @@ public class PersonaServicio implements UserDetailsService {
 		entidad.setRol(Rol.USER);
 		personaRepositorio.save(entidad);
 	}
-	
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void modificar(String id, String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
 		validar(nombre, telefono, mail, clave);
-		Persona usuario = buscaPorId(id);	
-		if(!usuario.getMail().equals(mail))
-		{
+		Persona usuario = buscaPorId(id);
+		if (!usuario.getMail().equals(mail)) {
 			validarMail(mail);
 		}
 		usuario.setNombre(nombre);
@@ -60,6 +67,21 @@ public class PersonaServicio implements UserDetailsService {
 		usuario.setMail(mail);
 		usuario.setClave(encriptarClave(clave));
 		personaRepositorio.save(usuario);
+	}
+
+	// Metodo para crear una mascota y añadirla al usuario que inicio la sesion
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public void aniadirMascota(String id_persona, String nombre, String descripcion, String color, String raza,
+			String tamanio, Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
+			throws PersonaExcepcion, MascotaExcepcion, IOException {
+		Persona persona = buscaPorId(id_persona);
+		// Genero un UUID desde persona asi puedo tomar la id de la mascota para añadir
+		// a la lista de la persona.
+		UUID uuid = UUID.randomUUID();
+		String id_mascota = uuid.toString();
+		mascotaServicio.crearMascota(id_mascota, nombre, descripcion, color, raza, tamanio, encontrado, fecha, especie,
+				zona, archivo);
+		persona.getMascotas().add(mascotaServicio.buscaPorId(id_mascota));
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
@@ -89,20 +111,19 @@ public class PersonaServicio implements UserDetailsService {
 	public List<Persona> listarActivos() {
 		return personaRepositorio.buscarListaPersonas();
 	}
-	
+
 	@Transactional(readOnly = true)
-	public Persona buscaPorId(String id) throws PersonaExcepcion{
+	public Persona buscaPorId(String id) throws PersonaExcepcion {
 		Optional<Persona> oPersona = personaRepositorio.findById(id);
-		if(oPersona.isPresent()) {
+		if (oPersona.isPresent()) {
 			Persona person = oPersona.get();
 			return person;
-		}else {
+		} else {
 			throw new PersonaExcepcion("No se encuentra la Persona");
 		}
 	}
-	
-	public String encriptarClave(String clave)
-	{
+
+	public String encriptarClave(String clave) {
 		String claveEncriptada = new BCryptPasswordEncoder().encode(clave);
 		return claveEncriptada;
 	}
@@ -115,9 +136,8 @@ public class PersonaServicio implements UserDetailsService {
 		if (telefono == null) {
 			throw new PersonaExcepcion("No ingreso correctamente el telefono.");
 		}
-		
-		if (String.valueOf(telefono).length() < 6)
-		{
+
+		if (String.valueOf(telefono).length() < 6) {
 			throw new PersonaExcepcion("El formato del telefono es incorrecto");
 		}
 
@@ -128,14 +148,12 @@ public class PersonaServicio implements UserDetailsService {
 		if (clave == null || clave.strip().isEmpty()) {
 			throw new PersonaExcepcion("No ingreso correctamente la clave.");
 		}
-		if (clave.length() < 6)
-		{
+		if (clave.length() < 6) {
 			throw new PersonaExcepcion("La clave tiene que tener mas de 6 digitos");
 		}
 	}
 
-	public void validarMail(String mail) throws PersonaExcepcion
-	{
+	public void validarMail(String mail) throws PersonaExcepcion {
 		// Si el mail ya esta en la base de datos retorna un PersonaExcepcion
 		Optional<Persona> rsp_mail = personaRepositorio.buscarPorMail(mail);
 		if (rsp_mail.isPresent()) {
@@ -144,56 +162,59 @@ public class PersonaServicio implements UserDetailsService {
 
 	}
 
-	public Persona buscarPorEmail(String mail)
-	{
+	public Persona buscarPorEmail(String mail) {
 		Optional<Persona> oPersona = personaRepositorio.buscarPorMail(mail);
-		if (oPersona.isPresent())
-		{
+		if (oPersona.isPresent()) {
 			Persona persona = oPersona.get();
 			return persona;
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
+
 	// METODO QUE CARGA EL USUARIO PARA LOGUEARSE
+
 	// Override porque se implementa userdetailservice y hay que sobreescribir el metodo
 		@Transactional
 		@Override
 		public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 
-			// accedemos a la persona por el email, ya que el mail sera el "usuario"
-			Persona persona = buscarPorEmail(mail);
+		// si no existe se retorna null
+		if (persona == null) {
+			return null;
+		}
 
-			// si no existe se retorna null
-			if (persona == null) {
-				return null;
-			}
+		// Se crea el listado de permisos
+		List<GrantedAuthority> permisos = new ArrayList<>();
 
-			// Se crea el listado de permisos
-			List<GrantedAuthority> permisos = new ArrayList<>();
+		// Se crea una autorizacion basada en el rol del cliente
+		// Despues vemos en los proximos dias el tema del concatenado, asi se respeta
+		// para los otros metodos
+		GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + persona.getRol());
+		permisos.add(p1);
 
 			// Se crea una autorizacion basada en el rol del cliente
 			// Despues vemos en los proximos dias el tema del concatenado, asi se respeta para los otros metodos
 			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_" + persona.getRol());
 			permisos.add(p1);
-			
+		
 			// Se extraen atributos de contexto del navegador -> INVESTIGAR
-			
-			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
-			// Se crea la sesion y se agrega el cliente a la misma
-			HttpSession session = attr.getRequest().getSession(true);
-			session.setAttribute("clientesession", persona);
-			// Tanto este metodo con el anterior, en conjunto
-			// sirve para que los datos de la sesion queden guardados en la cache del navegador
-			// con uno se guardan los datos de entorno (tiempos de session, inactividad, etc)
-			// y se guarda la sesion correspondiente, el navegador despues se organiza (el nav sapbee)
+ 
+		// Se crea la sesion y se agrega el cliente a la misma
+		HttpSession session = attr.getRequest().getSession(true);
+		session.setAttribute("clientesession", persona);
+		// Tanto este metodo con el anterior, en conjunto
+		// sirve para que los datos de la sesion queden guardados en la cache del
+		// navegador
+		// con uno se guardan los datos de entorno (tiempos de session, inactividad,
+		// etc)
+		// y se guarda la sesion correspondiente, el navegador despues se organiza (el
+		// nav sapbee)
 
 			// Se retorna el usuario con sesion "iniciada" y con permisos
 			User user = new User(persona.getMail(), persona.getClave(), permisos);
 			return user;
 
-		}
+	}
 
 }

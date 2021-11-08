@@ -31,20 +31,21 @@
 							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/home1.png" alt=""> 
 									 Inicio
 						</a></li>
-						<li><a href="#" class="nav-link text-light text-center" data-toggle="modal" data-target="#exampleModal"> 
-									<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/acceso.png" alt=""> 
-									Iniciar sesion
+					<li><a href="#" class="nav-link text-light text-center" data-toggle="modal"
+							data-target="#exampleModal">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/acceso.png"
+								alt="">
+							Iniciar sesion
 						</a></li>
-						<li><a  class="nav-link text-light text-center" href="/persona/registro" > 
-						<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/firmar.png" alt=""> 
-									Registrarse
+					<li><a class="nav-link text-light text-center" href="/persona/registro">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/firmar.png"
+								alt="">
+							Registrarse
 						</a></li>
-						
-					</ul>
-				</div>
+
+				</ul>
 			</div>
 		</div>
-		
 	</header>
 	<header sec:authorize="isAuthenticated()">
 		<div class="px-3 py-2 nav-principal text-dark opacity-45">
@@ -55,17 +56,18 @@
 						class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
 						<img class="logo" src="./imagenes/logo.png" alt="">
 					</a>
+				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small text-light">
+					<li><a href="/../" class="nav-link text-light text-center">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/home1.png"
+								alt="">
+							Inicio
+						</a></li>
+					<li><a href="#" class="nav-link text-light text-center">
+							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/mascota1.png"
+								alt="">
+							Mis Mascotas
+						</a></li>
 
-					<ul
-						class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small text-light">
-						<li><a href="/../" class="nav-link text-light text-center"> 
-							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/home1.png" alt=""> 
-									 Inicio
-						</a></li>
-						<li><a href="#" class="nav-link text-light text-center"> 
-									<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/mascota1.png" alt=""> 
-									Mis Mascotas
-						</a></li>
 						<li class="dropdown"><a href="#" class="nav-link text-light text-center" data-bs-toggle="dropdown" aria-expanded="false" data-offset="0, 25"> 
 						<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/perfil2.png" alt="" th:text="${session.clientesession.nombre}"></a>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="opacity: 0.8;">
@@ -76,4 +78,5 @@
 				</div>
 			</div>
 		</div>
-		</header>
+	</div>
+</header>
