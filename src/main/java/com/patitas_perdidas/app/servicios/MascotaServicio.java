@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.patitas_perdidas.app.entidades.Mascota;
 import com.patitas_perdidas.app.excepciones.MascotaExcepcion;
+import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
 import com.patitas_perdidas.app.repositorios.MascotaRepositorio;
 
 @Service
@@ -22,6 +23,9 @@ public class MascotaServicio {
 
 	@Autowired
 	private MascotaRepositorio mr;
+	
+	@Autowired
+	private PersonaServicio ps;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void crearMascota(String id, String nombre, String descripcion, String color, String raza, String tamanio,
@@ -159,6 +163,18 @@ public class MascotaServicio {
 		String archivoNombre = StringUtils.cleanPath(archivo.getOriginalFilename());
 		if (archivoNombre.contains("..")) {
 			throw new IOException("El archivo no es valido");
+		}
+	}
+	public List<Mascota> getMascotasPersona(String id) throws PersonaExcepcion
+	{
+		List<Mascota> lista = ps.buscaPorId(id).getMascotasActivas();
+		if(lista.isEmpty())
+		{
+			throw new PersonaExcepcion("Usted no tiene mascotas activos");
+		}
+		else
+		{
+			return lista;
 		}
 	}
 }

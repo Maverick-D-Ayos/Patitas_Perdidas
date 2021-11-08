@@ -191,4 +191,11 @@ public class MascotaControlador {
 		modelo.addAttribute("listaMascotasxColor", muestraMascotas);
 		return "";
 	}
+	@GetMapping("/mis-mascotas")
+	public String getMascotasPersona(ModelMap model, @RequestParam String id) throws PersonaExcepcion
+	{
+		List<Mascota> lista = ms.getMascotasPersona(id);
+		model.put("listaMascotas", lista);
+		return "mis-mascotas.html";
+	}
 }

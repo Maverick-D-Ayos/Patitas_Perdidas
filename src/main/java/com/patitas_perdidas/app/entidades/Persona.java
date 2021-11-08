@@ -1,5 +1,6 @@
 package com.patitas_perdidas.app.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -71,7 +72,7 @@ public class Persona {
 	}
 	public void setMascotas(List<Mascota> mascotas) {
 		this.mascotas = mascotas;
-	}	
+	}
 	public Rol getRol() {
 		return rol;
 	}
@@ -100,6 +101,18 @@ public class Persona {
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", mail=" + mail + ", clave="
 				+ clave + ", alta=" + alta + ", mascotas=" + mascotas + "]";
+	}
+	public List<Mascota> getMascotasActivas() {
+		List<Mascota> mascotasActivas = new ArrayList<>();
+		for (Mascota mascota : mascotas) 
+		{
+			if(mascota.getAlta())
+			{
+				mascotasActivas.add(mascota);
+			}
+			
+		}
+		return mascotasActivas;
 	}
 	
 	
