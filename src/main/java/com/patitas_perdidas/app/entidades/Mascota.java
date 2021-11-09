@@ -6,7 +6,9 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -34,6 +36,9 @@ public class Mascota {
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private String image;
 	private String zona;
+	@ManyToOne
+	@JoinColumn(name = "persona_id", referencedColumnName = "id")
+	private Persona persona;
 
 	public Mascota() {
 
@@ -133,6 +138,15 @@ public class Mascota {
 
 	public void setZona(String zona) {
 		this.zona = zona;
+	}
+	
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
 	@Override

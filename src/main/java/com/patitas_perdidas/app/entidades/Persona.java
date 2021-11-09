@@ -1,8 +1,10 @@
 package com.patitas_perdidas.app.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,7 +27,7 @@ public class Persona {
 	private String mail;
 	private String clave;
 	private Boolean alta;
-	@OneToMany
+	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Mascota> mascotas;
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
@@ -71,7 +73,7 @@ public class Persona {
 	}
 	public void setMascotas(List<Mascota> mascotas) {
 		this.mascotas = mascotas;
-	}	
+	}
 	public Rol getRol() {
 		return rol;
 	}
@@ -100,6 +102,18 @@ public class Persona {
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", telefono=" + telefono + ", mail=" + mail + ", clave="
 				+ clave + ", alta=" + alta + ", mascotas=" + mascotas + "]";
+	}
+	public List<Mascota> getMascotasActivas() {
+		List<Mascota> mascotasActivas = new ArrayList<>();
+		for (Mascota mascota : mascotas) 
+		{
+			if(mascota.getAlta())
+			{
+				mascotasActivas.add(mascota);
+			}
+			
+		}
+		return mascotasActivas;
 	}
 	
 	
