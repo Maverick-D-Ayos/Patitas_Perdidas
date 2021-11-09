@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.patitas_perdidas.app.entidades.Mascota;
 import com.patitas_perdidas.app.excepciones.MascotaExcepcion;
+import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
 import com.patitas_perdidas.app.repositorios.MascotaRepositorio;
 
 @Service
@@ -22,11 +23,14 @@ public class MascotaServicio {
 
 	@Autowired
 	private MascotaRepositorio mr;
+	
+	@Autowired
+	private PersonaServicio ps;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void crearMascota(String id, String nombre, String descripcion, String color, String raza, String tamanio,
+	public void crearMascota(String id, String person_id, String nombre, String descripcion, String color, String raza, String tamanio,
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
-			throws MascotaExcepcion, IOException {
+			throws MascotaExcepcion, IOException, PersonaExcepcion {
 		validar(nombre, descripcion, color, raza, tamanio, especie, zona, archivo);
 		Mascota m = new Mascota();
 		m.setId(id);
@@ -38,6 +42,7 @@ public class MascotaServicio {
 		m.setEncontrado(encontrado);
 		m.setFecha(fecha);
 		m.setEspecie(especie);
+		m.setPersona(ps.buscaPorId(person_id));
 		m.setAlta(true);
 
 		try {
@@ -52,9 +57,9 @@ public class MascotaServicio {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void eliminarMascota(String id) {
-		Mascota m = mr.getById(id);
-		mr.delete(m);
+	public void eliminarMascota(String id) throws MascotaExcepcion {
+		Mascota m = buscaPorId(id);
+		m.setAlta(false);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
@@ -62,8 +67,7 @@ public class MascotaServicio {
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
 			throws MascotaExcepcion, IOException {
 		validar(nombre, descripcion, color, raza, tamaño, especie, zona, archivo);
-		Mascota m = mr.getById(id);
-
+		Mascota m = buscaPorId(id);
 		m.setNombre(nombre);
 		m.setDescripcion(descripcion);
 		m.setColor(color);
@@ -98,9 +102,11 @@ public class MascotaServicio {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Mascota> listarMascotasActivasEncontradas() {
-		List<Mascota> lm = mr.buscarListaEncontrados();
-		return lm;
+	public List<Mascota> listarMascotasActivasEncontradas(String atributo) {
+	if (atributo != null) {
+	return mr.buscarPorBusqueda(atributo);
+	}
+	return mr.buscarListaEncontrados();
 	}
 
 	@Transactional(readOnly = true)
@@ -159,6 +165,18 @@ public class MascotaServicio {
 		String archivoNombre = StringUtils.cleanPath(archivo.getOriginalFilename());
 		if (archivoNombre.contains("..")) {
 			throw new IOException("El archivo no es valido");
+		}
+	}
+	public List<Mascota> getMascotasPersona(String id) throws PersonaExcepcion
+	{
+		List<Mascota> lista = ps.buscaPorId(id).getMascotasActivas();
+		if(lista.isEmpty())
+		{
+			throw new PersonaExcepcion("Usted no tiene mascotas activas");
+		}
+		else
+		{
+			return lista;
 		}
 	}
 }

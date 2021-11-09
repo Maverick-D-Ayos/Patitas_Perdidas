@@ -79,7 +79,7 @@ public class PersonaServicio implements UserDetailsService {
 		// a la lista de la persona.
 		UUID uuid = UUID.randomUUID();
 		String id_mascota = uuid.toString();
-		mascotaServicio.crearMascota(id_mascota, nombre, descripcion, color, raza, tamanio, encontrado, fecha, especie,
+		mascotaServicio.crearMascota(id_mascota, id_persona, nombre, descripcion, color, raza, tamanio, encontrado, fecha, especie,
 				zona, archivo);
 		persona.getMascotas().add(mascotaServicio.buscaPorId(id_mascota));
 	}

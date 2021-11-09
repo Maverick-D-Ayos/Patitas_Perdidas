@@ -46,9 +46,10 @@
 				</ul>
 			</div>
 		</div>
+		</div>
 	</header>
 	<header sec:authorize="isAuthenticated()">
-		<div class="px-3 py-2 nav-principal text-dark opacity-45">
+		<div class="px-3 py-2 nav-principal opacity-45">
 			<div class="container">
 				<div
 					class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -62,7 +63,7 @@
 								alt="">
 							Inicio
 						</a></li>
-					<li><a href="#" class="nav-link text-light text-center">
+					<li><a th:href="@{/mascota/mis-mascotas(id=__${session.clientesession.id}__)}" class="nav-link text-light text-center">
 							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/mascota1.png"
 								alt="">
 							Mis Mascotas
@@ -82,9 +83,9 @@ Añadir
 </ul>
 </div>
 </li>
-						
+													
 						<li class="dropdown"><a href="#" class="nav-link text-light text-center" data-bs-toggle="dropdown" aria-expanded="false" data-offset="0, 25"> 
-						<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/perfil2.png" alt="" th:text="${session.clientesession.nombre}"></a>
+						<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/perfil2.png" alt="" th:text="${session.clientesession.nombre}"></a>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="opacity: 0.8;">
 						    <li><a class="dropdown-item" th:href="@{/persona/perfil/{id}(id = ${session.clientesession.id})}">Mi Perfil</a></li>
 						    <li><a class="dropdown-item" href="/logout">Cerrar sesion</a></li>
@@ -93,5 +94,5 @@ Añadir
 				</div>
 			</div>
 		</div>
-	</div>
+	
 </header>
