@@ -219,6 +219,14 @@ public class MascotaControlador {
 		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
 		return "mascotasPerdidas.html";
 	}
+	
+	@GetMapping("/listarE")
+	public String listarActivos2(ModelMap modelo) {
+		List<Mascota> muestraMascotas = ms.listarMascotasActivasPerdidas();
+		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
+		return "mascotasPerdidas.html";
+	}
+
 
 	
 	 @PostMapping("/listarE")
