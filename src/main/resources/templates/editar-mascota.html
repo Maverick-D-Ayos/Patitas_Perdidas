@@ -22,11 +22,7 @@
         <!-- FIN HEADER -->
 
         <!-- Formulario -->
-        <div>
-            <div th:if="${session.clientesession == null}">
-                <h1>Por favor Registrarse o iniciar sesion</h1>
-            </div>
-            <div th:unless="${session.clientesession == null}">
+                   
                 <div id="formulario" class="card w-50" style="margin: 0 auto">
     <div class="row mb-4">
         <div class="col">
@@ -37,7 +33,7 @@
 
                 <!-- Formulario de Mascotas Encontradas -->
                 <form th:action="@{/mascota/actualizar/{id}(id=${mascota.id})}" method="POST"
-                    enctype="multipart/form-data" class="form-anticlear">
+                    enctype="multipart/form-data" class="form">
 
                     <!-- Nombre -->
                     <div class="form-group">
@@ -209,6 +205,7 @@
 
         <!-- FIN HEADER -->
 
+    </div>
     </div>
     </div>
     <footer th:replace="/fragments/footer :: footer"></footer>
