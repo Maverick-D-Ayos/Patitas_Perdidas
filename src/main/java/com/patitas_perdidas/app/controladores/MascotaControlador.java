@@ -165,6 +165,9 @@ public class MascotaControlador {
 		return "";
 	}
 
+	
+	
+	
 	@GetMapping("/listar")
 	public String listarActivos(ModelMap modelo) {
 		List<Mascota> muestraMascotas = ms.listarMascotasActivasPerdidas();
@@ -172,14 +175,22 @@ public class MascotaControlador {
 		return "mascotasPerdidas.html";
 	}
 	
+	@PostMapping("/listar")
+    public String listarActivosP(ModelMap modelo, String atributo) {
+	List<Mascota> muestraMascotas = ms.listarMascotasActivasPerdidas(atributo);
+	modelo.addAttribute("listaMascotasActivas", muestraMascotas);
+	return "mascotasPerdidas.html";
+	 }
+	
+	
+	
+	
 	@GetMapping("/listarE")
 	public String listarActivos2(ModelMap modelo) {
-		List<Mascota> muestraMascotas = ms.listarMascotasActivasEncontradas(null);
-		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
-		return "mascotasPerdidas.html";
+		List<Mascota> muestraMascotas = ms.listarMascotasActivasEncontradas();
+		modelo.addAttribute("listaMascotasEncontradas", muestraMascotas);
+		return "mascotasEncontradas.html";
 	}
-
-
 	
 	 @PostMapping("/listarE")
      public String listarActivos1(ModelMap modelo, String atributo) {
@@ -187,6 +198,9 @@ public class MascotaControlador {
 	modelo.addAttribute("listaMascotasEncontradas", muestraMascotas);
 	return "mascotasEncontradas.html";
 	 }
+	 
+	 
+	 
 
 	@GetMapping("/listar/{raza}")
 	public String listarPorRaza(ModelMap modelo, @PathVariable String raza) {
