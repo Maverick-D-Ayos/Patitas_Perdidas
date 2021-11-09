@@ -14,62 +14,75 @@
  <!--
 	ITEMS
 	-->
- <h3>
+ 
 
-  <div class="card-group">
+  <div class="row row-cols-1 row-cols-lg-4 g-3" >
   <tr th:each="mascota:${listaMascotasEncontradas}">
 
- <div class="card flex" style="width: 18rem;">
+
+ <div class="card flex m-4" style="width: 25rem;">
   <img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"
    class="card-img-top">
-  <div class="card-b
-  .cody">
+  <div class="card-b .cody">
  
-    <p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
+    <p class="card-text"></p>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Especie: <span th:text="${mascota.especie}"></span></li>
-    <li class="list-group-item">Raza: <span th:text="${mascota.raza}"></span></li>
-    <li class="list-group-item">Color: <span th:text="${mascota.color}"></span></li>
-    <li class="list-group-item">Fecha en que se perdio: <span th:text="${mascota.fecha}"></span></li>
+  <ul class="list-group list-group-flush ">
+  	<li class="list-group-item">Fecha en que se perdio: <span th:text="${mascota.fecha}"></span></li>
     <li class="list-group-item">Zona en que se perdio: <span th:text="${mascota.zona}"></span></li>
+   <!-- MODAL -->
+    
+<modal class="modal fade"  th:id="masInfo+${mascota.id}" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true" >
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-light" id="exampleModalLabel">Mas Info</h5>
+						<button type="" class="close rounded" data-dismiss="modal"
+							aria-label="Close">
+							<img src="/imagenes/cerrar.png" alt="">
+						</button>
+					</div>
+					
+						<div class="modal-body">
+						
+						<div class="row">
+      						<div class="col-md-6"><img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"class="card-img-top"></div>
+      						<div class="col-md-6 ms-auto"> 
+	      						<p class="list-group-item"><span th:text="${mascota.descripcion}"></span></p>
+	    						<p class="list-group-item">Especie: <span th:text="${mascota.especie}"></span></p>
+	    						<p class="list-group-item">Raza: <span th:text="${mascota.raza}"></span></p>
+	   							<p class="list-group-item">Color: <span th:text="${mascota.color}"></span></p>
+	   						</div>
+	   					
+    					</div>
+						
+							
+							 
+							
+						</div>
+
+						<div class="modal-footer">
+
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>							
+						</div>
+					
+				</div>
+			</div>
+		</modal> 
+    
   </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Contacto</a>
-  </div>
+  <a href="#" class="nav-link text-center" data-toggle="modal"
+						data-target="#masInfo"
+							th:attr="data-target='#masInfo'+${mascota.id}">
+							mas info
+							</a>
 </div>
 </div>    
     </tr>
-    </h3>
+    
     </div>
 
-  <!-- 
- <table class="table table-striped">
-                    <thead>
-                      <tr>
-                            <th>Color</th>
-                            <th>Descripcion</th>
-                            <th>Fecha</th>
-                            <th>Nombre</th>     
-                            <th>Raza</th>
-                            <th>Especie</th>
-                   
-                            <th>Barrio</th>  
-                            <th>Imagen</th>
-                   
-                        </tr>
-                    </thead>
-    <tr th:each="mascota:${listaMascotasEncontradas}">
-                            <td th:text="${mascota.color}"></td>
-                            <td th:text="${mascota.descripcion}"></td>
-                            <td th:text="${mascota.fecha}"></td>
-                            <td th:text="${mascota.nombre}"></td>
-                            <td th:text="${mascota.raza}"></td>
-                            <td th:text="${mascota.especie}"></td>
-                          
-                            <td th:text="${mascota.zona}"></td>
-                           <td><img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"></td>
--->
 
                            
     
@@ -77,15 +90,31 @@
     </h3>
     </div>
     
-    
-
-<div class="publicacion">
-  <h5>¿Encontraste una mascota perdida? publicala para que encuentre a su familia</h5>
-  <form class="form-inline my-1 my-lg-0 input-group">
-          <button class="btn btn-outline-success boton" type="submit"><a class="nav-link active" href="/mascota/registroencontrada">Publicar mascota</a></button>
-        </form>
-         </div>
+   
  <footer th:replace= "/fragments/footer :: footer"></footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous">
+    </script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous">
+    </script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
+	<script src="./js/wow.min.js">
+    </script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+		crossorigin="anonymous"></script>
 </body>
 
      
