@@ -68,7 +68,7 @@ public class MascotaControlador {
 				return "redirect:/inicio";
 			}
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-			personaServicio.aniadirMascota(id_persona, nombre, descripcion, color, raza, tamanio, encontrado, date,
+			personaServicio.aniadirMascota(id_persona, "sin nombre", descripcion, color, raza, tamanio, encontrado, date,
 					especie, zona, archivo);
 			Persona usuario = personaServicio.buscaPorId(id_persona);
 			modelo.addAttribute("usuario", usuario);

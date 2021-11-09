@@ -137,7 +137,7 @@ public class PersonaControlador {
 	@PostMapping("/modificar/{id}")
 	public String modificar(HttpSession session, RedirectAttributes redirAttrs, ModelMap model,
 			@PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono,
-			@RequestParam String mail) {
+			@RequestParam String mail) throws PersonaExcepcion {
 		try {
 			Persona person = (Persona) session.getAttribute("clientesession");
 			if (person == null || !person.getId().equals(id)) {
@@ -149,12 +149,19 @@ public class PersonaControlador {
 			session.setAttribute("clientesession", usuario);
 			model.put("exito", "Su perfil ha sido modificado exitosamente");
 			redirAttrs.addAttribute("id", id);
+
+			return "redirect:/persona/perfil/{id}";
+		} catch(PersonaExcepcion e) {
+			modelo.put("error", e.getMessage());
+			Persona usuario = personaServicio.buscaPorId(id);
+			modelo.addAttribute("usuario", usuario);
+			session.setAttribute("clientesession", usuario);
 			return "perfil.html";
 		} catch (Exception e) {
 			model.put("error", "Falto ingresar el nombre");
 			redirAttrs.addAttribute("id", id);
 
 			return "redirect:/persona/perfil/{id}";
-		}
+		} 
 	}
 }
