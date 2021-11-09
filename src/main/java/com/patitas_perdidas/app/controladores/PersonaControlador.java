@@ -134,7 +134,7 @@ public class PersonaControlador {
 
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@PostMapping("/modificar/{id}")
-	public String modificar(HttpSession session, RedirectAttributes redirAttrs, ModelMap modelo,
+	public String modificar(HttpSession session, RedirectAttributes redirAttrs, ModelMap model,
 			@PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono,
 			@RequestParam String mail) {
 		try {
@@ -144,14 +144,13 @@ public class PersonaControlador {
 			}
 			personaServicio.modificar(id, nombre, telefono, mail);
 			Persona usuario = personaServicio.buscaPorId(id);
-			modelo.addAttribute("usuario", usuario);
+			model.addAttribute("usuario", usuario);
 			session.setAttribute("clientesession", usuario);
-			modelo.put("exito", "Perfil modificado");
+			model.put("exito", "Su perfil ha sido modificado exitosamente");
 			redirAttrs.addAttribute("id", id);
-
-			return "redirect:/persona/perfil/{id}";
+			return "perfil.html";
 		} catch (Exception e) {
-			modelo.put("error", "Falto ingresar el nombre");
+			model.put("error", "Falto ingresar el nombre");
 			redirAttrs.addAttribute("id", id);
 
 			return "redirect:/persona/perfil/{id}";
