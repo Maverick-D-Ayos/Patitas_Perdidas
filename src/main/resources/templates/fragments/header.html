@@ -67,7 +67,22 @@
 								alt="">
 							Mis Mascotas
 						</a></li>
-
+						<li>
+<!-- Añadi un dropdown para probar -->
+<div class="nav-link text-light text-center dropdown">
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+data-bs-toggle="dropdown" aria-expanded="false">
+Añadir
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+<li><a class="dropdown-item" th:href="
+@{/mascota/registroperdida/{id} (id=${session.clientesession.id})}">Mascota Perdida</a></li>
+<li><a class="dropdown-item" th:href="
+@{/mascota/registroencontrada/{id} (id=${session.clientesession.id})}">Mascota encontrada</a></li>
+</ul>
+</div>
+</li>
+						
 						<li class="dropdown"><a href="#" class="nav-link text-light text-center" data-bs-toggle="dropdown" aria-expanded="false" data-offset="0, 25"> 
 						<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="./imagenes/perfil2.png" alt="" th:text="${session.clientesession.nombre}"></a>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="opacity: 0.8;">
