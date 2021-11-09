@@ -90,8 +90,8 @@ public class PersonaControlador {
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
-	@GetMapping("/modificar/{id}")
-	public String preModificar(HttpSession session, ModelMap model, @PathVariable String id) throws PersonaExcepcion {
+	@GetMapping("/modificar-pass/{id}")
+	public String modificarPass(HttpSession session, ModelMap model, @PathVariable String id) throws PersonaExcepcion {
 		Persona person = (Persona) session.getAttribute("clientesession");
 		if (person == null || !person.getId().equals(id)) {
 			return "redirect:/inicio";
@@ -99,7 +99,36 @@ public class PersonaControlador {
 
 		Persona usuario = personaServicio.buscaPorId(id);
 		model.addAttribute("usuario", usuario);
-		return "modificar-usuario";
+		model.put("pass", "pass");
+		return "perfil.html";
+
+	}
+	@PostMapping("/modificar-pass/{id}")
+	public String modificarPassPost(HttpSession session, ModelMap model, @PathVariable String id, @RequestParam String clave1, @RequestParam String clave2) throws PersonaExcepcion {
+		Persona person = (Persona) session.getAttribute("clientesession");
+		if (person == null || !person.getId().equals(id)) {
+			return "redirect:/inicio";
+		}
+		try
+		{
+			personaServicio.modificarClave(id, clave1, clave2);
+			model.put("cambio", "Su contraseña a sido cambiada con exito");
+			model.put("pass", "pass");
+			Persona usuario = personaServicio.buscaPorId(id);
+			model.addAttribute("usuario", usuario);
+			model.addAttribute("exito", "La clave a sido modificada exitosamente");
+			session.setAttribute("clientesession", usuario);
+			return "perfil.html";
+		}
+		catch(PersonaExcepcion pe)
+		{
+			model.put("error", pe.getMessage());
+			Persona usuario = personaServicio.buscaPorId(id);
+			model.addAttribute("usuario", usuario);
+			session.setAttribute("clientesession", usuario);
+			return "perfil.html";
+		}
+
 
 	}
 
@@ -107,17 +136,17 @@ public class PersonaControlador {
 	@PostMapping("/modificar/{id}")
 	public String modificar(HttpSession session, RedirectAttributes redirAttrs, ModelMap modelo,
 			@PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono,
-			@RequestParam String mail, @RequestParam String clave) {
+			@RequestParam String mail) {
 		try {
 			Persona person = (Persona) session.getAttribute("clientesession");
 			if (person == null || !person.getId().equals(id)) {
 				return "redirect:/inicio";
 			}
-			personaServicio.modificar(id, nombre, telefono, mail, clave);
+			personaServicio.modificar(id, nombre, telefono, mail);
 			Persona usuario = personaServicio.buscaPorId(id);
 			modelo.addAttribute("usuario", usuario);
 			session.setAttribute("clientesession", usuario);
-			modelo.put("exito", "Perfirl modificado");
+			modelo.put("exito", "Perfil modificado");
 			redirAttrs.addAttribute("id", id);
 
 			return "redirect:/persona/perfil/{id}";

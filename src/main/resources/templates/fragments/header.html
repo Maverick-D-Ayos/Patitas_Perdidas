@@ -71,7 +71,7 @@
 						<li>
 							
 						
-						<li class="dropdown"><a href="#" class="nav-link text-light text-center" data-bs-toggle="dropdown" aria-expanded="false" data-offset="0, 25"> 
+						<li class="dropdown" style="z-index: 3"><a href="#" class="nav-link text-light text-center" data-bs-toggle="dropdown" aria-expanded="false" data-offset="0, 25"> 
 						<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/perfil2.png" alt="" th:text="${session.clientesession.nombre}"></a>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="opacity: 0.8;">
 						    <li><a class="dropdown-item" th:href="@{/persona/perfil/{id}(id = ${session.clientesession.id})}">Mi Perfil</a></li>
