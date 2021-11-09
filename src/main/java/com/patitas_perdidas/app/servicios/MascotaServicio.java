@@ -28,9 +28,9 @@ public class MascotaServicio {
 	private PersonaServicio ps;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void crearMascota(String id, String nombre, String descripcion, String color, String raza, String tamanio,
+	public void crearMascota(String id, String person_id, String nombre, String descripcion, String color, String raza, String tamanio,
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
-			throws MascotaExcepcion, IOException {
+			throws MascotaExcepcion, IOException, PersonaExcepcion {
 		validar(nombre, descripcion, color, raza, tamanio, especie, zona, archivo);
 		Mascota m = new Mascota();
 		m.setId(id);
@@ -42,6 +42,7 @@ public class MascotaServicio {
 		m.setEncontrado(encontrado);
 		m.setFecha(fecha);
 		m.setEspecie(especie);
+		m.setPersona(ps.buscaPorId(person_id));
 		m.setAlta(true);
 
 		try {
@@ -56,9 +57,9 @@ public class MascotaServicio {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void eliminarMascota(String id) {
-		Mascota m = mr.getById(id);
-		mr.delete(m);
+	public void eliminarMascota(String id) throws MascotaExcepcion {
+		Mascota m = buscaPorId(id);
+		m.setAlta(false);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
@@ -66,8 +67,7 @@ public class MascotaServicio {
 			Boolean encontrado, Date fecha, String especie, String zona, MultipartFile archivo)
 			throws MascotaExcepcion, IOException {
 		validar(nombre, descripcion, color, raza, tamaño, especie, zona, archivo);
-		Mascota m = mr.getById(id);
-
+		Mascota m = buscaPorId(id);
 		m.setNombre(nombre);
 		m.setDescripcion(descripcion);
 		m.setColor(color);
@@ -170,7 +170,7 @@ public class MascotaServicio {
 		List<Mascota> lista = ps.buscaPorId(id).getMascotasActivas();
 		if(lista.isEmpty())
 		{
-			throw new PersonaExcepcion("Usted no tiene mascotas activos");
+			throw new PersonaExcepcion("Usted no tiene mascotas activas");
 		}
 		else
 		{

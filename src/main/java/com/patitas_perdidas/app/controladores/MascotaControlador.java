@@ -95,7 +95,7 @@ public class MascotaControlador {
 		if (person == null || !person.getId().equals(id_persona)) {
 			return "redirect:/inicio";
 		}
-
+		
 		Persona usuario = personaServicio.buscaPorId(id_persona);
 		model.addAttribute("usuario", usuario);
 		modelo.addAttribute("perdida", "perdida");
@@ -152,9 +152,10 @@ public class MascotaControlador {
 	}
 
 	@GetMapping("/eliminar/{id}")
-	public String elimina(ModelMap modelo, @PathVariable String id) {
+	public String elimina(ModelMap modelo, @PathVariable String id) throws MascotaExcepcion {
+		String person_id = ms.buscaPorId(id).getPersona().getId();
 		ms.eliminarMascota(id);
-		return "";
+		return "redirect:/mascota/mis-mascotas?id=" + person_id;
 	}
 
 	@GetMapping("/lista")
@@ -194,8 +195,14 @@ public class MascotaControlador {
 	@GetMapping("/mis-mascotas")
 	public String getMascotasPersona(ModelMap model, @RequestParam String id) throws PersonaExcepcion
 	{
-		List<Mascota> lista = ms.getMascotasPersona(id);
+		try 
+		{ List<Mascota> lista = ms.getMascotasPersona(id);
 		model.put("listaMascotas", lista);
+		}
+		catch(PersonaExcepcion p)
+		{
+			model.put("error", p.getMessage());
+		}
 		return "mis-mascotas.html";
 	}
 }

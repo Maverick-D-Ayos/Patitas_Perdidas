@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,7 +27,7 @@ public class Persona {
 	private String mail;
 	private String clave;
 	private Boolean alta;
-	@OneToMany
+	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Mascota> mascotas;
 	@Enumerated(EnumType.STRING)
 	private Rol rol;

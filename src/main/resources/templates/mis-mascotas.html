@@ -29,13 +29,25 @@
 			<header th:replace = "/fragments/header :: header"></header>
 		<!-- FIN HEADER -->
 		<div class="container">
-		<div class="row" th:fragment="list" xmlns:th="http://www.thymeleaf.org">
+		<div class="alert alert-danger d-flex align-items-center"
+					role="alert" th:if="${error != null}"
+				>
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24"
+						role="img" aria-label="Danger:"
+					>
+						<use xlink:href="#exclamation-triangle-fill" /></svg>
+					<div th:text="${error}"></div>
+				</div>
+				<a class="btn btn-primary btn-lg m-3" th:href="@{/mascota/registroperdida/{id}(id=__${session.clientesession.id}__)}"
+					 role="button">Agregar mascota perdida</a>
+				<a class="btn btn-primary btn-lg m-3" th:href="@{/mascota/registroencontrada/{id}(id=__${session.clientesession.id}__)}" role="button">Agregar mascota encontrada</a>
+		<div class="row" th:fragment="list">
     <div th:each="mascota : ${listaMascotas}" class="col-sm-4">
         <div class="card mb-3">
         <img th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" style="max-height: 15em;">
             <div class="card-body">
                 <h5 class="card-title" th:text="${mascota?.nombre}"></h5>
-                <p class="card-text" th:text="${mascota?.descripcion}"></p>
+                <p class="card-text" th:text="'Dueño: ' + ${mascota.persona?.nombre}"></p>
                 <a th:href="@{/mascota/actualizar/{id}(id = __${mascota.id}__)}" class="btn btn-primary">Editar</a>
                 <a th:href="@{/mascota/eliminar/{id}(id = __${mascota.id}__)}" class="btn btn-danger">Eliminar</a>
             </div>
