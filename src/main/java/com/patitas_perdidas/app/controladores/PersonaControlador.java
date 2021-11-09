@@ -103,6 +103,7 @@ public class PersonaControlador {
 		return "perfil.html";
 
 	}
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@PostMapping("/modificar-pass/{id}")
 	public String modificarPassPost(HttpSession session, ModelMap model, @PathVariable String id, @RequestParam String clave1, @RequestParam String clave2) throws PersonaExcepcion {
 		Persona person = (Persona) session.getAttribute("clientesession");

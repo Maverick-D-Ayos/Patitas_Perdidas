@@ -44,7 +44,7 @@
                     <!-- Descripcion -->
                     <div class="form-group">
                         <label ><span class="required">*</span>Descripción</label>
-                        <textarea class="form-control" name="descripcion" id="descripcion" rows=3 th:value="${mascota?.descripcion}" required> </textarea>
+                        <textarea class="form-control" name="descripcion" id="descripcion" rows=3 th:text="${mascota?.descripcion}" required> </textarea>
                     </div>
                     <!-- FIN Descripcion -->
 
@@ -53,7 +53,7 @@
                         <label for="especie"><span class="required">*</span>Especie</label>
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="especie"
                             id="especie" required>
-                            <option selected value="" th:text="${mascota?.especie}">Seleccione la especie de su mascota</option>
+                            <option selected value="" th:text="${mascota?.especie}" th:value="${mascota?.especie}">Seleccione la especie de su mascota</option>
                             <option value="Gato">Gato</option>
                             <option value="Perro">Perro</option>
                         </select>
@@ -79,7 +79,7 @@
                         <label for="tamaño"><span class="required">*</span>Tamaño
                             de la mascota</label> <select class="form-select form-select-sm"
                             aria-label=".form-select-sm example" name="tamanio" required>
-                            <option selected style="color: dimgray" value="" th:text="${mascota?.tamanio}">Seleccione
+                            <option selected style="color: dimgray" value="" th:text="${mascota?.tamanio}" th:value="${mascota?.especie}">Seleccione
                                 el tamaño de su mascota</option>
                             <option value="Pequeño" class="select">Pequeño</option>
                             <option value="Mediano" class="select">Mediano</option>
@@ -93,7 +93,7 @@
                         <label for="zona"><span class="required">*</span>Barrio</label>
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="zona"
                             required>
-                            <option selected style="color: dimgray" value="" th:text="${mascota?.zona}">Seleccione
+                            <option selected style="color: dimgray" value="" th:text="${mascota?.zona}" th:value="${mascota?.especie}">Seleccione
                                 el barrio donde lo encontro</option>
                             <option id='Altos de Mendoza' class="select">Altos de
                                 Mendoza</option>
