@@ -68,7 +68,10 @@ public class MascotaServicio {
 			throws MascotaExcepcion, IOException {
 		validar(nombre, descripcion, color, raza, tamaño, especie, zona, archivo);
 		Mascota m = buscaPorId(id);
-		m.setNombre(nombre);
+		if(nombre != null && !nombre.isEmpty())
+		{
+			m.setNombre(nombre);
+		}
 		m.setDescripcion(descripcion);
 		m.setColor(color);
 		m.setRaza(raza);
@@ -77,11 +80,12 @@ public class MascotaServicio {
 		m.setFecha(fecha);
 		m.setEspecie(especie);
 		m.setAlta(true);
-
-		try {
-			m.setImage(Base64.getEncoder().encodeToString(archivo.getBytes()));
-		} catch (IOException e) {
-			throw new IOException("El archivo no es valido");
+		if (archivo != null && !archivo.isEmpty()) {
+			try {
+				m.setImage(Base64.getEncoder().encodeToString(archivo.getBytes()));
+			} catch (IOException e) {
+				throw new IOException("El archivo no es valido");
+			}
 		}
 
 		m.setZona(zona);

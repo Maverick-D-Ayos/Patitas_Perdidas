@@ -181,24 +181,27 @@ public class MascotaControlador {
 			return ("redirect:/mascota/registroperdida/{id_persona}");
 		}
 	}
-	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/actualizar/{id}")
 	public String muestraActualiza(ModelMap modelo, @PathVariable String id) throws Exception {
 		Mascota m = ms.buscaPorId(id);
-		modelo.addAttribute(m);
-		return " ";
+		modelo.addAttribute("mascota", m);
+		return "editar-mascota.html";
 	}
-
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@PostMapping("/actualizar/{id}")
-	public String actualiza(ModelMap modelo, String id, String nombre, String descripcion, String color, String raza,
-			String tamanio, Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo)
-			throws ParseException, MascotaExcepcion, IOException {
+	public String actualiza(HttpSession session, ModelMap modelo, @PathVariable String id, @RequestParam(required = false) String nombre, @RequestParam String descripcion, @RequestParam String color, @RequestParam String raza,
+			@RequestParam String tamanio, @RequestParam Boolean encontrado, @RequestParam String fecha, @RequestParam String especie, @RequestParam String zona, @RequestParam(required = false) MultipartFile archivo)
+			throws ParseException, MascotaExcepcion, IOException 
+	{
 		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
 		ms.modificarMascota(id, nombre, descripcion, color, raza, tamanio, encontrado, date, especie, zona, archivo);
 		modelo.put("Exito", "Actualizacion exitosa");
-		return " ";
+		Persona person = (Persona) session.getAttribute("clientesession");
+		String personId = person.getId();
+		return "redirect:/mascota/mis-mascotas?id=" + personId;
 	}
-
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/eliminar/{id}")
 	public String elimina(ModelMap modelo, @PathVariable String id) throws MascotaExcepcion {
 		String person_id = ms.buscaPorId(id).getPersona().getId();
@@ -263,6 +266,7 @@ public class MascotaControlador {
 		modelo.addAttribute("listaMascotasxColor", muestraMascotas);
 		return "";
 	}
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/mis-mascotas")
 	public String getMascotasPersona(ModelMap model, @RequestParam String id) throws PersonaExcepcion
 	{
