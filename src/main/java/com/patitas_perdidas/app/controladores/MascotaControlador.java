@@ -76,12 +76,36 @@ public class MascotaControlador {
 
 			return "redirect:/mascota/registroencontrada/{id_persona}";
 		} catch (MascotaExcepcion e) {
+			modelo.put("nombre", nombre);
+			modelo.put("descripcion", descripcion);
+			modelo.put("color",color);
+			modelo.put("raza", raza);
+			modelo.put("tamanio", tamanio);
+			modelo.put("fecha", fecha);
+			modelo.put("especie", especie);
+			modelo.put("zona", zona);
 			redirAttrs.addFlashAttribute("error", e.getMessage());
 			return ("redirect:/mascota/registroencontrada/{id_persona}");
 		} catch (ParseException e) {
+			modelo.put("nombre", nombre);
+			modelo.put("descripcion", descripcion);
+			modelo.put("color",color);
+			modelo.put("raza", raza);
+			modelo.put("tamanio", tamanio);
+			modelo.put("fecha", fecha);
+			modelo.put("especie", especie);
+			modelo.put("zona", zona);
 			redirAttrs.addFlashAttribute("error", "Revise la fecha añadida");
 			return ("redirect:/mascota/registroencontrada/{id_persona}");
 		} catch (IOException e) {
+			modelo.put("nombre", nombre);
+			modelo.put("descripcion", descripcion);
+			modelo.put("color",color);
+			modelo.put("raza", raza);
+			modelo.put("tamanio", tamanio);
+			modelo.put("fecha", fecha);
+			modelo.put("especie", especie);
+			modelo.put("zona", zona);
 			redirAttrs.addFlashAttribute("error", "El archivo esta dañado.");
 			return ("redirect:/mascota/registroencontrada/{id_persona}");
 		}
@@ -123,12 +147,36 @@ public class MascotaControlador {
 
 			return "redirect:/mascota/registroperdida/{id_persona}";
 		} catch (MascotaExcepcion e) {
+			modelo.put("nombre", nombre);
+			modelo.put("descripcion", descripcion);
+			modelo.put("color",color);
+			modelo.put("raza", raza);
+			modelo.put("tamanio", tamanio);
+			modelo.put("especie", especie);
+			modelo.put("zona", zona);
+			modelo.put("archivo", archivo);
 			redirAttrs.addFlashAttribute("error", e.getMessage());
 			return ("redirect:/mascota/registroperdida/{id_persona}");
 		} catch (ParseException e) {
+			modelo.put("nombre", nombre);
+			modelo.put("descripcion", descripcion);
+			modelo.put("color",color);
+			modelo.put("raza", raza);
+			modelo.put("tamanio", tamanio);
+			modelo.put("especie", especie);
+			modelo.put("zona", zona);
+			modelo.put("archivo", archivo);
 			redirAttrs.addFlashAttribute("error", "Revise la fecha añadida");
 			return ("redirect:/mascota/registroperdida/{id_persona}");
 		} catch (IOException e) {
+			modelo.put("nombre", nombre);
+			modelo.put("descripcion", descripcion);
+			modelo.put("color",color);
+			modelo.put("raza", raza);
+			modelo.put("tamanio", tamanio);
+			modelo.put("especie", especie);
+			modelo.put("zona", zona);
+			modelo.put("archivo", archivo);
 			redirAttrs.addFlashAttribute("error", "El archivo esta dañado.");
 			return ("redirect:/mascota/registroperdida/{id_persona}");
 		}

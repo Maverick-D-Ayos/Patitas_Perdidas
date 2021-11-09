@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -5,7 +8,7 @@
 <div id="formulario" class="card w-50" style="margin: 0 auto">
     <div class="row mb-4">
         <div class="col">
-            <div class="form-anticlear">
+            <div class="form">
 
                 <!-- Titulo del formulario de Mascotas Encontradas -->
                 <h2 th:if="${encontrada}">Formulario de mascota encontrada</h2>
@@ -16,19 +19,19 @@
                 <!-- Formulario de Mascotas Encontradas -->
                 <form th:if="${encontrada}"
                     th:action="@{/mascota/registroencontrada/{id}(id=${session.clientesession.id})}" method="POST"
-                    enctype="multipart/form-data" class="form-anticlear">
+                    enctype="multipart/form-data" class="form">
 
                     <!-- Nombre -->
                     <div class="form-group">
                         <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" hidden
-                            value="Sin nombre">
+                            value="Sin nombre" th:value="${nombre}">
                     </div>
                     <!-- FIN Nombre -->
 
                     <!-- Descripcion -->
                     <div class="form-group">
                         <label for="descripcion"><span class="required">*</span>Descripción</label>
-                        <textarea class="form-control" name="descripcion" id="descripcion" rows=3 required> </textarea>
+                        <textarea class="form-control" name="descripcion" id="descripcion" rows=3 th:value="${descripcion}" required> </textarea>
                     </div>
                     <!-- FIN Descripcion -->
 
@@ -36,7 +39,7 @@
                     <div class="form-group">
                         <label for="especie"><span class="required">*</span>Especie</label>
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="especie"
-                            id="especie" required>
+                            id="especie" th:value="${especie}" required>
                             <option selected value="">Seleccione la especie de su mascota</option>
                             <option value="Gato">Gato</option>
                             <option value="Perro">Perro</option>
@@ -47,14 +50,14 @@
                     <!-- Raza -->
                     <div class="form-group">
                         <label for="raza"><span class="required">*</span>Raza</label> <input type="text"
-                            class="form-control" name="raza" id="raza" placeholder="Raza" required>
+                            class="form-control" name="raza" id="raza" placeholder="Raza" th:value="${raza}" required>
                     </div>
                     <!-- FIN Raza -->
 
                     <!-- Color -->
                     <div class="form-group">
                         <label for="color"><span class="required">*</span>Color</label>
-                        <input type="text" class="form-control" name="color" id="color" placeholder="Color" required>
+                        <input type="text" class="form-control" name="color" id="color" placeholder="Color" th:value="${color}" required>
                     </div>
                     <!-- FIN Color -->
 
@@ -62,7 +65,7 @@
                     <div class="form-group">
                         <label for="tamaño"><span class="required">*</span>Tamaño
                             de la mascota</label> <select class="form-select form-select-sm"
-                            aria-label=".form-select-sm example" name="tamanio" required>
+                            aria-label=".form-select-sm example" name="tamanio" th:value="${tamanio}" required>
                             <option selected style="color: dimgray" value="">Seleccione
                                 el tamaño de su mascota</option>
                             <option value="Pequeño" class="select">Pequeño</option>
@@ -76,7 +79,7 @@
                     <div class="form-group">
                         <label for="zona"><span class="required">*</span>Barrio</label>
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="zona"
-                            required>
+                            th:value="${zona}" required>
                             <option selected style="color: dimgray" value="">Seleccione
                                 el barrio donde lo encontro</option>
                             <option id='Altos de Mendoza' class="select">Altos de
@@ -151,7 +154,7 @@
                     <!-- fecha -->
                     <div class="form-group">
                         <label class="control-label"><span class="required">*</span>Fecha en que se encontro</label>
-                        <input class="form-control" name="fecha" type="text" id="datepicker" required>
+                        <input class="form-control" name="fecha" type="text" id="datepicker" th:value="${fecha}" required>
                     </div>
                     <!-- FIN fecha -->
 
@@ -159,7 +162,7 @@
                     <div class="form-group">
                         <label for="foto"><span class="required">*</span>Subi la Foto de tu mascota</label>
                         <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
-                            required>
+                           th:value="${foto}" required>
                     </div>
                     <!-- FIN Foto -->
 
@@ -192,19 +195,19 @@
                 <!-- Formulario de Mascotas Perdidas-->
                 <form th:if="${perdida}"
                     th:action="@{/mascota/registroperdida/{id}(id=${session.clientesession.id})}" method="POST"
-                    enctype="multipart/form-data" class="form-anticlear">
+                    enctype="multipart/form-data" class="form">
 
                     <!-- Nombre -->
                     <div class="form-group">
                         <label for="nombre"><span class="required">*</span>Nombre de la mascota</label> <input
-                            type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
+                            type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" th:value="${nombre}" required>
                     </div>
                     <!-- FIN Nombre -->
 
                     <!-- Descripcion -->
                     <div class="form-group">
                         <label for="descripcion"><span class="required">*</span>Descripción</label>
-                        <textarea class="form-control" name="descripcion" id="descripcion" rows=3 required> </textarea>
+                        <textarea class="form-control" name="descripcion" id="descripcion" rows=3 th:value="${descripcion}" required> </textarea>
                     </div>
                     <!-- FIN Descripcion -->
 
@@ -212,7 +215,7 @@
                     <div class="form-group">
                         <label for="especie"><span class="required">*</span>Especie</label>
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="especie"
-                            id="especie" required>
+                            id="especie" th:value="${especie}" required>
                             <option value="" selected>Seleccione la especie de su mascota</option>
                             <option value="Gato">Gato</option>
                             <option value="Perro">Perro</option>
@@ -223,14 +226,14 @@
                     <!-- Raza -->
                     <div class="form-group">
                         <label for="raza"><span class="required">*</span>Raza</label> <input type="text"
-                            class="form-control" name="raza" id="raza" placeholder="Raza" required>
+                            class="form-control" name="raza" id="raza" placeholder="Raza" th:value="${raza}" required>
                     </div>
                     <!-- FIN Raza -->
 
                     <!-- Color -->
                     <div class="form-group">
                         <label for="color"><span class="required">*</span>Color</label>
-                        <input type="text" class="form-control" name="color" id="color" placeholder="Color" required>
+                        <input type="text" class="form-control" name="color" id="color" placeholder="Color" th:value="${color}" required>
                     </div>
                     <!-- FIN Color -->
 
@@ -238,7 +241,7 @@
                     <div class="form-group">
                         <label for="tamaño"><span class="required">*</span>Tamaño
                             de la mascota</label> <select class="form-select form-select-sm"
-                            aria-label=".form-select-sm example" name="tamanio" required>
+                            aria-label=".form-select-sm example" name="tamanio" th:value="${tamanio}" required>
                             <option selected style="color: dimgray" value="">Seleccione
                                 el tamaño de su mascota</option>
                             <option value="Pequeño" class="select">Pequeño</option>
@@ -251,10 +254,10 @@
                     <!-- Zona -->
                     <div class="form-group">
                         <label for="zona"><span class="required">*</span>Barrio</label>
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="zona"
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="zona" th:value="${zona}"
                             required>
                             <option selected style="color: dimgray" value="">Seleccione
-                                el barrio donde lo encontro</option>
+                                el barrio donde lo perdio</option>
                             <option id='22 de Julio' class="select">22 de Julio</option>
                             <option id='Abasto' class="select">Abasto</option>
                             <option id='Aldea' class="select">Aldea</option>
@@ -354,16 +357,18 @@
 
                     <!-- Fecha -->
                     <div class="fecha">
-                        <label class="control-label"><span class="required">*</span>Fecha en que se encontro</label>
-                        <input class="form-control" name="fecha" type="text" id="datepicker" required>
+                        <label class="control-label"><span class="required">*</span>Fecha en que se perdio</label>
+                        <input class="form-control" name="fecha" type="text" id="datepicker" th:value="${fecha}" required>
                     </div>
                     <!-- FIN Fecha -->
 
                     <!-- Foto -->
                     <div class="form-group">
                         <label for="foto"><span class="required">*</span>Subi la Foto de tu mascota</label>
+                        <div class = md-6>
                         <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
-                            required>
+                             required>
+                            </div>
                     </div>
                     <!-- FIN Foto -->
 
