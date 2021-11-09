@@ -5,7 +5,7 @@
 <div id="formulario" class="card w-50" style="margin: 0 auto">
     <div class="row mb-4">
         <div class="col">
-            <div class="form-anticlear">
+            <div class="form">
 
                 <!-- Titulo del formulario de Mascotas Encontradas -->
                 <h2 th:if="${encontrada}">Formulario de mascota encontrada</h2>
@@ -16,18 +16,18 @@
                 <!-- Formulario de Mascotas Encontradas -->
                 <form th:if="${encontrada}"
                     th:action="@{/mascota/registroencontrada/{id}(id=${session.clientesession.id})}" method="POST"
-                    enctype="multipart/form-data" class="form-anticlear">
+                    enctype="multipart/form-data" class="form">
 
                     <!-- Nombre -->
                     <div class="form-group">
                         <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" hidden
-                            value="Sin nombre">
+                            value="Mascota encontrada">
                     </div>
                     <!-- FIN Nombre -->
 
                     <!-- Descripcion -->
                     <div class="form-group">
-                        <label for="descripcion"><span class="required">*</span>Descripción</label>
+                        <label ><span class="required">*</span>Descripción</label>
                         <textarea class="form-control" name="descripcion" id="descripcion" rows=3 required> </textarea>
                     </div>
                     <!-- FIN Descripcion -->
@@ -47,7 +47,7 @@
                     <!-- Raza -->
                     <div class="form-group">
                         <label for="raza"><span class="required">*</span>Raza</label> <input type="text"
-                            class="form-control" name="raza" id="raza" placeholder="Raza" required>
+                            class="form-control" name="raza" placeholder="Raza" required>
                     </div>
                     <!-- FIN Raza -->
 
@@ -192,7 +192,7 @@
                 <!-- Formulario de Mascotas Perdidas-->
                 <form th:if="${perdida}"
                     th:action="@{/mascota/registroperdida/{id}(id=${session.clientesession.id})}" method="POST"
-                    enctype="multipart/form-data" class="form-anticlear">
+                    enctype="multipart/form-data" class="form">
 
                     <!-- Nombre -->
                     <div class="form-group">

@@ -137,18 +137,21 @@ public class MascotaControlador {
 	@GetMapping("/actualizar/{id}")
 	public String muestraActualiza(ModelMap modelo, @PathVariable String id) throws Exception {
 		Mascota m = ms.buscaPorId(id);
-		modelo.addAttribute(m);
-		return " ";
+		modelo.addAttribute("mascota", m);
+		return "editar-mascota.html";
 	}
 
 	@PostMapping("/actualizar/{id}")
-	public String actualiza(ModelMap modelo, String id, String nombre, String descripcion, String color, String raza,
-			String tamanio, Boolean encontrado, String fecha, String especie, String zona, MultipartFile archivo)
-			throws ParseException, MascotaExcepcion, IOException {
+	public String actualiza(HttpSession session, ModelMap modelo, @PathVariable String id, @RequestParam(required = false) String nombre, @RequestParam String descripcion, @RequestParam String color, @RequestParam String raza,
+			@RequestParam String tamanio, @RequestParam Boolean encontrado, @RequestParam String fecha, @RequestParam String especie, @RequestParam String zona, @RequestParam(required = false) MultipartFile archivo)
+			throws ParseException, MascotaExcepcion, IOException 
+	{
 		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
 		ms.modificarMascota(id, nombre, descripcion, color, raza, tamanio, encontrado, date, especie, zona, archivo);
 		modelo.put("Exito", "Actualizacion exitosa");
-		return " ";
+		Persona person = (Persona) session.getAttribute("clientesession");
+		String personId = person.getId();
+		return "redirect:/mascota/mis-mascotas?id=" + personId;
 	}
 
 	@GetMapping("/eliminar/{id}")
