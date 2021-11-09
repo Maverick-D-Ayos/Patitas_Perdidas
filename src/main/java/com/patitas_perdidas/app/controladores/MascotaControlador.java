@@ -174,7 +174,7 @@ public class MascotaControlador {
 	
 	@GetMapping("/listarE")
 	public String listarActivos2(ModelMap modelo) {
-		List<Mascota> muestraMascotas = ms.listarMascotasActivasPerdidas();
+		List<Mascota> muestraMascotas = ms.listarMascotasActivasEncontradas(null);
 		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
 		return "mascotasPerdidas.html";
 	}
