@@ -1,12 +1,27 @@
-<head><meta charset="UTF-8"></head>
-<buscar class="buscador text-light">
+<head>
+	<meta charset="UTF-8">
+</head>
+<buscar class="buscador text-light" sec:authorize="isAnonymous()">
+	<h2>Encontrá tu mascota de la forma más fácil, nosotros te
+		ayudamos</h2>
+	<form class="form-inline my-1 my-lg-0 input-group align-items-center" th:action="@{/mascota/listar}" method="POST">
+		<input class="input-busqueda text-dark" type="search" placeholder="Buscar" aria-label="Search" name="atributo"
+			th:value:"${atributo}"> 
+			<a class="col nav-link active" href="/mascota/listar"><img alt=""
+				src="./imagenes/lupa.png" class="lupita">
+			<p class="text-dark">Buscar mascota</p>
+		</a>
+	</form>
+</buscar>
+<buscar class="buscador text-light" sec:authorize="isAuthenticated()">
 	<h2>Encontrá tu mascota de la forma más fácil, nosotros te
 		ayudamos</h2>
 	<form class="form-inline my-1 my-lg-0 input-group align-items-center" th:action="@{/mascota/listarE}" method="POST">
-		<input class="input-busqueda text-dark" type="search"
-			placeholder="Buscar" aria-label="Search" name="atributo" th:value:"${atributo}"> <a
-			class="col nav-link active" href="/mascota/listarE"><img alt=""
-			src="./imagenes/lupa.png" class="lupita">
-			<p class="text-dark">Buscar mascota</p></a>
+		<input class="input-busqueda text-dark" type="search" placeholder="Buscar" aria-label="Search" name="atributo"
+			th:value:"${atributo}"> 
+			<a class="col nav-link active" href="/mascota/listarE"><img alt=""
+				src="./imagenes/lupa.png" class="lupita">
+			<p class="text-dark">Buscar mascota</p>
+		</a>
 	</form>
 </buscar>
