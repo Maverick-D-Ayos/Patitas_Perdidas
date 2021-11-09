@@ -102,9 +102,11 @@ public class MascotaServicio {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Mascota> listarMascotasActivasEncontradas() {
-		List<Mascota> lm = mr.buscarListaEncontrados();
-		return lm;
+	public List<Mascota> listarMascotasActivasEncontradas(String atributo) {
+	if (atributo != null) {
+	return mr.buscarPorBusqueda(atributo);
+	}
+	return mr.buscarListaEncontrados();
 	}
 
 	@Transactional(readOnly = true)
