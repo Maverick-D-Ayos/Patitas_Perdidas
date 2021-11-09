@@ -149,12 +149,11 @@ public class PersonaControlador {
 			session.setAttribute("clientesession", usuario);
 			model.put("exito", "Su perfil ha sido modificado exitosamente");
 			redirAttrs.addAttribute("id", id);
-
-			return "redirect:/persona/perfil/{id}";
+			return "perfil.html";
 		} catch(PersonaExcepcion e) {
-			modelo.put("error", e.getMessage());
+			model.put("error", e.getMessage());
 			Persona usuario = personaServicio.buscaPorId(id);
-			modelo.addAttribute("usuario", usuario);
+			model.addAttribute("usuario", usuario);
 			session.setAttribute("clientesession", usuario);
 			return "perfil.html";
 		} catch (Exception e) {
