@@ -55,17 +55,22 @@ public class PersonaServicio implements UserDetailsService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void modificar(String id, String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
-		validar(nombre, telefono, mail, clave);
+	public void modificar(String id, String nombre, Long telefono, String mail) throws PersonaExcepcion {
+		validarSinClave(nombre, telefono, mail);
 		Persona usuario = buscaPorId(id);
 		if (!usuario.getMail().equals(mail)) {
 			validarMail(mail);
 		}
 		usuario.setNombre(nombre);
-		System.out.println(usuario.getNombre() + "sasd");
 		usuario.setTelefono(telefono);
 		usuario.setMail(mail);
-		usuario.setClave(encriptarClave(clave));
+		personaRepositorio.save(usuario);
+	}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public void modificarClave(String id, String clave1, String clave2) throws PersonaExcepcion {
+		validarClave(clave1, clave2);
+		Persona usuario = buscaPorId(id);
+		usuario.setClave(encriptarClave(clave2));
 		personaRepositorio.save(usuario);
 	}
 
@@ -151,6 +156,37 @@ public class PersonaServicio implements UserDetailsService {
 		if (clave.length() < 6) {
 			throw new PersonaExcepcion("La clave tiene que tener mas de 6 digitos");
 		}
+	}
+	public void validarSinClave(String nombre, Long telefono, String mail) throws PersonaExcepcion {
+		if (nombre == null || nombre.strip().isEmpty()) {
+			throw new PersonaExcepcion("No ingreso correctamente el nombre.");
+		}
+
+		if (telefono == null) {
+			throw new PersonaExcepcion("No ingreso correctamente el telefono.");
+		}
+
+		if (String.valueOf(telefono).length() < 6) {
+			throw new PersonaExcepcion("El formato del telefono es incorrecto");
+		}
+
+		if (mail == null || mail.strip().isEmpty()) {
+			throw new PersonaExcepcion("No ingreso correctamente el mail.");
+		}
+	}
+	public void validarClave(String clave1, String clave2) throws PersonaExcepcion {
+		if(!clave1.equals(clave2))
+		{
+			throw new PersonaExcepcion("Las claves son diferentes");
+		}
+		
+		if (clave1 == null || clave1.strip().isEmpty() || clave2 == null || clave2.strip().isEmpty()) {
+			throw new PersonaExcepcion("No ingreso correctamente la clave.");
+		}
+		if (clave1.length() < 6 || clave2.length() < 6) {
+			throw new PersonaExcepcion("La clave tiene que tener mas de 6 digitos");
+		}
+		
 	}
 
 	public void validarMail(String mail) throws PersonaExcepcion {
