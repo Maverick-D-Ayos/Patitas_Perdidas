@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.patitas_perdidas.app.entidades.Persona;
 import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
+import com.patitas_perdidas.app.servicios.MailServicio;
 import com.patitas_perdidas.app.servicios.PersonaServicio;
 
 @Controller
@@ -25,7 +26,9 @@ public class PersonaControlador {
 
 	@Autowired
 	private PersonaServicio personaServicio;
+	private MailServicio mailServicio;
 
+	
 	@GetMapping("/lista")
 	public String lista(ModelMap modelo) {
 
@@ -52,8 +55,14 @@ public class PersonaControlador {
 		}
 		redirAttrs.addFlashAttribute("exito", "Se ha registrado sastifactoriamente. Ahora puede ir a iniciar sesion.");
 		return ("redirect:./registro");
-
 	}
+		public void enviarMail(String cuerpo, String titulo, @RequestParam String mail) {
+			mailServicio.enviarMail("Se ha registrado correctamente", "Registro PatitasPerdidas", mail);
+		}
+	
+	
+
+
 
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/baja/id")
