@@ -278,6 +278,6 @@ public class MascotaControlador {
 		{
 			model.put("error", p.getMessage());
 		}
-		return "mis-mascotas.html";
+		return "misMascotas.html";
 	}
 }

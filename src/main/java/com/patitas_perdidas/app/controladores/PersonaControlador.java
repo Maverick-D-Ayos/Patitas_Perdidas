@@ -46,6 +46,7 @@ public class PersonaControlador {
 
 		try {
 			personaServicio.guardar(nombre, telefono, mail, clave);
+			personaServicio.sendMail(mail, nombre);
 		} catch (PersonaExcepcion e) {
 			redirAttrs.addFlashAttribute("error", e.getMessage());
 			return ("redirect:./registro");

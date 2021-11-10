@@ -5,7 +5,7 @@ body {
 	padding: 0.1px;
 	background-image: url(/imagenes/pataFondo.png);
     background-size: cover;
-      justify-content: space-between;
+    justify-content: space-between;
 }
 
 /*ITEMS*/
