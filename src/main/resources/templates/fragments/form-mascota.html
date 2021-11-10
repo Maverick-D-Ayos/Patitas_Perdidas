@@ -3,9 +3,10 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/form-mascota.css">
 </head>
 <!-- Formulario -->
-<div id="formulario" class="card w-50" style="margin: 0 auto">
+<div id="formulario" class="card w-50 mt-1 mb-1" style="margin: 0 auto">
     <div class="row mb-4">
         <div class="col">
             <div class="form">
@@ -381,11 +382,12 @@
                     <!-- Botones -->
                     <div class="form-group mt-2">
                         <div>
-                            <button type="submit" class="btn btn-primary mt-2">
-                                <strong>Añadir mascota</strong>
+                        
+                            <button type="submit" class="btn btn-primary boton">
+                                Añadir mascota
                             </button>
-                            <button type="Reset" class="btn btn-danger mt-2">
-                                <strong>Limpiar formulario</strong>
+                            <button type="Reset" class="btn btn-danger boton">
+                                Limpiar formulario
                             </button>
                             <br></br>
                             <div class="alert alert-success" role="alert" th:text="${exito}" th:if="${exito}"></div>
