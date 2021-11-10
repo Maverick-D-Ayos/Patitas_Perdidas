@@ -11,6 +11,14 @@
 <body>
  <header th:replace = "/fragments/header2 :: header"></header>	
  
+ <div class="background-text">
+ <div sec:authorize="isAnonymous()">
+	  <p class = "publicacion flex-box">¿Encontraste una mascota? Publicala para que se pueda reencontrar con su dueño<a href ="/persona/registro/" class="btn btn-primary md-2">Registrate para publicar tu mascota</a>  </p>
+  </div> 
+	<div sec:authorize="isAuthenticated()">
+	  <p class = "publicacion flex-box">¿Encontraste una mascota? Publicala para que se pueda reencontrar con su dueño<a th:href="@{/mascota/registroencontrada/{id}(id=__${session.clientesession.id}__)}" class="btn btn-primary md-2">Publica tu mascota</a>  </p>
+	</div>
+</div>
  <!--
 	ITEMS
 	-->
@@ -23,13 +31,13 @@
  <div class="card flex m-4" style="width: 25rem;">
   <img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"
    class="card-img-top">
-  <div class="card-b .cody">
- 
-    <p class="card-text"></p>
+  <div class="card-body">
+    <p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
   </div>
   <ul class="list-group list-group-flush ">
-  	<li class="list-group-item">Fecha en que se perdio: <span th:text="${mascota.fecha}"></span></li>
-    <li class="list-group-item">Zona en que se perdio: <span th:text="${mascota.zona}"></span></li>
+  <li class="list-group-item">Nombre: <span th:text="${mascota.nombre}"></span></li>
+  	<li class="list-group-item">Fecha en que se encontro: <span th:text="${mascota.fecha}"></span></li>
+    <li class="list-group-item">Zona en que se encontro: <span th:text="${mascota.zona}"></span></li>
    <!-- MODAL -->
     
 <modal class="modal fade"  th:id="masInfo+${mascota.id}" tabindex="-1" role="dialog"
@@ -37,11 +45,7 @@
 			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title text-light" id="exampleModalLabel">Mas Info</h5>
-						<button type="" class="close rounded" data-dismiss="modal"
-							aria-label="Close">
-							<img src="/imagenes/cerrar.png" alt="">
-						</button>
+						<h5 class="modal-title text-light" id="exampleModalLabel">Más Info</h5>
 					</div>
 					
 						<div class="modal-body">
@@ -49,14 +53,16 @@
 						<div class="row">
       						<div class="col-md-6"><img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"class="card-img-top"></div>
       						<div class="col-md-6 ms-auto"> 
-	      						<p class="list-group-item"><span th:text="${mascota.descripcion}"></span></p>
-	    						<p class="list-group-item">Especie: <span th:text="${mascota.especie}"></span></p>
-	    						<p class="list-group-item">Raza: <span th:text="${mascota.raza}"></span></p>
-	   							<p class="list-group-item">Color: <span th:text="${mascota.color}"></span></p>
+      						<div class = "list-group">
+	      						<p class="list-group-item rounded-top-right-20 rounded-bottom-20"><span th:text="${mascota.descripcion}"></span></p>
+	    						<p class="list-group-item rounded-top-right-20 rounded-bottom-20">Especie: <span th:text="${mascota.especie}"></span></p>
+	    						<p class="list-group-item rounded-top-right-20 rounded-bottom-20">Raza: <span th:text="${mascota.raza}"></span></p>
+	   							<p class="list-group-item rounded-top-right-20 rounded-bottom-20">Color: <span th:text="${mascota.color}"></span></p>
 	   							<h4>Contacta con el usuario que publico esta mascota:</h4>
-	   							<p><strong>Nombre de usuario:</strong> <span th:text="${mascota.persona.nombre}"></span></p>
-	   							<p><strong>Email: </strong><span th:text="${mascota.persona.mail}"></span></p>
-	   							<p><strong>Telefono/Cel: </strong><span th:text="${mascota.persona.telefono}"></span></p>
+	   							<p id = "texto-modal"><strong>Nombre de usuario:</strong> <span th:text="${mascota.persona.nombre}"></span></p>
+	   							<p id = "texto-modal"><strong>Email: </strong><span th:text="${mascota.persona.mail}"></span></p>
+	   							<p id = "texto-modal"><strong>Telefono/Cel: </strong><span th:text="${mascota.persona.telefono}"></span></p>
+	   						</div>
 	   						</div>
 	   					
     					</div>
@@ -79,7 +85,7 @@
   <a href="#" class="nav-link text-center" data-toggle="modal"
 						data-target="#masInfo"
 							th:attr="data-target='#masInfo'+${mascota.id}">
-							mas info
+							Más Info
 							</a>
 </div>
 </div>    
