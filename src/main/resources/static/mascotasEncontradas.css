@@ -2,10 +2,10 @@ body {
 	background-color: #454545;
 	color: rgb(253, 251, 247);
 	margin: 1%;
-	padding: 10px;
+	padding: 0.1px;
 	background-image: url(/imagenes/pataFondo.png);
     background-size: cover;
-      justify-content: space-between;
+    justify-content: space-between;
 }
 
 /*ITEMS*/

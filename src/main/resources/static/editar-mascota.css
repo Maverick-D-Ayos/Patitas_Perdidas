@@ -1,0 +1,7 @@
+.btn {
+	vertical-align: unset !important;
+}
+body{
+	background-image: url(/imagenes/pataFondo.png);
+    background-size: cover;
+}
