@@ -25,6 +25,11 @@ h3 > * {
 
 }
 
+h4 {
+	color:#f8f9fa;
+}
+
+
 .card-text, .card-link, .list-group-item{
 	font-size: 16px;
 	overflow: hidden;
@@ -99,6 +104,27 @@ button.btn.btn-outline-success.boton{
     margin-left: 4%;
 }
 
+
+.background-text{
+	margin-top: 0%;
+	background-color: rgba(0, 0, 0, .3);
+}
+
+.publicacion{
+	    color:#f8f9fa;
+	    font-size: 22px;
+}
+
+.flex-box {
+  display:flex;
+  align-items: center;
+  justify-content:space-between;
+  	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 1%;
+	padding-left: 1%;
+}
+
 /* DERECHOS */
 .derechos {
 	color:#FFFFFF;
@@ -119,4 +145,30 @@ button.btn.btn-outline-success.boton{
 }
 .card-group {
 	width: 200vh;
+}
+
+.modal-header{
+    background-color: #454545;
+}
+.modal-body{
+    background-color: #454545;
+    color: black;
+}
+.modal-footer{
+    background-color: #454545;
+}
+
+
+#texto-modal{
+		color:#f8f9fa;
+}
+
+
+.rounded-top-right-20 {
+  border-top-right-radius: 20px!important;
+}
+
+.rounded-bottom-20 {
+  border-bottom-left-radius: 20px!important;
+  border-bottom-right-radius: 20px!important;
 }

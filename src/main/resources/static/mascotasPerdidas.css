@@ -58,20 +58,44 @@ h3{
 h5 {
 	margin-bottom: 30%;
     margin-top: 10%;
-    margin-left: 2%;
-    background-color: rgba(0, 0, 0, .3);
+    margin-left: 1%;
+/*     background-color: rgba(0, 0, 0, .3);  */
     display: block;
     align-items: center;
     width: 50% !important;
     border-radius: 1%;
     justify-content: flex-end;
+    color:#f8f9fa;
+    
 }
+
 
 button.btn.btn-outline-success.boton{
     background-color: rgb(5, 126, 85) !important;
     color: white;
     border-radius: 2%; 
     margin-bottom: 4%;
+}
+
+
+.background-text{
+	margin-top: 0%;
+	background-color: rgba(0, 0, 0, .3);
+}
+
+.publicacion{
+	    color:#f8f9fa;
+	    font-size: 22px;
+}
+
+.flex-box {
+  display:flex;
+  align-items: center;
+  justify-content:space-between;
+  	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 1%;
+	padding-left: 1%;
 }
 
 /* DERECHOS */
@@ -99,7 +123,7 @@ button.btn.btn-outline-success.boton{
 /* FIN CARD */
 /* MODAL */
 .modal {
-    display: flex;
+   display: flex;
    background-color: rgba(0, 0, 0, .6);
    justify-content: center;
    align-items: center;
@@ -120,3 +144,17 @@ button.btn.btn-outline-success.boton{
     background-color: rgba(0, 0, 0, 0)!important;
 }
 /*FIN MODAL*/
+
+#texto-modal{
+		color:#f8f9fa;
+}
+
+
+.rounded-top-right-20 {
+  border-top-right-radius: 20px!important;
+}
+
+.rounded-bottom-20 {
+  border-bottom-left-radius: 20px!important;
+  border-bottom-right-radius: 20px!important;
+}

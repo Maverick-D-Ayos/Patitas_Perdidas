@@ -62,6 +62,7 @@ li .nav-item{
 .buscador{
     margin-bottom: 30%;
     margin-top: 10%;
+    border-radius: 30px 30px 30px 30px;
     background-color: rgba(0, 0, 0, .3);
     display: block;
     align-items: center;
@@ -74,25 +75,55 @@ li .nav-item{
 }
 
 
+
 .input-busqueda{
+	color: white;
     display: block;
     align-items: center;
+   	border-radius: 50px 0px 0px 50px;
     width: 60% !important;
     margin-left: 10%;
     margin-right: 4%;
     margin-bottom: 4%;
-    border-radius: 2%; 
+    padding-left: 10px;
+    border-color: #00bcd4;
+    border-width: 5px;
+    background-color: rgba(0,0,0,.5);
 }
+
 button.btn.btn-outline-success.boton {
     background-color: rgb(5, 126, 85) !important;
-    border-radius: 2%; 
     margin-bottom: 4%;
     margin-right: 2%;
 }
 button.btn.btn-outline-success.boton a{
 	color: white;
+	
 }
+
+::placeholder{
+	color: lightgray;
+}
+
 /* FIN BUSCADOR*/
+
+/* Primary button color gray */
+.btn-primary {
+    background-color: rgba(0, 0, 0, .3) !important;
+    border-color: rgba(0, 0, 0, .3) !important;
+    border-radius: 2%; 
+    margin-bottom: 4%;
+    margin-left: 2%;
+    margin-right: 2%;
+    transition: background-color 0.25s;
+    outline: none;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    background-color: #00bcd4 !important;
+    border-color: #00bcd4 !important;
+}
+
+
 .footer{
     background-color: rgba(0, 0, 0, .3);
 }
@@ -168,5 +199,6 @@ h2 {
   }
 
 /* FIN DERECHOS */
+
 
   
