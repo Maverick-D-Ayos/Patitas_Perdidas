@@ -1,0 +1,23 @@
+button.btn {
+	vertical-align: unset !important;
+	margin-top: 1rem;
+}
+body{
+	background-image: url(/imagenes/pataFondo.png);
+    background-size: cover;
+}
+
+/* DERECHOS */
+.derechos {
+	color:#FFFFFF;
+    padding: 20px 10px;
+    background-color:#454545;
+    display: flex;
+    justify-content: space-around;
+  }
+.derechos p {
+    font-size: 12px;
+  }
+
+/* FIN DERECHOS */
+
