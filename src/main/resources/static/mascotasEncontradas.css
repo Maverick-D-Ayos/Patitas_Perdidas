@@ -108,6 +108,7 @@ button.btn.btn-outline-success.boton{
 .background-text{
 	margin-top: 0%;
 	background-color: rgba(0, 0, 0, .3);
+	padding-right: 13%;
 }
 
 .publicacion{
@@ -171,4 +172,28 @@ button.btn.btn-outline-success.boton{
 .rounded-bottom-20 {
   border-bottom-left-radius: 20px!important;
   border-bottom-right-radius: 20px!important;
+}
+
+.card {
+	background: #FFFFFF;
+	margin-top: 50px;
+	-webkit-transition: all 0.2s ease-in;
+	-moz-transition: all 0.2s ease-in;
+	-ms-transition: all 0.2s ease-in;
+	-o-transition: all 0.2s ease-in;
+	transition: all 0.2s ease-in;
+	box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.40);
+}
+
+.card:hover {
+	background-color: #fff;
+	box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+	box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+	-webkit-transition: all 0.2s ease-in;
+	-moz-transition: all 0.2s ease-in;
+	-ms-transition: all 0.2s ease-in;
+	-o-transition: all 0.2s ease-in;
+	transition: all 0.2s ease-in;
+	margin-top: 50px;
+	transform: scale(1.05)
 }
