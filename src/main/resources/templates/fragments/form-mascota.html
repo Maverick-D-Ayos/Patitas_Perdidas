@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/form-mascota.css">
 </head>
 <!-- Formulario -->
+
 <div id="formulario" class="card w-50 mt-1 mb-1" style="margin: 0 auto">
     <div class="row mb-4">
         <div class="col">
@@ -162,8 +163,11 @@
                     <!-- Foto -->
                     <div class="form-group">
                         <label for="foto"><span class="required">*</span>Subi la Foto de tu mascota</label>
-                        <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
-                           th:value="${foto}" required>
+                        <div class = md-6>
+                            <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
+                            th:value="${foto}"required>
+                            </div>
+                        <div id="preview"></div>
                     </div>
                     <!-- FIN Foto -->
 
@@ -369,7 +373,8 @@
                         <div class = md-6>
                         <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
                              required>
-                            </div>
+                        </div>
+                        <div id="preview"></div>
                     </div>
                     <!-- FIN Foto -->
 
