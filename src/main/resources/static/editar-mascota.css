@@ -6,21 +6,18 @@ body{
     background-size: cover;
 }
 
-html{
-	height: 100%
+html, body {
+  height: 100%;
 }
 body {
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: 1fr auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer{
     background-color: rgba(0, 0, 0, .3);
-      grid-row-start: 2;
-  grid-row-end: 3;
+    flex-shrink: 0;
 }
-
 .derechos p{
 	color: white;
 }
