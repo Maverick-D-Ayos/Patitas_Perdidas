@@ -5,3 +5,22 @@ body{
 	background-image: url(/imagenes/pataFondo.png);
     background-size: cover;
 }
+
+html{
+	height: 100%
+}
+body {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.footer{
+    background-color: rgba(0, 0, 0, .3);
+      grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.derechos p{
+	color: white;
+}

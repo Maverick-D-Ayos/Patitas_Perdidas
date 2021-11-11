@@ -8,6 +8,14 @@ body {
     justify-content: space-between;
 }
 
+.footer{
+    background-color: rgba(0, 0, 0, .3);
+    position: absolute;
+ 	bottom: 0;
+ 	width: 100%;
+ 	max-height: 10%;
+}
+
 /*ITEMS*/
 
 h3{

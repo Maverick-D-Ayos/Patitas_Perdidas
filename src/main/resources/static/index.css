@@ -53,6 +53,19 @@ li .nav-item{
     color:#f8f9fa;
     justify-content: flex-end;
 }
+
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer{
+    background-color: rgba(0, 0, 0, .3);
+    flex-shrink: 0;
+}
 /*FIN MENU*/
 
 /*INICIO BUSCADOR*/
@@ -112,12 +125,16 @@ button.btn.btn-outline-success.boton a{
     background-color: rgba(0, 0, 0, .3) !important;
     border-color: rgba(0, 0, 0, .3) !important;
     border-radius: 2%; 
-    margin-bottom: 4%;
-    margin-left: 2%;
-    margin-right: 2%;
     transition: background-color 0.25s;
     outline: none;
 }
+
+.btn-margin{
+	    margin-bottom: 4%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
     background-color: #00bcd4 !important;
     border-color: #00bcd4 !important;
