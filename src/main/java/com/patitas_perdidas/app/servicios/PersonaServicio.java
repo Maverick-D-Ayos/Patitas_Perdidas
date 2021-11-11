@@ -57,6 +57,7 @@ public class PersonaServicio implements UserDetailsService {
 		entidad.setAlta(true);
 		entidad.setRol(Rol.USER);
 		personaRepositorio.save(entidad);
+		
 	}
 	
 	public void sendMail(String to, String nombre) {
