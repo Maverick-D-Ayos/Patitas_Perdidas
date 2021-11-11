@@ -1,12 +1,25 @@
 body {
 	background-image: url(https://media.diariouno.com.ar/p/f54249878a58173518d1bc7ec8f5814e/adjuntos/298/imagenes/008/806/0008806731/1200x0/smart/perro-callejerojpg.jpg);
 	color: rgb(253, 251, 247);
-	margin: 1%;
-	padding: 10px;
 	background-size:cover;
 	
 	
 }
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer{
+    background-color: rgba(0, 0, 0, .3);
+    flex-shrink: 0;
+}
+
+
 .formulario {
 	display:flex;
 	justify-content: flex-end;
@@ -51,6 +64,10 @@ h2 {
 	text-align: left;
 	align-items: left;
 	margin: 2px;
+}
+
+.navbar{
+	margin: 0;
 }
 
 nav li .nav-item {
