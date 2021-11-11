@@ -26,7 +26,6 @@ public class PersonaControlador {
 
 	@Autowired
 	private PersonaServicio personaServicio;
-	private MailServicio mailServicio;
 
 	
 	@GetMapping("/lista")
@@ -56,14 +55,7 @@ public class PersonaControlador {
 		redirAttrs.addFlashAttribute("exito", "Se ha registrado sastifactoriamente. Ahora puede ir a iniciar sesion.");
 		return ("redirect:./registro");
 	}
-		public void enviarMail(String cuerpo, String titulo, @RequestParam String mail) {
-			mailServicio.enviarMail("Se ha registrado correctamente", "Registro PatitasPerdidas", mail);
-		}
-	
-	
-
-
-
+		
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/baja/id")
 	public String baja(@PathVariable String id) {

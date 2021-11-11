@@ -55,6 +55,20 @@ public class PersonaServicio implements UserDetailsService {
 		
 	}
 
+
+	public void sendMail(String to, String nombre) {
+
+        SimpleMailMessage mail = new SimpleMailMessage();
+
+        mail.setFrom("patitasperdidas.egg@gmail.com");
+        mail.setTo(to);
+        mail.setSubject("Se ha completado su registro en Patitas Perdidas");
+        mail.setText("Bienvenido "+nombre+" a la familia de Patitas Perdidas, gracias por registrarte y por formar parte de esta comunidad. Su aporte a la comunidad siempre es importante, si ve un perro perdido no dude en publicarlo, seguramente su dueño se lo va a agradecer infinitamente.");
+
+        javaMailSender.send(mail);
+    }
+
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void modificar(String id, String nombre, Long telefono, String mail) throws PersonaExcepcion {
 		validarSinClave(nombre, telefono, mail);
