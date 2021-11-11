@@ -58,7 +58,8 @@ public class PersonaServicio implements UserDetailsService {
 		entidad.setRol(Rol.USER);
 		personaRepositorio.save(entidad);
 	}
-	
+
+
 	public void sendMail(String to, String nombre) {
 
         SimpleMailMessage mail = new SimpleMailMessage();
