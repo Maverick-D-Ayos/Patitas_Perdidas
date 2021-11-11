@@ -1,4 +1,4 @@
- let cambioColor = document.querySelector(".change-color");   
+/*let cambioColor = document.querySelector(".change-color");   
 cambioColor.addEventListener("click",myf1);
 let contador = 0;
  function myf1() {
@@ -9,4 +9,12 @@ let contador = 0;
          cambioColor.style.backgroundColor = "white";
       }
       contador += 1;
-    };
+    };*/
+
+    const btnSwitch = document.querySelector('#switch');
+    const vista = document.querySelector('.vista-principal');
+    btnSwitch.addEventListener('click', () => {
+		vista.classList.toggle('dark');
+		btnSwitch.classList.toggle('active');
+	
+	});
