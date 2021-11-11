@@ -176,7 +176,12 @@
                     <!-- Foto -->
                     <div class="form-group">
                         <label for="foto"><span class="required">*</span>Subi la Foto de tu mascota</label>
-                        <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg">
+                        
+                        <div class = md-6>
+                            <input type="file" class="form-control-file" name="archivo" id="foto" accept="image/jpeg"
+                            th:value="${foto}"required>
+                        </div>
+                       <div id="preview"></div>
                     </div>
                     <!-- FIN Foto -->
 
@@ -231,6 +236,7 @@
         <script src="https://cdn.jsdelivr.net/gh/akjpro/form-anticlear/base.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/preview_image.js"></script>
 	<script>
 		$(function () {
 			$("#datepicker").datepicker({

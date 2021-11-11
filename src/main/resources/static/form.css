@@ -49,3 +49,13 @@ h1, h2, label, strong, .form-control-file {
   background: repeat 0 0 lightgray;
   font-weight: bold;
 }
+
+#preview {
+  border:1px solid #ddd;
+  padding:5px;
+  border-radius:2px;
+  background:#fff;
+  max-width:200px;
+}
+
+#preview img {width:100%;display:block;}
