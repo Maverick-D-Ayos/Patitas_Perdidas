@@ -10,8 +10,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -40,9 +38,6 @@ public class PersonaServicio implements UserDetailsService {
 
 	@Autowired
 	private MascotaServicio mascotaServicio;
-	
-	@Autowired
-    private JavaMailSender javaMailSender;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void guardar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
@@ -59,18 +54,6 @@ public class PersonaServicio implements UserDetailsService {
 		personaRepositorio.save(entidad);
 		
 	}
-	
-	public void sendMail(String to, String nombre) {
-
-        SimpleMailMessage mail = new SimpleMailMessage();
-
-        mail.setFrom("patitasperdidas.egg@gmail.com");
-        mail.setTo(to);
-        mail.setSubject("Se ha completado su registro en Patitas Perdidas");
-        mail.setText("Bienvenido "+nombre+" a la familia de Patitas Perdidas, gracias por registrarte y por formar parte de esta comunidad. Su aporte a la comunidad siempre es importante, si ve un perro perdido no dude en publicarlo, seguramente su dueño se lo va a agradecer infinitamente.");
-
-        javaMailSender.send(mail);
-    }
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void modificar(String id, String nombre, Long telefono, String mail) throws PersonaExcepcion {
