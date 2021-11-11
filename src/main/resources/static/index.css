@@ -4,6 +4,10 @@
     padding: 0.1px;
     
 }
+.vista-principal.dark{
+	background-image:unset;
+	background:#111111 !important;
+}
 h1{
     font-family: 'Asap', sans-serif;
     text-align: left;
@@ -18,6 +22,19 @@ h1{
 	border-radius: 35%;
 	width:35%;
 	margin:2%;
+}
+.efecto:before{
+	 content:"";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 0px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 1s ease;
+}
+.efecto:hover:before{
+	width: 100%;
 }
 .navbar-collapse {
 	justify-content:flex-end;
@@ -146,28 +163,39 @@ button.btn.btn-outline-success.boton a{
 }
 
 /*CAROUSEL*/
-
-h2 {
-	background-color: rgba(0, 0, 0, .3);
+.h2 {
+	background-color: rgba(0, 0, 0, .5);
+	font-family: 'Asap', sans-serif;
+	font-weight: 700 !important;
 	text-align:center;
-	font-size:20rem;
 	color: white;
 	margin:0!important;
 	padding:2%;
 }
- .carousel-item.active{
-    background-color: rgba(0, 0, 0, .3);
+.carousel-text{
+	background-color: rgba(0, 0, 0, .5);
+	font-family: 'Asap', sans-serif;
+	font-weight: 700 !important;
+	text-align:center;
+	color: white;
+	margin:0!important;
+	padding:2%;
+	font-size:2.5rem !important;
+}
+ .carousel-item{
+    background-color: rgba(0, 0, 0, .5);
 }
 .carousel .slide {
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .5);
 }
 .carousel-item img{
+	border-radius:3%;
     display: block;
     margin-bottom:4%;
     margin-left: auto;
     margin-right: auto;
-    width: 80%!important;
-    height: 80%!important;
+    width: 70%!important;
+    height: 70%!important;
 
 }
 .carousel.slide .carousel-indicators li{
@@ -207,7 +235,7 @@ h2 {
 .derechos {
 	color:#FFFFFF;
     padding: 20px 10px;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .5);
     display: flex;
     justify-content: space-around;
   }
@@ -216,6 +244,45 @@ h2 {
   }
 
 /* FIN DERECHOS */
-
+.switch {
+	height:2rem;
+	background: #343D5B;
+	border-radius:1000px;
+	border:none;
+	position:relative;
+	cursor: pointer;
+	display:flex;
+	outline: none;
+}
+span {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	display:block;
+	background:none;
+	color:#fff;
+}
+.switch::after {
+	content: "";
+	display:block;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	background: #F1F1F1;
+	top: 0;
+	left: 0;
+	right: unset;
+	border-radius: 100px;
+	transition: .3s ease all;
+	box-shadow: 0px 0px 2px 2px rgba(0,0,0,.2);		
+}
+.switch.active{
+		background: orange;
+		color: #000;
+}
+.switch.active::after {
+	right:0;
+	left:unset;
+}
 
   
