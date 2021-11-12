@@ -15,31 +15,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-
-<body>
-    <div class="vista-principal">
-
-        <!-- HEADER -->
-        <header th:replace="/fragments/header :: header"></header>
-        <!-- FIN HEADER -->
-
-        <!-- FORMULARIO -->
-        <div>
-            <div th:if="${session.clientesession == null}">
-                <h1>Por favor Registrarse o iniciar sesion</h1>
-            </div>
-            <div th:unless="${session.clientesession == null}">
-                <div th:insert="/fragments/form-mascota :: #formulario"></div>
-        </div>
-		<!-- FIN FORMULARIO -->
-       </div>
-    </div>
-    </div>
-    <!-- FOOTER -->
-    <footer th:replace="/fragments/footer :: footer"></footer>
-    <!-- FIN FOOTER -->
-    
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+           <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
@@ -60,6 +36,31 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/preview_image.js"></script>
     <script src="/barrioMascota.js"></script>
+
+<body>
+    <div class="vista-principal">
+
+        <!-- HEADER -->
+        <header th:replace="/fragments/header :: header"></header>
+        <!-- FIN HEADER -->
+
+        <!-- FORMULARIO -->
+        <div>
+            <div th:if="${session.clientesession == null}">
+                <h1>Por favor Registrarse o iniciar sesion</h1>
+            </div>
+            <div th:unless="${session.clientesession == null}">
+                <div th:insert="/fragments/form-mascota :: #formulario"></div>
+        </div>
+		<!-- FIN FORMULARIO -->
+       </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <footer th:replace="/fragments/footer :: footer"></footer>
+    <!-- FIN FOOTER -->
+    
+ 
 	<script>
 		$(function () {
 			$("#datepicker").datepicker({
@@ -67,6 +68,15 @@
 				dateFormat: "yy-mm-dd"
 			});
 		});
+	</script>
+	<script src="/preview_image.js"></script>
+    <script>
+	(function() { 
+  		$('#filediv').click(function(e) {
+    	return $('input:file')[0].click();
+ 	});
+
+}).call(this);
 	</script>
 </body>
 

@@ -143,9 +143,10 @@ public class MascotaControlador {
 					especie, zona, archivo);
 			Persona usuario = personaServicio.buscaPorId(id_persona);
 			modelo.addAttribute("usuario", usuario);
+			String personId = person.getId();
 			redirAttrs.addFlashAttribute("exito", "Se añadio la mascota con exito");
 
-			return "redirect:/mascota/registroperdida/{id_persona}";
+			return "redirect:/mascota/mis-mascotas?id=" + personId;
 		} catch (MascotaExcepcion e) {
 			redirAttrs.addFlashAttribute("nombre", nombre);
 			redirAttrs.addFlashAttribute("descripcion", descripcion);
