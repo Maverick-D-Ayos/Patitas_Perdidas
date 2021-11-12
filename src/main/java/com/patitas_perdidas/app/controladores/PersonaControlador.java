@@ -48,6 +48,9 @@ public class PersonaControlador {
 			personaServicio.guardar(nombre, telefono, mail, clave);
 			personaServicio.sendMail(mail, nombre);
 		} catch (PersonaExcepcion e) {
+			redirAttrs.addFlashAttribute("nombre",nombre);
+			redirAttrs.addFlashAttribute("telefono",telefono);
+			redirAttrs.addFlashAttribute("mail",mail);
 			redirAttrs.addFlashAttribute("error", e.getMessage());
 			return ("redirect:./registro");
 		}
@@ -55,6 +58,7 @@ public class PersonaControlador {
 		return ("redirect:./registro");
 
 	}
+
 
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@GetMapping("/baja/id")
