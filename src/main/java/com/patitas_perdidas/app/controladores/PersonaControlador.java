@@ -51,11 +51,11 @@ public class PersonaControlador {
 			redirAttrs.addFlashAttribute("nombre",nombre);
 			redirAttrs.addFlashAttribute("telefono",telefono);
 			redirAttrs.addFlashAttribute("mail",mail);
-			redirAttrs.addFlashAttribute("error", e.getMessage());
+			redirAttrs.addFlashAttribute("errorReg", e.getMessage());
 			return ("redirect:./registro");
 		}
 		redirAttrs.addFlashAttribute("exito", "Se ha registrado sastifactoriamente. Ahora puede ir a iniciar sesion.");
-		return ("redirect:./registro");
+		return ("redirect:/");
 
 	}
 
