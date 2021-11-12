@@ -47,8 +47,9 @@ public class PersonaServicio implements UserDetailsService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void guardar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
 
-		validar(nombre, telefono, mail, clave);
+		validar(nombre, mail, clave);
 		validarMail(mail);
+		validarTelefono(telefono);
 		Persona entidad = new Persona();
 		entidad.setNombre(nombre);
 		entidad.setTelefono(telefono);
@@ -151,17 +152,9 @@ public class PersonaServicio implements UserDetailsService {
 		return claveEncriptada;
 	}
 
-	public void validar(String nombre, Long telefono, String mail, String clave) throws PersonaExcepcion {
+	public void validar(String nombre, String mail, String clave) throws PersonaExcepcion {
 		if (nombre == null || nombre.strip().isEmpty()) {
 			throw new PersonaExcepcion("No ingreso correctamente el nombre.");
-		}
-
-		if (telefono == null) {
-			throw new PersonaExcepcion("No ingreso correctamente el telefono.");
-		}
-
-		if (String.valueOf(telefono).length() < 6) {
-			throw new PersonaExcepcion("El formato del telefono es incorrecto");
 		}
 
 		if (mail == null || mail.strip().isEmpty()) {
@@ -215,6 +208,16 @@ public class PersonaServicio implements UserDetailsService {
 		}
 
 	}
+	
+	public void validarTelefono(Long telefono) throws PersonaExcepcion {
+		if (telefono == null) {
+			throw new PersonaExcepcion("No ingreso correctamente el telefono.");
+		}
+
+		if (String.valueOf(telefono).length() < 6) {
+			throw new PersonaExcepcion("El formato del telefono es incorrecto");
+		}
+	}
 
 	public Persona buscarPorEmail(String mail) {
 		Optional<Persona> oPersona = personaRepositorio.buscarPorMail(mail);
@@ -225,6 +228,7 @@ public class PersonaServicio implements UserDetailsService {
 			return null;
 		}
 	}
+	
 
 	// METODO QUE CARGA EL USUARIO PARA LOGUEARSE
 
