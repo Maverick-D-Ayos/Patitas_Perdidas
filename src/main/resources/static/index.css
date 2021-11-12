@@ -144,12 +144,14 @@ button.btn.btn-outline-success.boton a{
     border-radius: 2%; 
     transition: background-color 0.25s;
     outline: none;
+    margin: 3px;
 }
 
 .btn-margin{
-	    margin-bottom: 4%;
+	margin-bottom: 4%;
     margin-left: 2%;
     margin-right: 2%;
+    
 }
 
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
@@ -254,14 +256,14 @@ button.btn.btn-outline-success.boton a{
 	display:flex;
 	outline: none;
 }
-span {
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	display:block;
-	background:none;
-	color:#fff;
-}
+/* span { */
+/* 	width: 30px; */
+/* 	height: 30px; */
+/* 	line-height: 30px; */
+/* 	display:block; */
+/* 	background:none; */
+/* 	color:#fff; */
+/* } */
 .switch::after {
 	content: "";
 	display:block;

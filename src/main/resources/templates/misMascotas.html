@@ -50,6 +50,7 @@
 		<!-- FIN HEADER -->
 		<div class="container">
 		<div th:replace = "/fragments/error :: error"></div>
+		<div th:replace = "/fragments/exito :: exito"></div>
 		<div class="mb-3 mt-3 mascotas" >
 				<a class="btn btn-warning btn-lg m-3" th:href="@{/mascota/registroperdida/{id}(id=__${session.clientesession.id}__)}"
 					 role="button">Agregar mascota perdida</a>
@@ -58,7 +59,7 @@
 		<div class="row" th:fragment="list">
     <div th:each="mascota : ${listaMascotas}" class="col-sm-4">
         <div class="card mb-3">
-        <img th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" style="max-height: 15em;">
+        <img th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" class="p-2" style="max-height: 15em;object-fit: cover">
             <div class="card-body">
                 <h5 class="card-title" th:text="${mascota?.nombre}"></h5>
                 <p class="card-text" th:text="'Raza: ' + ${mascota.raza}"></p>
