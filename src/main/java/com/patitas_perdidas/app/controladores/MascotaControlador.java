@@ -210,14 +210,21 @@ public class MascotaControlador {
 		return "redirect:/mascota/mis-mascotas?id=" + person_id;
 	}
 
-	@GetMapping("/lista")
-	public String listar(ModelMap modelo) {
-		List<Mascota> muestraMascotas = ms.listarTodasMascotas();
-		modelo.addAttribute("listaMascota", muestraMascotas);
-		return "";
-	}
-
 	
+	@GetMapping("/listaA")
+	public String listar(ModelMap modelo) {
+		List<Mascota> muestraMascotas = ms.listarTodasMascotasActivas();
+		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
+		return "mascotasActivas.html";
+	}
+	
+	@PostMapping("/listaA")
+	public String listarA(ModelMap modelo, String atributo) {
+		List<Mascota> muestraMascotas = ms.listarMascotasActivas(atributo);
+		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
+		return "mascotasActivas.html";
+	}
+		
 	
 	
 	@GetMapping("/listar")

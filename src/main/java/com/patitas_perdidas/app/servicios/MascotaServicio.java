@@ -94,10 +94,19 @@ public class MascotaServicio {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Mascota> listarTodasMascotas() {
-		List<Mascota> lm = mr.findAll();
+	public List<Mascota> listarTodasMascotasActivas() {
+		List<Mascota> lm = mr.buscarListaActivos();
 		return lm;
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Mascota> listarMascotasActivas(String atributo) {
+	if (atributo != null) {
+	return mr.buscarPorBusquedaActivos(atributo);
+	}
+	return mr.buscarListaActivos();
+	}
+	
 
 	@Transactional(readOnly = true)
 	public List<Mascota> listarMascotasActivasPerdidas() {
@@ -194,6 +203,15 @@ public class MascotaServicio {
 		else
 		{
 			return lista;
+		}
+	}
+	
+	public String encontradaPerdida(String id) {
+		Mascota m=mr.getById(id);
+		if(m.getEncontrado()) {
+			return "Encontrado";
+		}else {
+			return "Perdido";
 		}
 	}
 }
