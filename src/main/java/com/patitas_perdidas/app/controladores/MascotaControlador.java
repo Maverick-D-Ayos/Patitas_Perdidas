@@ -288,4 +288,18 @@ public class MascotaControlador {
 		}
 		return "misMascotas.html";
 	}
+	
+	@GetMapping("/buscar")
+	public String buscar(ModelMap modelo) {
+		List<Mascota> muestraMascotas = ms.listarTodasMascotasActivas();
+		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
+		return "mascotasActivas.html";
+	}
+	
+	@PostMapping("/buscar")
+	public String buscar(ModelMap modelo,@RequestParam String seleccion,@RequestParam String atributo) {
+		List<Mascota> muestraMascotas = ms.listarMascotasBusqueda(atributo, seleccion);
+		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
+		return "mascotasActivas.html";
+	}
 }
