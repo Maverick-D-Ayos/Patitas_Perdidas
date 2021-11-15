@@ -5,11 +5,11 @@ body {
 	
 	
 }
-html, body {
+html, body, .vista {
   height: 100%;
 }
 
-body {
+body{
   display: flex;
   flex-direction: column;
 }
@@ -120,4 +120,4 @@ nav li .nav-item {
     font-size: 12px;
   }
 
-/* FIN DERECHOS */
+

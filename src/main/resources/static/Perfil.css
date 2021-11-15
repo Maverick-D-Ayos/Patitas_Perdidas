@@ -139,3 +139,16 @@ nav li .nav-item {
 }
 
 /* FIN DERECHOS */
+
+html, body, .vista-principal-perfil {
+  height: 100%;
+}
+body, .vista-principal-perfil {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer{
+    background-color: rgba(0, 0, 0, .3);
+    flex-shrink: 0;
+}
