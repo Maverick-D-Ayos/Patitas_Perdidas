@@ -1,7 +1,7 @@
 <head>
 	<meta charset="UTF-8">
 </head>
-<buscar class="buscador rounded-search text-light" sec:authorize="isAnonymous()">
+<buscar class="buscador rounded-search text-light">
 	<h2>Encontrá tu mascota de la forma más fácil, nosotros te
 		ayudamos</h2>
 	<form class="form-inline my-1 my-lg-0 input-group align-items-center" th:action="@{/mascota/listaA}" method="POST">
@@ -16,21 +16,4 @@
 	<a href ="./mascota/listarE/" class="btn btn-primary btn-margin">Ver todas las mascotas encontradas</a>
 	<a href="./mascota/listar/"  class="btn btn-primary btn-margin">Ver todas las mascotas perdidas</a>
 	</div>
-</buscar>
-<buscar class="buscador text-light md-2" sec:authorize="isAuthenticated()">
-	<h2>Encontrá tu mascota de la forma más fácil, nosotros te
-		ayudamos</h2>
-	<form class="form-inline my-1 my-lg-0 input-group align-items-center" th:action="@{/mascota/listarE}" method="POST">
-		<input class="input-busqueda rounded-search text-light" type="search" placeholder="Buscar" aria-label="Search" name="atributo"
-			th:value:"${atributo}"> 
-			<a class="col nav-link active" href="/mascota/listarE"><img alt=""
-				src="./imagenes/lupa.png" class="lupita">
-			<p class="text-light">Buscar mascota</p>
-		</a>
-	</form>
-	<div class = "btn-group d-flex justify-content-center">
-	<a href ="./mascota/listarE/" class="btn btn-primary btn-margin">Ver todas las mascotas encontradas</a>
-	<a href="./mascota/listar/"  class="btn btn-primary btn-margin">Ver todas las mascotas perdidas</a>
-	</div>
-	
 </buscar>
