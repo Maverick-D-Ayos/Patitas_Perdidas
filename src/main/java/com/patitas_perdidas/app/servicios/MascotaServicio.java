@@ -214,4 +214,19 @@ public class MascotaServicio {
 			return "Perdido";
 		}
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Mascota> listarMascotasBusqueda(String atributo, String seleccion) {
+		switch(seleccion)
+		{
+		   case "todas":
+			   return mr.buscarPorBusquedaActivos(atributo);		   
+		   case "encontradas":
+			   return mr.buscarPorBusqueda(atributo,true);
+		   case "perdidas":
+			   return mr.buscarPorBusqueda(atributo,false);
+		   default:
+			   return null;
+		}
+	}
 }
