@@ -71,10 +71,11 @@ li .nav-item{
     justify-content: flex-end;
 }
 
-html, body {
+
+html, body, .vista-principal {
   height: 100%;
 }
-body {
+body, .vista-principal {
   display: flex;
   flex-direction: column;
 }
@@ -83,6 +84,7 @@ body {
     background-color: rgba(0, 0, 0, .3);
     flex-shrink: 0;
 }
+
 /*FIN MENU*/
 
 /*INICIO BUSCADOR*/
