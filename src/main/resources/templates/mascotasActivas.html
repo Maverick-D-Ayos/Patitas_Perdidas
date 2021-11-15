@@ -57,9 +57,12 @@
    <p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
   </div>
   <ul class="list-group list-group-flush ">
-  <li class="list-group-item">Nombre: <span th:text="${mascota.nombre}"></span></li>
+  <li class="list-group-item">Nombre: <span th:text="${mascota.nombre}"></span></li> 
+    
   	<li class="list-group-item">Fecha en que se perdio: <span th:text="${mascota.fecha}"></span></li>
     <li class="list-group-item">Zona en que se perdio: <span th:text="${mascota.zona}"></span></li>
+    <li class="list-group-item" th:if="${mascota.encontrado}">Encontrada</li>
+    <li class="list-group-item" th:unless="${mascota.encontrado}">Perdida</li>
   </ul>
     <a href="#" class="btn btn-info m-2 stretched-link" data-toggle="modal"	th:attr="data-target=${'#masInfo'+mascota.id}" data-mascota="${mascota}" role="button">
 							Más Info
