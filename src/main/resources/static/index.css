@@ -6,7 +6,6 @@
 }
 .vista-principal.dark{
 	background-image:unset;
-	background:#111111 !important;
 }
 h1{
     font-family: 'Asap', sans-serif;
@@ -258,14 +257,44 @@ button.btn.btn-outline-success.boton a{
 	display:flex;
 	outline: none;
 }
-/* span { */
-/* 	width: 30px; */
-/* 	height: 30px; */
-/* 	line-height: 30px; */
-/* 	display:block; */
-/* 	background:none; */
-/* 	color:#fff; */
-/* } */
+.form-select2{
+	 color: white !important;
+	 background-color: transparent !important;
+	 height: 3.7rem;
+	 border-style: solid;
+ 	 border-width: 1px;
+ 	 border-color: white;
+	 border-radius: 50px !important;
+}
+
+.form-select2 option {
+	color: white !important;
+    background-color: rgba(0, 0, 0, .9) !important; 
+    
+}
+/* MODO NOCTURNO*/
+
+.switch {
+	height:2rem;
+	background: #343D5B;
+	border-radius:1000px;
+	border:none;
+	position:relative;
+	cursor: pointer;
+	display:flex;
+	outline: none;
+	
+  align-self: center;
+  
+}
+ .nigth{ 
+ 	width: 30px; 
+ 	height: 30px;
+ 	line-height: 30px;
+ 	display:block; 
+	background:none; 
+ 	color:#fff; 
+ } 
 .switch::after {
 	content: "";
 	display:block;
@@ -288,18 +317,9 @@ button.btn.btn-outline-success.boton a{
 	right:0;
 	left:unset;
 }
-.form-select2{
-	 color: white !important;
-	 background-color: transparent !important;
-	 height: 3.7rem;
-	 border-style: solid;
- 	 border-width: 1px;
- 	 border-color: white;
-	 border-radius: 50px !important;
+.dark {
+	background-color: #2E3039!important;
+	
 }
 
-.form-select2 option {
-	color: white !important;
-    background-color: rgba(0, 0, 0, .9) !important; 
-    
-}
+  
