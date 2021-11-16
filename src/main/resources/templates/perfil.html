@@ -36,13 +36,13 @@
 		<!-- MENU -->
 	<header th:replace = "/fragments/header :: header"></header>	
 	<!-- FIN MENU -->
-	<div class="vista-principal-perfil" style="background-color: white;">
-	<div class="container rounded bg-white mt-5">
+	<div class="vista-principal-perfil" >
+	<div class="container rounded text-white mt-5">
 	<div th:replace = "/fragments/error :: error"></div>
 	<div th:replace = "/fragments/exito :: exito"></div>
 	<div class="row">
         <div class="col-md-4 border-right">
-        <h4 class="text-center text-dark">Tu perfil</h4>
+        <h4 class="text-center">Tu perfil</h4>
             <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle mt-3" src="/imagenes/perfil2.png" width="200"><span class="font-weight-bold fs-4" th:text="${session.clientesession.nombre}"></span></div>
         </div>
         <div th:replace = "/fragments/perfil-frag :: perfil"></div>        

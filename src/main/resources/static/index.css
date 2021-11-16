@@ -321,5 +321,12 @@ button.btn.btn-outline-success.boton a{
 	background-color: #2E3039!important;
 	
 }
+.saludo {
+margin: 2px;
+   background-color: rgba(0, 0, 0, .6);
+   justify-content: center;
+   align-items: center;
+	box-shadow: 0px 0px 2px 2px rgba(0,0,0,.7);	
+}
 
   
