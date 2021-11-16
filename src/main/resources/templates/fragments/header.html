@@ -1,7 +1,8 @@
 <!-- HEADER SIN LOGUEARSE -->
-
 <head>
+	
 	<meta charset="UTF-8">
+		
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 		crossorigin="anonymous">
@@ -25,6 +26,10 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
 		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
 		crossorigin="anonymous"></script> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		
+	
 </head>
 <header sec:authorize="isAnonymous()">
 	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -34,7 +39,7 @@
 		</symbol>
 	</svg>
 	<div class="px-3 py-2 nav-principal text-dark opacity-45">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 				<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
 					<img class="logo" src="/imagenes/logo.png" alt="">
@@ -45,20 +50,10 @@
 					</svg>
 					<div th:text="${error}"></div>
 				</div>
-
+				<form th:replace = "/fragments/buscarHead :: buscador"></form>				
 
 				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small text-white">
-					<form class="form-inline my-1 my-lg-0 input-group align-items-center" th:action="@{/mascota/buscar}" method="POST">
-						<select class="form-select-sm" aria-label=".form-select-sm example" name="seleccion"
-                            id="seleccion" required>
-                            <option selected value="todas">Todas</option>
-                            <option value="encontradas">Encontradas</option>
-                            <option value="perdidas">Perdidas</option>
-                        </select>
-						<input class="input-busqueda rounded-search text-light" placeholder="Buscar" aria-label="Search" name="atributo"
-							th:value:"${atributo}">
-						<button type="submit" class="btn btn-primary mb-3">Buscar</button>
-					</form>
+					
 					<li><a href="/../" class="nav-link text-light text-center efecto">
 							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/home1.png"
 								alt="">
@@ -87,24 +82,14 @@
 </header>
 <header sec:authorize="isAuthenticated()">
 	<div class="px-3 py-2 nav-principal opacity-45">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 				<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
 					<img class="logo" src="/imagenes/logo.png" alt="">
 				</a>
-				
+				<form th:replace = "/fragments/buscarHead :: buscador"></form>
 				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small text-light">
-					<form class="form-inline my-1 my-lg-0 input-group align-items-center" th:action="@{/mascota/buscar}" method="POST">
-						<select class="form-select-sm" aria-label=".form-select-sm example" name="seleccion"
-                            id="seleccion" required>
-                            <option selected value="todas">Todas</option>
-                            <option value="encontradas">Encontradas</option>
-                            <option value="perdidas">Perdidas</option>
-                        </select>
-						<input class="input-busqueda rounded-search text-light" placeholder="Buscar" aria-label="Search" name="atributo"
-							th:value:"${atributo}"> 
-						<button type="submit" class="btn btn-primary mb-3">Buscar</button>
-					</form>
+					
 					<li><a href="/../" class="nav-link text-light text-center">
 							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/home1.png"
 								alt="">
@@ -117,14 +102,15 @@
 							Mis Mascotas
 						</a></li>
 					<li>
-					<li class="dropdown"><a href="#" class="nav-link text-light text-center" data-bs-toggle="dropdown"
-							aria-expanded="false" data-offset="0, 25">
-							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/perfil2.png"
+					<li class="dropdown "><a href="#" class="nav-link text-light text-center" data-bs-toggle="dropdown"
+							aria-expanded="false" data-bs-offset="0,10">
+							<img class="bi d-block mx-auto mb-1" width="44" height="44" src="/imagenes/perfil2.png"
 								alt="" th:text="${session.clientesession?.nombre}"></a>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="opacity: 0.8;">
 							<li><a class="dropdown-item"
 									th:href="@{/persona/perfil/{id}(id = ${session.clientesession?.id})}">Mi Perfil</a>
 							</li>
+							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="/logout">Cerrar sesion</a></li>
 						</ul>
 					</li>

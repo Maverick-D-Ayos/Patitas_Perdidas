@@ -1,0 +1,29 @@
+.form-select2{
+	 color: white !important;
+	 background-color: transparent !important;
+	 height: 3.7rem;
+	 border-style: solid;
+ 	 border-width: 1px;
+ 	 border-color: white;
+	 border-radius: 50px !important;
+}
+
+.form-select2 option {
+	color: white !important;
+    background-color: rgba(0, 0, 0, .9) !important; 
+    
+}
+.input-busqueda{
+	color: white;
+/*     display: block; */
+    align-items: center;
+   	border-radius: 50px 50px 50px 50px;
+	height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 3%;
+    
+    border-color: #00bcd4;
+    border-width: 2px;
+    background-color: rgba(0,0,0,.5);
+}
