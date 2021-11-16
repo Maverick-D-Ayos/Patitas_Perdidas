@@ -17,10 +17,14 @@
 	rel="stylesheet">
 <link href="/headers.css" rel="stylesheet">
 
+<link rel="icon" href="/imagenes/favicon.ico" type="image/x-icon">
+<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
 		<div class="vista-principal">
+		
 		<!-- HEADER -->
 			<header th:replace = "/fragments/header :: header"></header>
 		<!-- FIN HEADER -->
@@ -32,8 +36,56 @@
 
 	
 		</div>
-	<footer th:replace= "/fragments/footer :: footer"></footer>
+		<!-- Inicia Carousel -->
+	
 
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-bs-ride="carousel">
+			<h2 class="carousel-text">Reencuentros felices</h2>
+			<ol class="carousel-indicators">
+				<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></li>
+				<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="1" aria-label="Slide 2"></li>
+				<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="2" aria-label="Slide 3"></li>
+					<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="3" aria-label="Slide 4"></li>
+					<li type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="4" aria-label="Slide 5"></li>
+			</ol>
+			<div class="carousel-inner carousel">
+				<div class="carousel-item active">
+					<img src="/imagenes/carousel1.png" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="/imagenes/carousel2.png" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="/imagenes/carousel3.png" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="./imagenes/carousel4.png" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="./imagenes/carousel.png" class="d-block w-100" alt="...">
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<img src="/imagenes/previous.png" alt=""> <span
+					class="visually-hidden ml-1">Previous</span>
+			</button>
+			<button class="carousel-control-next mr-10" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<img src="/imagenes/next-button.png" alt=""> <span
+					class="visually-hidden mr-10">Next</span>
+			</button>
+		
+		<!-- Fin Carousel -->
+	<footer th:replace= "/fragments/footer :: footer"></footer>
+	<script src="index.js"></script>
 </body>
 
 </html>
