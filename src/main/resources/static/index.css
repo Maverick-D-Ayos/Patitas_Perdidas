@@ -110,16 +110,16 @@ body, .vista-principal {
 
 .input-busqueda{
 	color: white;
-    display: block;
+/*     display: block; */
     align-items: center;
-   	border-radius: 50px 0px 0px 50px;
-    width: 60% !important;
-    margin-left: 10%;
-    margin-right: 4%;
-    margin-bottom: 4%;
-    padding-left: 10px;
+   	border-radius: 50px 50px 50px 50px;
+	height: 60px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 3%;
+    
     border-color: #00bcd4;
-    border-width: 5px;
+    border-width: 2px;
     background-color: rgba(0,0,0,.5);
 }
 
@@ -288,5 +288,18 @@ button.btn.btn-outline-success.boton a{
 	right:0;
 	left:unset;
 }
+.form-select2{
+	 color: white !important;
+	 background-color: transparent !important;
+	 height: 3.7rem;
+	 border-style: solid;
+ 	 border-width: 1px;
+ 	 border-color: white;
+	 border-radius: 50px !important;
+}
 
-  
+.form-select2 option {
+	color: white !important;
+    background-color: rgba(0, 0, 0, .9) !important; 
+    
+}
