@@ -107,7 +107,7 @@
 							aria-expanded="false" data-bs-offset="0,10">
 							<img class="bi d-block mx-auto mb-1" width="44" height="44" src="/imagenes/perfil2.png"
 								alt="" th:text="${session.clientesession?.nombre}"></a>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="opacity: 0.8;">
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 							<li><a class="dropdown-item"
 									th:href="@{/persona/perfil/{id}(id = ${session.clientesession?.id})}">Mi Perfil</a>
 							</li>

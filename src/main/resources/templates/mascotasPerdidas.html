@@ -16,7 +16,7 @@
  
  <modal th:replace= "/fragments/modal :: modal"></modal>
 
-<div class="background-text vista-principal carousel">
+<div class="background-text vista-principal">
  <div sec:authorize="isAnonymous()">
 	  <p class = "publicacion flex-box">¿Perdiste a tu mascota? Publicala para volver a encontrarla <a href ="/persona/registro/" class="btn btn-primary md-2">Registrate para publicar tu mascota</a>  </p>
   </div> 
@@ -66,17 +66,10 @@
 	   							<p id = "texto-modal"><strong>Nombre de usuario:</strong> <span th:text="${mascota.persona?.nombre}"></span></p>
 	   							<p id = "texto-modal"><strong>Email: </strong><span th:text="${mascota.persona?.mail}"></span></p>
 	   							<p id = "texto-modal"><strong>Telefono/Cel: </strong><span th:text="${mascota.persona?.telefono}"></span></p>   							
-	   						</div>
-	   					
+	   						</div>	   					
     					</div>
-						
-							
-							 
-							
 						</div>
-
 						<div class="modal-footer">
-
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>							
 						</div>
 					
@@ -111,6 +104,7 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
 		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
 		crossorigin="anonymous"></script>
+
 </body>
 
      
