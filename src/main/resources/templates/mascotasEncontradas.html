@@ -31,7 +31,9 @@
  <!--
 	ITEMS
 	-->
- 
+	<div class="vh-100 " style="text-align: center" th:if="${#lists.isEmpty(listaMascotasEncontradas)}">
+		<h2 style="color: aliceblue;">No se encontraron las mascotas, por favor busque con otras caracteristicas de la mascota</h2>
+	</div>
 
   <div class="row row-cols-1 row-cols-lg-4 g-3">
 
