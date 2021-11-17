@@ -47,7 +47,9 @@
 	  <p class = "publicacion flex-box">¿Perdiste a tu mascota? Publicala para volver a encontrarla <a th:href="@{/mascota/registroperdida/{id}(id=__${session.clientesession.id}__)}" class="btn btn-primary md-2">Publica tu mascota</a>  </p>
 	</div>
 </div>
-
+	<div class="vh-100 " style="text-align: center" th:if="${#lists.isEmpty(listaMascotasActivas)}">
+	<h2 style="color: aliceblue;">No se encontraron las mascotas, por favor busque con otras caracteristicas de la mascota</h2>
+	</div>
    <div class="row row-cols-1 row-cols-lg-4 g-3">
    
   <div class="card flex m-4" style="width: 25rem;" th:each="mascota:${listaMascotasActivas}">
