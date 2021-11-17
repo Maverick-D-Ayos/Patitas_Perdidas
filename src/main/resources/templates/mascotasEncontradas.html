@@ -50,13 +50,13 @@
  
     
   
-  <a href="#" class="btn btn-info m-2 stretched-link" data-toggle="modal"	th:attr="data-target=${'#masInfo'+mascota.id}" data-mascota="${mascota}" role="button">
+  <a href="#" class="btn btn-info m-2 stretched-link" data-toggle="modal" th:attr="data-target=${'#masInfo'+mascota.id}" data-mascota="${mascota}" role="button">
 							Más Info
 							</a>
 </div>
    <!-- MODAL -->
     
-	<div class="modal fade carousel"  th:attr="id=${'masInfo'+mascota.id}" tabindex="-1" role="dialog"
+	<div class="modal fade"  th:attr="id=${'masInfo'+mascota.id}" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true" th:each="mascota:${listaMascotasEncontradas}" >
 			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 				<div class="modal-content">
