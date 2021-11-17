@@ -1,10 +1,11 @@
-button.btn {
-	vertical-align: unset !important;
-	margin-top: 1rem;
-}
+/* button.btn { */
+/* 	vertical-align: unset !important; */
+/* 	margin-top: 1rem; */
+/* } */
 body{
 	background-image: url(/imagenes/pataFondo.png);
     background-size: cover;
+    height: 100%;
 }
 
 
@@ -23,9 +24,10 @@ body{
 
 /* FIN DERECHOS */
 
-html, body, .vista-principal {
+html {
   height: 100%;
 }
+
 body, .vista-principal {
   display: flex;
   flex-direction: column;

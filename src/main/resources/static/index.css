@@ -71,9 +71,9 @@ li .nav-item{
 }
 
 
-html, body, .vista-principal {
-  height: 100%;
-}
+/* html, body, .vista-principal { */
+/*   height: 100%; */
+/* } */
 body, .vista-principal {
   display: flex;
   flex-direction: column;
@@ -146,6 +146,8 @@ button.btn.btn-outline-success.boton a{
     transition: background-color 0.25s;
     outline: none;
     margin: 3px;
+
+}
 }
 
 .btn-margin{
