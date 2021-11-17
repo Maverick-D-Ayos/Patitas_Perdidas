@@ -6,9 +6,9 @@ body{
     background-size: cover;
 }
 
-html, body {
-  height: 100%;
-}
+/* html, body { */
+/*   height: 100%; */
+/* } */
 body {
   display: flex;
   flex-direction: column;

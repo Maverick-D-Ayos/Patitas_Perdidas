@@ -5,12 +5,12 @@ body{
 	padding: 0.1px;
 	background-image: url(/imagenes/pataFondo.png);
     background-size: cover;
-    justify-content: space-between;
+
 }
 
-html, body {
-  height: 100%;
-}
+/* html, body { */
+/*   height: 100%; */
+/* } */
 body {
   display: flex;
   flex-direction: column;

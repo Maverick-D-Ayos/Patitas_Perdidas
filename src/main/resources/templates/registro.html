@@ -39,8 +39,13 @@
 		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
 		crossorigin="anonymous"></script> 
     <style type="text/css">
+    #formulario{
+    	padding-left: 0;
+    	padding-top: 5%;
+    	padding-right: 3%;
+    }
     label{
-    color:black !important;
+    	color:black !important;
     }
     
     </style>
@@ -55,11 +60,11 @@
 	<!-- FIN MENU -->
 	<modal th:replace= "/fragments/modal :: modal"></modal>
 	<div class="vista" style="height: 100%; display: flex; flex-direction: column;">
-	<div id="formulario" class="card w-50 mt-1 mb-1" style="margin: 0 auto">
+	<div id="formulario" class="card w-50 mt-1 mb-1" style="margin: 0 auto; height: 100%">
     	<div class="row mb-4">
        		
             	<div class="form">
-            	<h2 class="text-center">Registrese</h2>
+            	<h1 class="text-center">Registrese</h1>
             	<form class="formulario-registro text-center" role="form" action="/persona/registro" method="POST">
             	<div class="row">
         <div class="col align-items-center text-center pt-5"><img src="/imagenes/perfil2.png" width="50%" height="50%" class="img-fluid"><div class="font-weight-bold fs-4 text-light" id="mostrarNombre"></div></div>
