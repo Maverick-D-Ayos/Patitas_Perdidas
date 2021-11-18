@@ -1,0 +1,12 @@
+.sidebar .nav-link.active {
+    color: #2470dc;
+}
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+.masc-link{
+	color: grey;
+	text-decoration: none;
+}
+

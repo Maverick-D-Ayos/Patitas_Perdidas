@@ -40,7 +40,7 @@ public class MascotaControlador {
 	// el metodo de encontrada y perdida podria ser uno solo pero cuando puse que
 	// retorne al index se mostraba mal.
 	//06-11 // puse el id de la persona para poder usarala
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/registroencontrada/{id_persona}")
 	public String registroencontrada(HttpSession session, ModelMap model, Model modelo, @PathVariable String id_persona)
 			throws PersonaExcepcion {
@@ -55,7 +55,7 @@ public class MascotaControlador {
 		return "registro-mascota";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@PostMapping("/registroencontrada/{id_persona}")
 	public String registroencontrada(HttpSession session, RedirectAttributes redirAttrs, ModelMap modelo,
 			@PathVariable String id_persona, @RequestParam String nombre, @RequestParam String descripcion,
@@ -111,7 +111,7 @@ public class MascotaControlador {
 		}
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/registroperdida/{id_persona}")
 	public String registroperdida(HttpSession session, ModelMap model, Model modelo, @PathVariable String id_persona)
 			throws PersonaExcepcion {
@@ -126,7 +126,7 @@ public class MascotaControlador {
 		return "registro-mascota";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@PostMapping("/registroperdida/{id_persona}")
 	public String perdida(HttpSession session, RedirectAttributes redirAttrs, ModelMap modelo,
 			@PathVariable String id_persona, @RequestParam String nombre, @RequestParam String descripcion,
@@ -182,14 +182,14 @@ public class MascotaControlador {
 			return ("redirect:/mascota/registroperdida/{id_persona}");
 		}
 	}
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/actualizar/{id}")
 	public String muestraActualiza(ModelMap modelo, @PathVariable String id) throws Exception {
 		Mascota m = ms.buscaPorId(id);
 		modelo.addAttribute("mascota", m);
 		return "editar-mascota.html";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@PostMapping("/actualizar/{id}")
 	public String actualiza(HttpSession session, ModelMap modelo, @PathVariable String id, @RequestParam(required = false) String nombre, @RequestParam String descripcion, @RequestParam String color, @RequestParam String raza,
 			@RequestParam String tamanio, @RequestParam Boolean encontrado, @RequestParam String fecha, @RequestParam String especie, @RequestParam String zona, @RequestParam(required = false) MultipartFile archivo)
@@ -202,7 +202,7 @@ public class MascotaControlador {
 		String personId = person.getId();
 		return "redirect:/mascota/mis-mascotas?id=" + personId;
 	}
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/eliminar/{id}")
 	public String elimina(ModelMap modelo, @PathVariable String id) throws MascotaExcepcion {
 		String person_id = ms.buscaPorId(id).getPersona().getId();
@@ -274,7 +274,7 @@ public class MascotaControlador {
 		modelo.addAttribute("listaMascotasxColor", muestraMascotas);
 		return "";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/mis-mascotas")
 	public String getMascotasPersona(ModelMap model, @RequestParam String id) throws PersonaExcepcion
 	{

@@ -96,13 +96,17 @@
 								alt="">
 							Inicio
 						</a></li>
+						<li sec:authorize="hasAnyRole('ROLE_ADMIN')">
+						<a href="/dashboard" class="nav-link text-light text-center"><img class="bi d-block mx-auto mb-1" src="/imagenes/dashboard2.png" width="44" height="44">Panel de control</a>
+						</li>
+						
 					<li><a th:href="@{/mascota/mis-mascotas(id=__${session.clientesession?.id}__)}"
 							class="nav-link text-light text-center">
 							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/mascota1.png"
 								alt="">
 							Mis Mascotas
 						</a></li>
-					<li>
+											
 					<li class="dropdown "><a href="#" class="nav-link text-light text-center" data-bs-toggle="dropdown"
 							aria-expanded="false" data-bs-offset="0,10">
 							<img class="bi d-block mx-auto mb-1" width="44" height="44" src="/imagenes/perfil2.png"

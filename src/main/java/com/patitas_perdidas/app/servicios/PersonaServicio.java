@@ -26,6 +26,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.patitas_perdidas.app.entidades.Mascota;
 import com.patitas_perdidas.app.entidades.Persona;
 import com.patitas_perdidas.app.enums.Rol;
 import com.patitas_perdidas.app.excepciones.MascotaExcepcion;
@@ -120,7 +121,7 @@ public class PersonaServicio implements UserDetailsService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Persona baja(String id) throws PersonaExcepcion {
 
-		Persona entidad = personaRepositorio.findById(id).get();
+		Persona entidad = buscaPorId(id);
 		entidad.setAlta(false);
 
 		return personaRepositorio.save(entidad);
@@ -132,7 +133,7 @@ public class PersonaServicio implements UserDetailsService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Persona> listarActivos() {
+	public List<Persona> listarActivos() throws PersonaExcepcion {
 		return personaRepositorio.buscarListaPersonas();
 	}
 
@@ -272,6 +273,19 @@ public class PersonaServicio implements UserDetailsService {
 		User user = new User(persona.getMail(), persona.getClave(), permisos);
 		return user;
 
+	}
+	public int contarMascotasActivas(String id) throws PersonaExcepcion
+	{
+		Persona persona = buscaPorId(id);
+		int k = 0;
+		for (Mascota mascota : persona.getMascotas()) 
+		{
+			if(mascota.getAlta())
+			{
+				k++;
+			}
+		}
+		return k;
 	}
 
 }
