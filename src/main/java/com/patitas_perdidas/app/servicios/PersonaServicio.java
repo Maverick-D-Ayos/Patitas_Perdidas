@@ -25,17 +25,21 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.patitas_perdidas.app.entidades.Mascota;
+import com.patitas_perdidas.app.entidades.ConfirmationToken;
 import com.patitas_perdidas.app.entidades.Persona;
 import com.patitas_perdidas.app.enums.Rol;
 import com.patitas_perdidas.app.excepciones.MascotaExcepcion;
 import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
+import com.patitas_perdidas.app.repositorios.ConfirmationTokenRepository;
 import com.patitas_perdidas.app.repositorios.PersonaRepositorio;
 
 @Service
 public class PersonaServicio implements UserDetailsService {
 
+	@Autowired
+	private ConfirmationTokenRepository confirmationTokenRepository;
+	
 	@Autowired
 	private PersonaRepositorio personaRepositorio;
 
@@ -73,6 +77,10 @@ public class PersonaServicio implements UserDetailsService {
 
         javaMailSender.send(mail);
     }
+	
+	public void sendMailContraseña(SimpleMailMessage message){
+	    javaMailSender.send(message);	
+	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void modificar(String id, String nombre, Long telefono, String mail) throws PersonaExcepcion {
@@ -230,6 +238,11 @@ public class PersonaServicio implements UserDetailsService {
 		}
 	}
 	
+	public Persona buscarPorEmail2(String mail) {
+		Persona persona = personaRepositorio.buscarPersonaPorMail(mail);
+		return persona;
+	}
+	
 
 	// METODO QUE CARGA EL USUARIO PARA LOGUEARSE
 
@@ -286,6 +299,18 @@ public class PersonaServicio implements UserDetailsService {
 			}
 		}
 		return k;
+	
+	public void guardarToken(ConfirmationToken token){
+		 confirmationTokenRepository.save(token);
+	}
+	
+	public ConfirmationToken confirmarToken(String token){
+		return confirmationTokenRepository.findByConfirmationToken(token);
+	}
+	
+	public void guardarPersona(Persona persona) {
+		personaRepositorio.save(persona);
+
 	}
 
 }

@@ -21,15 +21,43 @@
 </head>
 <body >
 
-	<div class="vista-principal">
+	<div class="vista-principal" id="subir">
 
 		<!-- HEADER -->
 		<header th:replace = "/fragments/header :: header"></header>		
 		<!-- FIN HEADER -->	
 		
-		<!-- BUSCADOR -->
-			<buscar th:replace= "/fragments/buscar :: buscar"></buscar>
-		<!-- FIN BUSCADOR -->
+		<!-- TITULO PRINCIPAL -->
+			<h2 class="titulo-principal">Encontra tu mascota dela forma mas facil, nosotros te ayudamos</h2>
+		<!-- FIN TITULO PRINCIPAL -->
+		<!-- ULTIMAS MASCOTAS PERDIDAS -->
+	
+
+		<!-- FIN ULTIMAS MASCOTAS PERDIDAS -->
+		
+		<!-- ULTIMAS MASCOTAS ENCONTRADAS -->
+			<div class="row row-cols-1 row-cols-lg-4 g-3">
+		<h3 class="text-white">Ultimas mascotas encontradas</h3>
+
+ <div class="card flex m-4" style="width: 25rem;" th:each="mascota:${listaMascotasEncontradas}">
+  <img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"
+   class="card-img-top p-2">
+  <div class="card-body">
+    <p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
+  </div>
+  <ul class="list-group list-group-flush ">
+  <li class="list-group-item">Nombre: <span th:text="${mascota.nombre}"></span></li>
+  	<li class="list-group-item">Fecha en que se encontro: <span th:text="${mascota.fecha}"></span></li>
+    <li class="list-group-item">Zona en que se encontro: <span th:text="${mascota.zona}"></span></li>
+    </ul>
+ 
+    
+  
+  <a href="#" class="btn btn-info m-2 stretched-link" data-toggle="modal" th:attr="data-target=${'#masInfo'+mascota.id}" data-mascota="${mascota}" role="button">
+							Más Info
+							</a>
+							</div>
+		<!-- FIN ULTIMAS MASCOTAS ENCONTRADAS -->
 	</div>	
 		<!---inicia sesion Modal --->
 			<modal class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -68,22 +96,21 @@
 		
 	<!-- saludo de bienvenida modal -->
 		
-    <div class="modal fade "   th:id="masInfo+${sesion}" tabindex="-1" role="dialog"
+    <div class="modal fade"   th:id="masInfo+${sesion}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true" >
-<div class="modal-dialog modal-dialog-centered" role="document" >
-<div class="modal-content">
+<div class="modal-dialog modal-dialog-centered"  role="document" >
+<div class="modal-content" style="height:50vh;">
 <div class="modal-header">
-<h4 class="modal-title text-white" id="exampleModalLabel">Saludo</h4>
+<h4 class="modal-title text-white" id="exampleModalLabel">Bienvenido a mascotas perdidas</h4>
 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button>
 </div>
-<div class="modal-body text-white" >
-  Bienvenido!
-  <a href="#" class="nav-link text-light text-center" data-bs-toggle="dropdown"
-                    aria-expanded="false" data-offset="0, 25">
-                    <img class="bi d-block mx-auto mb-1 " width="50" height="50" src="/imagenes/perfil2.png"
-                        alt="" th:text="${session.clientesession?.nombre}"></a>
+<div class="modal-body text-white" th:object="${session.clientesession?.nombre}" >
+  Te ayudaremos a encontrar tu mascota
+  
+                    <h2 class="bi d-block mx-auto mb-1 " th:text="${session.clientesession?.nombre}">HOLIS</h2>
+                   
 </div>
 <div class="modal-footer">
 <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#masInfo"
@@ -96,7 +123,7 @@
 				</div>
 			</div>
 		</modal>	
-		<!---Termina sesion Modal --->
+		<!---TERMINA SALUDO --->
 
 		
 
@@ -148,10 +175,14 @@
 			</button>
 		
 		<!-- Fin Carousel -->
-
+	
 
 	</div>
 	<footer th:replace= "/fragments/footer :: footer"></footer>
+	<div class="subir " >
+      <a href="#subir" class="subir">
+      <img src="./imagenes/up.png" alt="subir" ></a>
+	</div>
 	<script src="index.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
