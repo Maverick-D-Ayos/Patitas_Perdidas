@@ -25,4 +25,8 @@ public interface PersonaRepositorio extends JpaRepository<Persona, String> {
 	// Devuelve una persona por su email.
 	@Query("SELECT p FROM Persona p WHERE p.mail = :mail")
 	public Optional<Persona> buscarPorMail(@Param("mail") String mail);
+	
+	@Query("SELECT p FROM Persona p WHERE p.mail = :mail")
+	public Persona buscarPersonaPorMail(@Param("mail") String mail);
+	
 }
