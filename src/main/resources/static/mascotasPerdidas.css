@@ -197,7 +197,6 @@ button.btn.btn-outline-success.boton{
 	cursor: pointer;
 	display:flex;
 	outline: none;
-	
   align-self: center;
   
 }
@@ -232,9 +231,8 @@ button.btn.btn-outline-success.boton{
 	left:unset;
 }
 .dark {
-	background-color: #2E3039!important;
+	/*background-color: #2E3039!important;*/
+	background-color: rgba(0, 0, 0, .7)!important;
 	background-image:unset;
+	
 }
-
-
-

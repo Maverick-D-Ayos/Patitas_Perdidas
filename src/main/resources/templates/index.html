@@ -106,7 +106,7 @@
   <span aria-hidden="true">&times;</span>
 </button>
 </div>
-<div class="modal-body text-white" th:object="${session.clientesession}" >
+<div class="modal-body text-white" th:object="${session.clientesession?.nombre}" >
   Te ayudaremos a encontrar tu mascota
   
                     <h2 class="bi d-block mx-auto mb-1 " th:text="${session.clientesession?.nombre}">HOLIS</h2>
