@@ -27,7 +27,7 @@ public class IndexControlador {
 	{
 		return "index2.html";
 	}
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/inicio")
 	public String inicio(@RequestParam(required = false) String error, ModelMap model) {
 		if(error != null)

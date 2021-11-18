@@ -65,7 +65,7 @@ public class PersonaControlador {
 	}
 
 
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/baja/id")
 	public String baja(@PathVariable String id) {
 		try {
@@ -87,7 +87,7 @@ public class PersonaControlador {
 
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/perfil/{id}")
 	public String perfilUsuario(HttpSession session, ModelMap modelo, @PathVariable String id) throws PersonaExcepcion {
 		Persona person = (Persona) session.getAttribute("clientesession");
@@ -99,7 +99,7 @@ public class PersonaControlador {
 		return "perfil.html";
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/modificar-pass/{id}")
 	public String modificarPass(HttpSession session, ModelMap model, @PathVariable String id) throws PersonaExcepcion {
 		Persona person = (Persona) session.getAttribute("clientesession");
@@ -113,7 +113,7 @@ public class PersonaControlador {
 		return "perfil.html";
 
 	}
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@PostMapping("/modificar-pass/{id}")
 	public String modificarPassPost(HttpSession session, ModelMap model, @PathVariable String id, @RequestParam String clave1, @RequestParam String clave2) throws PersonaExcepcion {
 		Persona person = (Persona) session.getAttribute("clientesession");
@@ -143,7 +143,7 @@ public class PersonaControlador {
 
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@PostMapping("/modificar/{id}")
 	public String modificar(HttpSession session, RedirectAttributes redirAttrs, ModelMap model,
 			@PathVariable String id, @RequestParam String nombre, @RequestParam Long telefono,

@@ -115,6 +115,18 @@ public class Persona {
 		}
 		return mascotasActivas;
 	}
+	public int getNumeroMascotasActivas()
+	{
+		int k = 0;
+		for (Mascota mascota : mascotas) 
+		{
+			if(mascota.getAlta())
+			{
+				k++;
+			}
+		}
+		return k;
+	}
 	
 	
 }
