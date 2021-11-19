@@ -95,6 +95,19 @@ public class PersonaServicio implements UserDetailsService {
 		personaRepositorio.save(usuario);
 	}
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public void modificarAdmin(String id, String nombre, Long telefono, String mail, Rol rol) throws PersonaExcepcion {
+		validarSinClave(nombre, telefono, mail);
+		Persona usuario = buscaPorId(id);
+		if (!usuario.getMail().equals(mail)) {
+			validarMail(mail);
+		}
+		usuario.setNombre(nombre);
+		usuario.setTelefono(telefono);
+		usuario.setMail(mail);
+		usuario.setRol(rol);
+		personaRepositorio.save(usuario);
+	}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void modificarClave(String id, String clave1, String clave2) throws PersonaExcepcion {
 		validarClave(clave1, clave2);
 		Persona usuario = buscaPorId(id);
@@ -255,7 +268,7 @@ public class PersonaServicio implements UserDetailsService {
 		Persona persona = buscarPorEmail(mail);
 
 		// si no existe se retorna null
-		if (persona == null) {
+		if (persona == null || persona.getAlta() == false) {
 			return null;
 		}
 
@@ -298,7 +311,9 @@ public class PersonaServicio implements UserDetailsService {
 				k++;
 			}
 		}
-		return k;}
+		return k;
+	}
+
 	
 	public void guardarToken(ConfirmationToken token){
 		 confirmationTokenRepository.save(token);
@@ -311,6 +326,29 @@ public class PersonaServicio implements UserDetailsService {
 	public void guardarPersona(Persona persona) {
 		personaRepositorio.save(persona);
 
+	}
+	public long countPersonasActivas()
+	{
+		return personaRepositorio.counAlta();
+	}
+	public long countPersonasBaja()
+	{
+		return personaRepositorio.countBaja();
+	}
+	@Transactional(readOnly = true)
+	public List<Persona> listarPersonasBusqueda(String atributo) throws PersonaExcepcion {
+		if(atributo == null || atributo.strip().isEmpty())
+			return listarActivos();
+		else
+		{
+			return personaRepositorio.buscarListaPersonasActivas(atributo);
+		}	
+		
+	}
+	public long countAdmin()
+	{
+		System.out.println(personaRepositorio.countAdmin());
+		return personaRepositorio.countAdmin();
 	}
 
 }

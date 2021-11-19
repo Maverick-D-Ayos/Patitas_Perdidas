@@ -212,7 +212,7 @@ public class MascotaControlador {
 
 	
 	@GetMapping("/listaA")
-	public String listar(ModelMap modelo) {
+	public String listar(ModelMap modelo) throws MascotaExcepcion {
 		List<Mascota> muestraMascotas = ms.listarTodasMascotasActivas();
 		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
 		return "mascotasActivas.html";
@@ -290,16 +290,10 @@ public class MascotaControlador {
 	}
 	
 	@GetMapping("/buscar")
-	public String buscar(ModelMap modelo) {
-		List<Mascota> muestraMascotas = ms.listarTodasMascotasActivas();
-		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
-		return "mascotasActivas.html";
-	}
-	
-	@PostMapping("/buscar")
-	public String buscar(ModelMap modelo,@RequestParam String seleccion,@RequestParam String atributo) {
+	public String buscar(ModelMap modelo, @RequestParam(required = false, value = "atributo") String atributo, @RequestParam(required = false) String seleccion) throws MascotaExcepcion {
 		List<Mascota> muestraMascotas = ms.listarMascotasBusqueda(atributo, seleccion);
 		modelo.addAttribute("listaMascotasActivas", muestraMascotas);
 		return "mascotasActivas.html";
 	}
+	
 }

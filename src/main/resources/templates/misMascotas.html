@@ -41,6 +41,7 @@
             <div class="card-body ">
                 <h5 class="card-title" th:text="${mascota?.nombre}"></h5>
                 <p class="card-text" th:text="'Raza: ' + ${mascota.raza}"></p>
+                <p class="card-text" th:text="${mascota?.encontrado}? 'Encontrado' : 'Perdido'"></p>
                 <a th:href="@{/mascota/actualizar/{id}(id = __${mascota.id}__)}" class="btn btn-primary boton">Editar</a>
                 <a  type="button" class="btn btn-danger boton" data-toggle="modal" data-target="#masInfo"
 							th:attr="data-target='#masInfo'+${mascota.id}">Eliminar</a>

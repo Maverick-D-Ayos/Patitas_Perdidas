@@ -44,7 +44,7 @@
 				<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
 					<img class="logo" src="/imagenes/logo.png" alt="">
 				</a>
-				<div class="alert alert-danger d-flex align-items-center" role="alert" th:if="${error != null}">
+				<div class="alert alert-danger d-flex align-items-center m-3" role="alert" th:if="${error != null}">
 					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
 						<use xlink:href="#exclamation-triangle-fill" />
 					</svg>
@@ -97,12 +97,12 @@
 							Inicio
 						</a></li>
 						<li sec:authorize="hasAnyRole('ROLE_ADMIN')">
-						<a href="/dashboard" class="nav-link text-light text-center"><img class="bi d-block mx-auto mb-1" src="/imagenes/dashboard2.png" width="44" height="44">Panel de control</a>
+						<a href="/dashboard" class="nav-link text-light text-center"><img class="bi d-block mx-auto mb-1" src="/imagenes/dashboard3.png" width="44" height="44">Panel de control</a>
 						</li>
 						
 					<li><a th:href="@{/mascota/mis-mascotas(id=__${session.clientesession?.id}__)}"
 							class="nav-link text-light text-center">
-							<img class="bi d-block mx-auto mb-1 " width="44" height="44" src="/imagenes/mascota1.png"
+							<img class="bi d-block mx-auto mb-1" width="44" height="44" src="/imagenes/mascota1.png"
 								alt="">
 							Mis Mascotas
 						</a></li>
