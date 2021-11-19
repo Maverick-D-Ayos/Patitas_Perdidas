@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Patitas perdidas</title>
-<link href="index.css" rel="stylesheet">
+<link href="/index.css" rel="stylesheet">
 <link rel="icon" href="/imagenes/favicon.ico" type="image/x-icon">
 <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 <link
@@ -22,43 +22,22 @@
 <body >
 
 	<div class="vista-principal" id="subir">
-
+	
 		<!-- HEADER -->
 		<header th:replace = "/fragments/header :: header"></header>		
 		<!-- FIN HEADER -->	
 		
 		<!-- TITULO PRINCIPAL -->
-			<h2 class="titulo-principal">Encontra tu mascota dela forma mas facil, nosotros te ayudamos</h2>
+			<tituloPrincipal th:replace= "/fragments/tituloPrincipal :: tituloPrincipal"></tituloPrincipal>
 		<!-- FIN TITULO PRINCIPAL -->
-		<!-- ULTIMAS MASCOTAS PERDIDAS -->
-	
 
-		<!-- FIN ULTIMAS MASCOTAS PERDIDAS -->
-		
-		<!-- ULTIMAS MASCOTAS ENCONTRADAS -->
-			<div class="row row-cols-1 row-cols-lg-4 g-3">
-		<h3 class="text-white">Ultimas mascotas encontradas</h3>
-
- <div class="card flex m-4" style="width: 25rem;" th:each="mascota:${listaMascotasEncontradas}">
-  <img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"
-   class="card-img-top p-2">
-  <div class="card-body">
-    <p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
-  </div>
-  <ul class="list-group list-group-flush ">
-  <li class="list-group-item">Nombre: <span th:text="${mascota.nombre}"></span></li>
-  	<li class="list-group-item">Fecha en que se encontro: <span th:text="${mascota.fecha}"></span></li>
-    <li class="list-group-item">Zona en que se encontro: <span th:text="${mascota.zona}"></span></li>
-    </ul>
- 
-    
-  
-  <a href="#" class="btn btn-info m-2 stretched-link" data-toggle="modal" th:attr="data-target=${'#masInfo'+mascota.id}" data-mascota="${mascota}" role="button">
-							Más Info
-							</a>
-							</div>
-		<!-- FIN ULTIMAS MASCOTAS ENCONTRADAS -->
 	</div>	
+	
+	
+		<!-- ULTIMAS MASCOTAS PERDIDAS -->
+		<mascotasInicio th:replace= "/fragments/mascotasInicio :: mascotasInicio"></mascotasInicio>
+		<!-- FIN ULTIMAS MASCOTAS ENCONTRADAS -->
+
 		<!---inicia sesion Modal --->
 			<modal class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,10 +85,10 @@
   <span aria-hidden="true">&times;</span>
 </button>
 </div>
-<div class="modal-body text-white" th:object="${session.clientesession?.nombre}" >
+<div class="modal-body text-white"  >
   Te ayudaremos a encontrar tu mascota
   
-                    <h2 class="bi d-block mx-auto mb-1 " th:text="${session.clientesession?.nombre}">HOLIS</h2>
+                    <h2 class="bi d-block mx-auto mb-1 " th:text="${clientesession?.nombre}">HOLIS</h2>
                    
 </div>
 <div class="modal-footer">
