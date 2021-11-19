@@ -1,6 +1,9 @@
 package com.patitas_perdidas.app.servicios;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -59,6 +62,7 @@ public class PersonaServicio implements UserDetailsService {
 		entidad.setNombre(nombre);
 		entidad.setTelefono(telefono);
 		entidad.setMail(mail);
+		entidad.setCreado(new Date());
 		entidad.setClave(encriptarClave(clave));
 		entidad.setAlta(true);
 		entidad.setRol(Rol.USER);
@@ -240,7 +244,7 @@ public class PersonaServicio implements UserDetailsService {
 			throw new PersonaExcepcion("El formato del telefono es incorrecto");
 		}
 	}
-
+	@Transactional(readOnly = true)
 	public Persona buscarPorEmail(String mail) {
 		Optional<Persona> oPersona = personaRepositorio.buscarPorMail(mail);
 		if (oPersona.isPresent()) {
@@ -250,7 +254,7 @@ public class PersonaServicio implements UserDetailsService {
 			return null;
 		}
 	}
-	
+	@Transactional(readOnly = true)
 	public Persona buscarPorEmail2(String mail) {
 		Persona persona = personaRepositorio.buscarPersonaPorMail(mail);
 		return persona;
@@ -300,6 +304,7 @@ public class PersonaServicio implements UserDetailsService {
 		return user;
 
 	}
+	@Transactional(readOnly = true)
 	public int contarMascotasActivas(String id) throws PersonaExcepcion
 	{
 		Persona persona = buscaPorId(id);
@@ -322,15 +327,17 @@ public class PersonaServicio implements UserDetailsService {
 	public ConfirmationToken confirmarToken(String token){
 		return confirmationTokenRepository.findByConfirmationToken(token);
 	}
-	
+	@Transactional(readOnly = true)
 	public void guardarPersona(Persona persona) {
 		personaRepositorio.save(persona);
 
 	}
+	@Transactional(readOnly = true)
 	public long countPersonasActivas()
 	{
 		return personaRepositorio.counAlta();
 	}
+	@Transactional(readOnly = true)
 	public long countPersonasBaja()
 	{
 		return personaRepositorio.countBaja();
@@ -345,10 +352,29 @@ public class PersonaServicio implements UserDetailsService {
 		}	
 		
 	}
+	@Transactional(readOnly = true)
 	public long countAdmin()
 	{
 		System.out.println(personaRepositorio.countAdmin());
 		return personaRepositorio.countAdmin();
+	}
+	public long userlastWeek()
+	{
+		return personaRepositorio.getLastWeek();
+	}
+	@Transactional(readOnly = true)
+	public List<Date> dia6()
+	{
+		List<Date> dias = personaRepositorio.getDia6();
+		return dias;
+//		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
+//		String dateString = format.format(fecha);
+//		return dateString;
+	}
+	@Transactional(readOnly = true)
+	public int getUsuarioFecha(Date fecha)
+	{
+		return personaRepositorio.getUsuarioxFecha(fecha);		
 	}
 
 }

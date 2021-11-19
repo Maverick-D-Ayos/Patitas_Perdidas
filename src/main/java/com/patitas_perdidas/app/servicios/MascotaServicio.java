@@ -239,6 +239,7 @@ public class MascotaServicio {
 			throw new IOException("El archivo no es valido");
 		}
 	}
+	@Transactional(readOnly = true)
 	public List<Mascota> getMascotasPersona(String id) throws PersonaExcepcion
 	{
 		List<Mascota> lista = ps.buscaPorId(id).getMascotasActivas();
@@ -251,7 +252,7 @@ public class MascotaServicio {
 			return lista;
 		}
 	}
-	
+	@Transactional(readOnly = true)
 	public String encontradaPerdida(String id) {
 		Mascota m=mr.getById(id);
 		if(m.getEncontrado()) {
@@ -278,12 +279,40 @@ public class MascotaServicio {
 			   return null;
 		}
 	}
+	@Transactional(readOnly = true)
 	public long countMascotasActivas()
 	{
 		return mr.countAlta();
 	}
+	@Transactional(readOnly = true)
 	public long countMascotasBaja()
 	{
 		return mr.countBaja();
+	}
+	@Transactional(readOnly = true)
+	public int countMascotasPerro()
+	{
+		return mr.countPerro();
+	}
+	@Transactional(readOnly = true)
+	public int countMascotasGatos()
+	{
+		return mr.countGato();
+	}
+	@Transactional(readOnly = true)
+	public int countMascotasOtros()
+	{
+		return mr.countOtros();
+	}
+	@Transactional(readOnly = true)
+	public List<Date> dia6()
+	{
+		List<Date> dias = mr.getDia6();
+		return dias;
+	}
+	@Transactional(readOnly = true)
+	public int getMascotaFecha(Date fecha)
+	{
+		return mr.getMascotaxFecha(fecha);		
 	}
 }

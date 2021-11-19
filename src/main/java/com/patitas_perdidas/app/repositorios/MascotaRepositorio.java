@@ -1,5 +1,6 @@
 package com.patitas_perdidas.app.repositorios;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -47,6 +48,19 @@ public interface MascotaRepositorio extends JpaRepository<Mascota, String> {
 	
 	@Query(value = "SELECT count(m) FROM Mascota m where m.alta = false")
 	public long countBaja();
+	
+	@Query(value = "SELECT count(m) FROM Mascota m where m.alta = true AND m.especie = 'Perro'")
+	public int countPerro();
+	@Query(value = "SELECT count(m) FROM Mascota m where m.alta = true AND m.especie = 'Gato'")
+	public int countGato();
+	@Query(value = "SELECT count(m) FROM Mascota m where m.alta = true AND m.especie != 'Gato' AND m.especie != 'Perro'")
+	public int countOtros();
+	
+	@Query(nativeQuery = true ,value = "SELECT creado FROM Mascota WHERE creado > DATE(NOW()) - INTERVAL 6 DAY;")
+	public List<Date> getDia6();
+	
+	@Query("SELECT COUNT(m) FROM Mascota m WHERE m.alta = true AND m.creado LIKE :fecha")
+	public int getMascotaxFecha(@Param("fecha") Date fecha);
 
 	// Buscar segun filtro todas las activas
 	@Query("SELECT m FROM Mascota m WHERE m.alta = true and (m.zona LIKE %:atributo%" + " OR m.tamanio LIKE %:atributo%"
