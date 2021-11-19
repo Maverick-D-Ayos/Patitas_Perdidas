@@ -46,13 +46,10 @@ public interface PersonaRepositorio extends JpaRepository<Persona, String> {
 	@Query(value = "SELECT count(p) FROM Persona p where p.alta = true AND p.rol = 'ADMIN'")
 	public long countAdmin();
 	
-	@Query(nativeQuery = true ,value = "SELECT COUNT(id) FROM persona WHERE creado >= date_sub(now(),INTERVAL 7 DAY);")
-	public long getLastWeek();
+	@Query(nativeQuery = true ,value = "SELECT COUNT(id) FROM persona WHERE creado >= date_sub(now(),INTERVAL :n DAY);")
+	public int getLastWeek(@Param("n") Integer numero);
 	
-	@Query(nativeQuery = true ,value = "SELECT creado FROM persona WHERE creado > DATE(NOW()) - INTERVAL 6 DAY;")
-	public List<Date> getDia6();
-	
-	@Query("SELECT COUNT(p) FROM Persona p WHERE p.alta = true AND p.creado LIKE :fecha")
-	public int getUsuarioxFecha(@Param("fecha") Date fecha);
-	
+	@Query(nativeQuery = true ,value = "SELECT creado FROM persona WHERE creado > DATE(NOW()) - INTERVAL :numero DAY;")
+	public List<Date> getDias(@Param("numero") int numero);
+		
 }

@@ -1,11 +1,14 @@
 package com.patitas_perdidas.app.servicios;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -285,6 +288,11 @@ public class MascotaServicio {
 		return mr.countAlta();
 	}
 	@Transactional(readOnly = true)
+	public long masclastWeek(Integer numero)
+	{
+		return mr.masclastWeek(numero);
+	}
+	@Transactional(readOnly = true)
 	public long countMascotasBaja()
 	{
 		return mr.countBaja();
@@ -305,14 +313,22 @@ public class MascotaServicio {
 		return mr.countOtros();
 	}
 	@Transactional(readOnly = true)
-	public List<Date> dia6()
+	public Map<String, Integer> grafDataMasc(Integer numero)
 	{
-		List<Date> dias = mr.getDia6();
-		return dias;
+		List<Date> fechasMasc = mr.getDias(numero);
+		Map<String, Integer> graphData = new TreeMap<>();
+        for (Date fecha : fechasMasc) {
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd");
+			String dateString = format.format(fecha);
+			if(graphData.containsKey(dateString))
+			{
+				int n = graphData.get(dateString) + 1;
+				graphData.put(dateString, n);
+			}
+			else
+				graphData.put(dateString, 1);
+		}
+        return graphData;
 	}
-	@Transactional(readOnly = true)
-	public int getMascotaFecha(Date fecha)
-	{
-		return mr.getMascotaxFecha(fecha);		
-	}
+	
 }
