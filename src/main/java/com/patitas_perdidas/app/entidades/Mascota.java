@@ -31,6 +31,8 @@ public class Mascota {
 	private Date fecha;
 	private String especie;
 	private Boolean alta;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creado;
 	//Se usa para almacenar un archivo a la base de datos
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
@@ -74,6 +76,14 @@ public class Mascota {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+	
+	public Date getCreado() {
+		return creado;
+	}
+
+	public void setCreado(Date creado) {
+		this.creado = creado;
 	}
 
 	public String getRaza() {

@@ -20,7 +20,9 @@
 <link rel="icon" href="/imagenes/favicon.ico" type="image/x-icon">
 <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 <link href="/dashboard.css" rel="stylesheet">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript"
+    src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 		
@@ -71,9 +73,103 @@
 <!--           </button> -->
 <!--         </div> -->
       </div>
+      <div class="container-fluid text-center" align="center">
+        <h2 class="p-3">Nuevos usuarios en los ultimos 7 dias</h2>
+        <div class="card m-3" style="pointer-events:none">
+        <div id="chart_div" style="height: 400px"></div>
+        </div>
+        <h2 class="p-3">Nuevas publicaciones en los ultimos 7 dias</h2>
+        <div class="card m-3" style="pointer-events:none">
+        <div id="chart_div2" style="height: 400px"></div>
+        </div>        
+        <h2 class="p-3">Tipos de mascotas en el sitio</h2>
+        <div class="card m-3" style="pointer-events:none">
+        <div id="piechart" align="center" style=" height: 500px;"></div>
+        </div>
+    
+    <script th:inline="javascript">
+        var real_data = /*[[${chartData}]]*/'noValue';
+        var real_data3 = /*[[${chartData3}]]*/'noValue';
+        $(document).ready(function() {
+            google.charts.load('current', {
+                packages : [ 'corechart', 'bar' ]
+            });
+            google.charts.setOnLoadCallback(drawColumnChart);
+            google.charts.setOnLoadCallback(drawColumnChart2);
+           
+        });
+        function drawColumnChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Fecha');
+            data.addColumn('number', 'Registos');
+            Object.keys(real_data).forEach(function(key) {
+                data.addRow([ key, real_data[key] ]);
+            });
+            var options = {
+                title : 'Cantidad de registros',
+                hAxis : {
+                    title : 'Fecha',
+                },
+                vAxis : {
+                    title : 'Registros'
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document
+                    .getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+        function drawColumnChart2() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Fecha');
+            data.addColumn('number', 'Publicaciones');
+            Object.keys(real_data3).forEach(function(key) {
+                data.addRow([ key, real_data3[key] ]);
+            });
+            var options = {
+                title : 'Cantidad de publicaciones',
+                hAxis : {
+                    title : 'Fecha',
+                },
+                vAxis : {
+                    title : 'Publicaciones'
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document
+                    .getElementById('chart_div2'));
+            chart.draw(data, options);
+        }
+        
+    </script>
+    <script th:inline="javascript">
+        var real_data2 = /*[[${chartData2}]]*/'noValue';
+        $(document).ready(function() {
+            google.charts.load('current', {
+                packages : [ 'corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+        });
+        
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Year');
+            data.addColumn('number', 'Views');
+            Object.keys(real_data2).forEach(function(key) {
+                data.addRow([ key, real_data2[key] ]);
+            });
+            var options = {
+                title : 'Tipo de mascotas',
+                pieHole: 0.5,
+                width: 800,
+  				height: 500,
+            };
+            var chart = new google.visualization.PieChart(document
+                    .getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
 
 <!--       <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1248" height="526" style="display: block; width: 1248px; height: 526px;"></canvas> -->
-		<h2>Activos</h2>
+		<h2 class="p-4 text-start">Activos</h2>
 		<div class="row">
 			<div class="card flex m-4" style="width: 18rem;">
 			  <img src="/imagenes/pet2.png" height="auto" width="64" class="card-img-top p-3" alt="...">
@@ -96,8 +192,15 @@
 			    <h2 class="card-text" th:text="${countAdmin}"></h2>
 			    </div>
 			</div>
+			<div class="card flex m-4" style="width: 18rem;">
+			  <img src="/imagenes/newuser.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			  <div class="card-body text-center">
+			    <h5 class="card-title">Nuevos usuarios ultimos 7 dias</h5>
+			    <h2 class="card-text" th:text="${countUserWeek}"></h2>
+			    </div>
 			</div>
-			<h2>Dados de baja</h2>
+			</div>
+			<h2 class="p-4 text-start">Dados de baja</h2>
 		<div class="row">
 			<div class="card flex m-4" style="width: 18rem; background-color:#d3d3d3 ; opacity: 0.7;">
 			  <img src="/imagenes/pet2.png" height="auto" width="64" class="card-img-top p-3" alt="...">
@@ -115,7 +218,7 @@
 			</div>
 			</div>
 
-     
+     </div>
     </main>
   </div>
 </div>

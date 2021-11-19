@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,14 +44,52 @@ public class AdminControlador {
 	private MascotaServicio ms;
 
 	@GetMapping("")
-	public String lista(ModelMap model) {
+	public String lista(ModelMap model) throws ParseException {
 		
 		model.addAttribute("countMasc", ms.countMascotasActivas());
 		model.addAttribute("countPers", personaServicio.countPersonasActivas());
 		model.addAttribute("countAdmin", personaServicio.countAdmin());
+		model.addAttribute("countUserWeek", personaServicio.userlastWeek());
 		model.addAttribute("countPersBaja", personaServicio.countPersonasBaja());
 		model.addAttribute("countMascBaja", ms.countMascotasBaja());
 		
+		List<Date> fechas = personaServicio.dia6();
+		Map<String, Integer> graphData = new TreeMap<>();
+		for (Date fecha : fechas) {
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM");
+			String dateString = format.format(fecha);
+			if(graphData.containsKey(dateString))
+			{
+				int n = graphData.get(dateString) + 1;
+				graphData.put(dateString, n);
+			}
+			else
+				graphData.put(dateString, personaServicio.getUsuarioFecha(fecha));			
+		}
+		model.addAttribute("chartData", graphData);
+		
+		Map<String, Integer> graphData2 = new TreeMap<>();
+        graphData2.put("Perro", ms.countMascotasPerro());
+        graphData2.put("Gato", ms.countMascotasGatos());
+        graphData2.put("Otros", ms.countMascotasOtros());
+
+        model.addAttribute("chartData2", graphData2);
+        
+        List<Date> fechasMasc = ms.dia6();
+        Map<String, Integer> graphData3 = new TreeMap<>();
+        for (Date fecha : fechasMasc) {
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM");
+			String dateString = format.format(fecha);
+			if(graphData3.containsKey(dateString))
+			{
+				int n = graphData3.get(dateString) + 1;
+				graphData3.put(dateString, n);
+			}
+			else
+				graphData3.put(dateString, ms.getMascotaFecha(fecha));			
+		}
+        model.addAttribute("chartData3", graphData3);
+        		
 		return "dashboard.html";
 	}
 	@GetMapping("/usuarios")

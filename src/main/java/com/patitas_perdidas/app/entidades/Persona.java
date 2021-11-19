@@ -1,6 +1,7 @@
 package com.patitas_perdidas.app.entidades;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +12,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,6 +30,8 @@ public class Persona {
 	private String mail;
 	private String clave;
 	private Boolean alta;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creado;
 	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Mascota> mascotas;
 	@Enumerated(EnumType.STRING)
@@ -37,6 +42,13 @@ public class Persona {
 	}
 	public void setAlta(Boolean alta) {
 		this.alta = alta;
+	}
+		
+	public Date getCreado() {
+		return creado;
+	}
+	public void setCreado(Date creado) {
+		this.creado = creado;
 	}
 	public String getId() {
 		return id;
