@@ -13,12 +13,12 @@
 		<link rel="stylesheet" href="/buscarHead.css">
     
 </head>
-<body >
+<body>
  <header th:replace = "/fragments/header :: header"></header>	
  
  <modal th:replace= "/fragments/modal :: modal"></modal>
 
-<div class="background-text vista-principal">
+<div class="background-text ">
  <div sec:authorize="isAnonymous()">
 	  <p class = "publicacion flex-box">¿Perdiste a tu mascota? Publicala para volver a encontrarla <a href ="/persona/registro/" class="btn btn-primary md-2">Registrate para publicar tu mascota</a>  </p>
   </div> 
