@@ -7,7 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -358,23 +360,27 @@ public class PersonaServicio implements UserDetailsService {
 		System.out.println(personaRepositorio.countAdmin());
 		return personaRepositorio.countAdmin();
 	}
-	public long userlastWeek()
+	public long userlastWeek(Integer dias)
 	{
-		return personaRepositorio.getLastWeek();
+		return personaRepositorio.getLastWeek(dias);
 	}
 	@Transactional(readOnly = true)
-	public List<Date> dia6()
+	public Map<String, Integer> grafDataPers(int dias)
 	{
-		List<Date> dias = personaRepositorio.getDia6();
-		return dias;
-//		SimpleDateFormat format = new SimpleDateFormat("dd/MM");
-//		String dateString = format.format(fecha);
-//		return dateString;
-	}
-	@Transactional(readOnly = true)
-	public int getUsuarioFecha(Date fecha)
-	{
-		return personaRepositorio.getUsuarioxFecha(fecha);		
-	}
+		List<Date> fechas = personaRepositorio.getDias(dias);		
+		Map<String, Integer> graphData = new TreeMap<>();
+		for (Date fecha : fechas) {
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd");
+			String dateString = format.format(fecha);
+			if(graphData.containsKey(dateString))
+			{
+				int n = graphData.get(dateString) + 1;
+				graphData.put(dateString, n);
+			}
+			else
+				graphData.put(dateString, 1);			
+		}
+		return graphData;
+	}	
 
 }

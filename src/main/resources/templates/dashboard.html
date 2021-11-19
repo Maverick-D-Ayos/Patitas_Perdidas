@@ -62,26 +62,42 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Panel de Control</h1>
-<!--         <div class="btn-toolbar mb-2 mb-md-0"> -->
+        <div class="btn-toolbar mb-2 mb-md-0">
 <!--           <div class="btn-group me-2"> -->
 <!--             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button> -->
 <!--             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
 <!--           </div> -->
-<!--           <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"> -->
-<!--             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> -->
-<!--             This week -->
-<!--           </button> -->
-<!--         </div> -->
+			<form th:replace = "/fragments/dias :: diasform"></form>
+        </div>
       </div>
       <div class="container-fluid text-center" align="center">
-        <h2 class="p-3">Nuevos usuarios en los ultimos 7 dias</h2>
-        <div class="card m-3" style="pointer-events:none">
+        <h2 class="p-3" th:text="'Nuevos usuarios en los ultimos __${dias}__ dias'"></h2>
+        <div class="row-fluid d-flex">
+        <div class="card flex m-4" style="width: 18rem;">
+			<img src="/imagenes/newuser.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			<div class="card-body text-center">
+				<h5 class="card-title" th:text="'Nuevos usuarios en los ultimos __${dias}__ dias'"></h5>
+			    <h2 class="card-text" th:text="${countUserWeek}"></h2>
+			</div>
+		</div>
+        <div class="card m-3" style="pointer-events:none; width: 100%;">
         <div id="chart_div" style="height: 400px"></div>
         </div>
-        <h2 class="p-3">Nuevas publicaciones en los ultimos 7 dias</h2>
-        <div class="card m-3" style="pointer-events:none">
+        </div>
+        
+        <h2 class="p-3" th:text="'Nuevas publicaciones en los ultimos __${dias}__ dias'"></h2>
+        <div class="row-fluid d-flex">
+        <div class="card flex m-4" style="width: 18rem;">
+			<img src="/imagenes/mascota2.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			<div class="card-body text-center">
+				<h5 class="card-title" th:text="'Nuevas publicaciones en los ultimos __${dias}__ dias'"></h5>
+			    <h2 class="card-text" th:text="${countMascotaWeek}"></h2>
+			</div>
+		</div>
+        <div class="card m-3" style="pointer-events:none; width: 100%">
         <div id="chart_div2" style="height: 400px"></div>
-        </div>        
+        </div>
+        </div>
         <h2 class="p-3">Tipos de mascotas en el sitio</h2>
         <div class="card m-3" style="pointer-events:none">
         <div id="piechart" align="center" style=" height: 500px;"></div>
