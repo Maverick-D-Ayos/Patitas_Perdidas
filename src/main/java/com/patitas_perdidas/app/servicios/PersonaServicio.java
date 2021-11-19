@@ -128,7 +128,7 @@ public class PersonaServicio implements UserDetailsService {
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Persona baja(String id) throws PersonaExcepcion {
-
+	
 		Persona entidad = buscaPorId(id);
 		entidad.setAlta(false);
 
@@ -298,7 +298,7 @@ public class PersonaServicio implements UserDetailsService {
 				k++;
 			}
 		}
-		return k;
+		return k;}
 	
 	public void guardarToken(ConfirmationToken token){
 		 confirmationTokenRepository.save(token);

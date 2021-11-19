@@ -1,4 +1,4 @@
-.vista-principal{
+ .vista-principal{
    	background-image: url(https://www.tuotrodiario.com/images/025c-0f2d43853899-b429df8f59c3-1000/horizontal-1150/perros-callejeros.jpg);
     background-size:cover;
     padding: 0.1px;
@@ -114,9 +114,10 @@ body, .vista-principal {
    	border-radius: 50px 50px 50px 50px;
 	height: 60px;
     margin-left: 2%;
-    margin-right: 2%;
+    margin-right: 10%;
     margin-bottom: 3%;
-    
+    padding-left:10%;
+    padding-right:10%;
     border-color: #00bcd4;
     border-width: 2px;
     background-color: rgba(0,0,0,.5);
@@ -359,5 +360,18 @@ button.btn.btn-outline-success.boton a{
     color:white;
     margin-left:5rem;
     margin-right:50rem;	
+}
+/* ERROR */
+.error-imagen{
+	width:30%;
+	height:30%;
+}
+.error{
+	display:flex;	
+}
+/*PASSWORD*/
+.password{
+	background-image: url(/imagenes/pataFondo.png);
+    background-size: cover;
 }
   
