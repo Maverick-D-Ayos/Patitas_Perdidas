@@ -1,6 +1,7 @@
 package com.patitas_perdidas.app.servicios;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -134,6 +135,50 @@ public class MascotaServicio {
 	}
 	return mr.buscarListaEncontrados();
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Mascota> listarUltimasMascotasPerdidas() {
+		List<Mascota> m = mr.buscarListaPerdidos();
+		List<Mascota> lm = new ArrayList<>();
+		int cantMascotas = m.size();
+		
+		if (cantMascotas > 3) {
+			
+			for (int i = (cantMascotas-1); i > (cantMascotas-4) ; i--) {
+				lm.add(m.get(i));
+			}
+			
+			return lm;
+			
+		}
+			
+		return m;
+		
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Mascota> listarUltimasMascotasEncontradas() {
+		List<Mascota> m = mr.buscarListaEncontrados();
+		List<Mascota> lm = new ArrayList<>();
+		int cantMascotas = m.size();
+		
+		if (cantMascotas > 3) {
+			
+			for (int i = (cantMascotas-1); i > (cantMascotas-4) ; i--) {
+				lm.add(m.get(i));
+			}
+			
+			return lm;
+			
+		}
+			
+		return m;
+			
+		
+	}
+	
+
+	
 
 	@Transactional(readOnly = true)
 	public List<Mascota> listarMascotasPorRaza(String raza) {
