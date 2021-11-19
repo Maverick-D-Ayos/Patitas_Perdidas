@@ -21,24 +21,6 @@
 <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 <link href="/dashboard.css" rel="stylesheet">
 
-<style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-    
-
-</head>
 <body>
 		
 		<!-- HEADER -->
@@ -53,17 +35,17 @@
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">Categorias</h6>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"><img src="/imagenes/homedash.png" width="24" height="24">
+            <a class="nav-link" aria-current="page" href="/dashboard"><img src="/imagenes/homedash.png" width="24" height="24">
               Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/dashboard/usuarios"><img src="/imagenes/users.png" width="24" height="24">
+            <a class="nav-link active" href="/dashboard/usuarios"><img src="/imagenes/users.png" width="24" height="24">
              Usuarios
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><img src="/imagenes/pet.png" width="24" height="24">
+            <a class="nav-link" href="/dashboard/mascotas"><img src="/imagenes/pet.png" width="24" height="24">
               Mascotas
             </a>
           </li>
@@ -88,7 +70,8 @@
           </button>
         </div>
       </div>
-
+	
+	<form class="form" th:href="@{/dashboard/usuarios/editar(id=__${usuario?.id}__)}" method="POST">
       <div class="form-floating mb-3">
 				<input type="text" class="form-control" id="nombre"
 					placeholder="name" name="nombre" th:value=${usuario?.nombre} required> 
@@ -106,17 +89,18 @@
 					placeholder="name@example.com" name="mail" th:value=${usuario?.mail} required>
 				 <label for="floatingInput">E-mail</label>
 			</div>
-			<div class="form-floating">
-			  <select class="form-select" id="floatingSelect" aria-label="Floating label select example" th:with="rol=${usuario.rol}">
-			    <option selected th:text="${usuario?.rol}">
-			    <option th:text="'USER'"></option>
-			    <option th:text="'ADMIN'"></option>
+			<div class="form-floating" th:if="${usuario?.id != session.clientesession.id}">
+			  <select class="form-select" name="rol" id="floatingSelect" aria-label="Floating label select example" th:value="${usuario?.rol}">
+			    <option selected th:text="${usuario?.rol}" th:value="${usuario.rol}">
+			    <option th:if="${usuario.rol?.toString() != 'USER'}" th:text="'USER'"></option>
+			    <option th:if="${usuario.rol?.toString() != 'ADMIN'}" th:text="'ADMIN'"></option>
 			   </select>
 			  <label for="floatingSelect">Rol</label>
 			</div>
 
 			<button class="btn btn-primary m-2" type="submit">Guardar</button>
 			<a class="btn btn-danger" href="/dashboard/usuarios" role="button">Volver</a>
+			</form>
 			 </main>
         </div>
       

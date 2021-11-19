@@ -41,6 +41,12 @@ public interface MascotaRepositorio extends JpaRepository<Mascota, String> {
 	// Busca una lista de mascota zona, retorna una lista de mascotas
 	@Query("SELECT m FROM Mascota m WHERE m.alta = true and m.zona = :zona")
 	public List<Mascota> buscarListaZona(@Param("zona") String zona);
+	
+	@Query(value = "SELECT count(m) FROM Mascota m where m.alta = true")
+	public long countAlta();
+	
+	@Query(value = "SELECT count(m) FROM Mascota m where m.alta = false")
+	public long countBaja();
 
 	// Buscar segun filtro todas las activas
 	@Query("SELECT m FROM Mascota m WHERE m.alta = true and (m.zona LIKE %:atributo%" + " OR m.tamanio LIKE %:atributo%"

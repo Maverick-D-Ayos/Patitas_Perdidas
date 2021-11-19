@@ -144,7 +144,7 @@
                     <!-- Zona -->
                     <div class="fecha ui-widget">
                         <label class="control-label"><span class="required">*</span>Barrio</label>
-                        <input class="form-control" name="zona" type="text" id="tags" th:value="${zona}" placeholder="Ingrese el barrio" required>
+                        <input class="form-control" name="zona" type="text" id="tags" th:value="${mascota?.zona}" placeholder="Ingrese el barrio" required>
                     </div>
                     <!-- FIN Zona -->
 
@@ -169,7 +169,8 @@
 
                     <!-- Encontrado -->
                     <div class="form-group">
-                        <input type="hidden" id="encontrado" name="encontrado" value=true>
+                        <input th:if="${mascota?.encontrado == true}" type="hidden" id="encontrado" name="encontrado" value=true>
+                        <input th:unless="${mascota?.encontrado == true}" type="hidden" id="encontrado" name="encontrado" value=false>
                     </div>
                     <!-- FIN Encontrado -->
 					</div>

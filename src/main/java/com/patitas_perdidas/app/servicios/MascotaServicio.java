@@ -94,7 +94,8 @@ public class MascotaServicio {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Mascota> listarTodasMascotasActivas() {
+	public List<Mascota> listarTodasMascotasActivas() throws MascotaExcepcion
+	{
 		List<Mascota> lm = mr.buscarListaActivos();
 		return lm;
 	}
@@ -217,6 +218,9 @@ public class MascotaServicio {
 	
 	@Transactional(readOnly = true)
 	public List<Mascota> listarMascotasBusqueda(String atributo, String seleccion) {
+		if(atributo == null || atributo.strip().isEmpty())
+			return mr.buscarListaActivos();
+		
 		switch(seleccion)
 		{
 		   case "todas":
@@ -228,5 +232,13 @@ public class MascotaServicio {
 		   default:
 			   return null;
 		}
+	}
+	public long countMascotasActivas()
+	{
+		return mr.countAlta();
+	}
+	public long countMascotasBaja()
+	{
+		return mr.countBaja();
 	}
 }
