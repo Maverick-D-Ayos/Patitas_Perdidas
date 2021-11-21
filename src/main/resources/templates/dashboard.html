@@ -117,7 +117,7 @@
         function drawColumnChart() {
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Fecha');
-            data.addColumn('number', 'Registos');
+            data.addColumn('number', 'Registros');
             Object.keys(real_data).forEach(function(key) {
                 data.addRow([ key, real_data[key] ]);
             });
