@@ -66,7 +66,7 @@ public class PersonaServicio implements UserDetailsService {
 		entidad.setMail(mail);
 		entidad.setCreado(new Date());
 		entidad.setClave(encriptarClave(clave));
-		entidad.setAlta(true);
+		entidad.setAlta(false);
 		entidad.setRol(Rol.USER);
 		personaRepositorio.save(entidad);
 	}
