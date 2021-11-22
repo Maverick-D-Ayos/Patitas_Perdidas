@@ -329,7 +329,7 @@ public class PersonaServicio implements UserDetailsService {
 	public ConfirmationToken confirmarToken(String token){
 		return confirmationTokenRepository.findByConfirmationToken(token);
 	}
-	@Transactional(readOnly = true)
+
 	public void guardarPersona(Persona persona) {
 		personaRepositorio.save(persona);
 
