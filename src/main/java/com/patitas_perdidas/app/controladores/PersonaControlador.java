@@ -18,15 +18,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import org.springframework.mail.javamail.JavaMailSender;
 import com.patitas_perdidas.app.entidades.ConfirmationToken;
 import com.patitas_perdidas.app.entidades.Persona;
 import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
+import com.patitas_perdidas.app.repositorios.ConfirmationTokenRepository;
+import com.patitas_perdidas.app.repositorios.PersonaRepositorio;
 import com.patitas_perdidas.app.servicios.PersonaServicio;
 
 @Controller
 @RequestMapping("/persona")
 public class PersonaControlador {
+	
+	@Autowired
+    private JavaMailSender javaMailSender;
+	
+	@Autowired
+	private PersonaRepositorio personaRepositorio;
+	
+	@Autowired
+	private ConfirmationTokenRepository confirmationTokenRepository;
 	
 	@Autowired
 	private PersonaServicio personaServicio;
@@ -51,7 +62,20 @@ public class PersonaControlador {
 
 		try {
 			personaServicio.guardar(nombre, telefono, mail, clave);
-			personaServicio.sendMail(mail, nombre);
+			Persona p = personaServicio.buscarPorEmail2(mail);
+			ConfirmationToken confirmationToken = new ConfirmationToken(p);
+			personaServicio.guardarToken(confirmationToken);
+
+		    SimpleMailMessage email = new SimpleMailMessage();
+		        
+		    String contenido = "Bievenido "+nombre+" a la familia de Patitas Perdidas. Para confirmar tu cuenta, por favor ingresa en el siguiente link:" +"http://localhost:8080/persona/confirm-account/"+confirmationToken.getConfirmationToken();
+
+		    email.setFrom("patitasperdidas.egg@gmail.com");
+		    email.setTo(mail);
+		    email.setSubject("Se ha completado su registro en Patitas Perdidas");
+		    email.setText(contenido);
+		    
+		    javaMailSender.send(email);
 		} catch (PersonaExcepcion e) {
 			redirAttrs.addFlashAttribute("nombre",nombre);
 			redirAttrs.addFlashAttribute("telefono",telefono);
@@ -59,10 +83,45 @@ public class PersonaControlador {
 			redirAttrs.addFlashAttribute("errorReg", e.getMessage());
 			return ("redirect:./registro");
 		}
-		redirAttrs.addFlashAttribute("exito", "Se ha registrado sastifactoriamente. Ahora puede ir a iniciar sesion.");
+		redirAttrs.addFlashAttribute("exito", "Se ha registrado sastifactoriamente. Por favor verifique su cuenta con el link que enviamos por mail.");
 		return ("redirect:/");
 
 	}
+	
+	
+	@RequestMapping(value="/register", method = RequestMethod.GET)
+    public ModelAndView displayRegistration(ModelAndView modelAndView, Persona persona)
+    {
+        modelAndView.addObject("persona", persona);
+        modelAndView.setViewName("register");
+        return modelAndView;
+    }
+
+  
+    @RequestMapping(value="/confirm-account/{confirmationToken}", method= {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView confirmUserAccount(ModelAndView modelAndView, @PathVariable String confirmationToken)
+    {
+        ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
+        System.out.println(token.getConfirmationToken()+"aqui deberia aparecer el token que enviamos");
+        if(token != null)
+        {
+            Persona persona = personaRepositorio.buscarPersonaPorMail(token.getUser().getMail());
+            try {
+				personaServicio.alta(persona.getId());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            modelAndView.setViewName("accountVerified");
+        }
+        else
+        {
+            modelAndView.addObject("message","The link is invalid or broken!");
+            modelAndView.setViewName("error");
+        }
+
+        return modelAndView;
+    }
 
 
 	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
