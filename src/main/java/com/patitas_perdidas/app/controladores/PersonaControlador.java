@@ -68,7 +68,7 @@ public class PersonaControlador {
 
 		    SimpleMailMessage email = new SimpleMailMessage();
 		        
-		    String contenido = "Bievenido "+nombre+" a la familia de Patitas Perdidas. Para confirmar tu cuenta, por favor ingresa en el siguiente link:" +"http://localhost:8080/persona/confirm-account/"+confirmationToken.getConfirmationToken();
+		    String contenido = "Bievenido "+nombre+" a la familia de Patitas Perdidas. Para confirmar tu cuenta, por favor ingresa en el siguiente link: " +"http://localhost:8080/persona/confirm-account/"+confirmationToken.getConfirmationToken();
 
 		    email.setFrom("patitasperdidas.egg@gmail.com");
 		    email.setTo(mail);
@@ -256,9 +256,9 @@ public class PersonaControlador {
             // Create the email
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(existingUser.getMail());
-            mailMessage.setSubject("Complete Password Reset!");
+            mailMessage.setSubject("Completa tu cambio de contraseña! (Patitas Perdidas)");
             mailMessage.setFrom("patitasperdidas.egg@gmail.com");
-            mailMessage.setText("To complete the password reset process, please click here: "
+            mailMessage.setText("Por favor, para continuar con el proceso de cambio de contraseña haz click en el siguiente link: "
               + "http://localhost:8080/persona/confirm-reset/"+confirmationToken.getConfirmationToken());
 
             // Send the email
