@@ -65,6 +65,9 @@ public interface MascotaRepositorio extends JpaRepository<Mascota, String> {
 	@Query(nativeQuery = true ,value = "SELECT * FROM Mascota WHERE alta = true AND encontrado = false ORDER BY creado DESC LIMIT 4")
 	public List<Mascota> ultimasMascotas();
 	
+	@Query(nativeQuery = true ,value = "SELECT * FROM Mascota WHERE alta = true AND encontrado = true ORDER BY creado DESC LIMIT 4")
+	public List<Mascota> ultimasMascotasEnc();
+	
 	@Query(nativeQuery = true ,value = "DELETE * FROM Mascota WHERE persona_id = :idPersona")
 	public void deleteMasc(@Param("idPersona") String idPersona);
 	

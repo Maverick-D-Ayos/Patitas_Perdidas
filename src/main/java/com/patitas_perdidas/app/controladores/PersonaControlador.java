@@ -131,10 +131,9 @@ public class PersonaControlador {
 			if (person == null || !person.getId().equals(id)) {
 				return "redirect:/inicio";
 			}
-			personaServicio.baja(id);
-			
+			personaServicio.baja(id);			
 			session.setAttribute("clientesession", null);
-			return "/logout";
+			return "redirect:/logout";
 		} catch (Exception e) {
 			return "redirect:/";
 		}
