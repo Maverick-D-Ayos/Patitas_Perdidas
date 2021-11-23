@@ -45,6 +45,7 @@ public class MascotaServicio {
 		m.setTamanio(tamanio);
 		m.setEncontrado(encontrado);
 		m.setFecha(fecha);
+		m.setCreado(new Date());
 		m.setEspecie(especie);
 		m.setPersona(ps.buscaPorId(person_id));
 		m.setAlta(true);

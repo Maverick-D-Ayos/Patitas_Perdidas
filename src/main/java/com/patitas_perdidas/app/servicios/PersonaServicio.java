@@ -37,6 +37,7 @@ import com.patitas_perdidas.app.enums.Rol;
 import com.patitas_perdidas.app.excepciones.MascotaExcepcion;
 import com.patitas_perdidas.app.excepciones.PersonaExcepcion;
 import com.patitas_perdidas.app.repositorios.ConfirmationTokenRepository;
+import com.patitas_perdidas.app.repositorios.MascotaRepositorio;
 import com.patitas_perdidas.app.repositorios.PersonaRepositorio;
 
 @Service
@@ -50,6 +51,9 @@ public class PersonaServicio implements UserDetailsService {
 
 	@Autowired
 	private MascotaServicio mascotaServicio;
+	
+	@Autowired
+	private MascotaRepositorio mr;
 	
 	@Autowired
     private JavaMailSender javaMailSender;
@@ -149,8 +153,8 @@ public class PersonaServicio implements UserDetailsService {
 	public Persona baja(String id) throws PersonaExcepcion {
 	
 		Persona entidad = buscaPorId(id);
+		mr.deleteMasc(id);
 		entidad.setAlta(false);
-
 		return personaRepositorio.save(entidad);
 	}
 
