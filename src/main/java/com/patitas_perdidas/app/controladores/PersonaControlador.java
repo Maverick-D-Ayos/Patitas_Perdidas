@@ -269,7 +269,7 @@ public class PersonaControlador {
 
         } else {
             modelAndView.addObject("message", "This email address does not exist!");
-            modelAndView.setViewName("error");
+            modelAndView.setViewName("errorCuentaInexistente");
         }
         return modelAndView;
     }
