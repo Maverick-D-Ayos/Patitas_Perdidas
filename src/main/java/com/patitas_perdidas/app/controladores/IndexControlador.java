@@ -28,7 +28,7 @@ public class IndexControlador {
 		if(error != null)
 		{
 			System.out.println("usuario incorrecto");
-			model.put("error", "Usuario o clave incorrectos");
+			model.put("errorIndex", "Usuario o clave incorrectos");
 		}
 		return "index.html";
 	}
@@ -51,7 +51,7 @@ public class IndexControlador {
 		model.addAttribute("ultimasMascotasPerdidas",ultimasPerdidas);
 		if(error != null)
 		{
-			model.put("error", "Usuario o clave incorrectos");
+			model.put("errorIndex", "Usuario o clave incorrectos");
 			return "index.html";
 		}
 		else
