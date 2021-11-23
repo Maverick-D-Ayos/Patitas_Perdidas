@@ -29,6 +29,7 @@
                 
                 <div class="mt-4 text-start"><button class="btn btn-primary" type="button" id="editar">Editar Perfil</button></div>
                 <div class="form-group text-start"><button class="btn btn-warning" type="submit" id="guardar">Guardar Perfil</button>
+                <div class="mt-4 text-end"><a class="btn btn-danger" role="button" th:href="@{/persona/baja/{id}(id = ${session.clientesession.id})}">Eliminar Perfil</a></div>
                 
                 </div>
                 </form>

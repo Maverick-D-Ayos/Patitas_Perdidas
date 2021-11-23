@@ -124,16 +124,23 @@ public class PersonaControlador {
 
 
 	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-	@GetMapping("/baja/id")
-	public String baja(@PathVariable String id) {
+	@GetMapping("/baja/{id}")
+	public String baja(HttpSession session, @PathVariable String id, RedirectAttributes redirAttrs) {
 		try {
+			Persona person = (Persona) session.getAttribute("clientesession");
+			if (person == null || !person.getId().equals(id)) {
+				return "redirect:/inicio";
+			}
 			personaServicio.baja(id);
-			return "redirect:/persona/lista";
+			
+			session.setAttribute("clientesession", null);
+			return "/logout";
 		} catch (Exception e) {
 			return "redirect:/";
 		}
 	}
-
+	
+	
 	@GetMapping("/alta/id")
 	public String alta(@PathVariable String id) {
 		try {
