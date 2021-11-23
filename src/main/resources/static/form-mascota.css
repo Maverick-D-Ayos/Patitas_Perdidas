@@ -1,0 +1,39 @@
+/* button.btn { */
+/* 	vertical-align: unset !important; */
+/* 	margin-top: 1rem; */
+/* } */
+body{
+	background-image: url(/imagenes/pataFondo.png);
+    background-size: cover;
+    
+}
+
+
+/* DERECHOS */
+.derechos {
+	color:#FFFFFF;
+    padding: 20px 10px;
+    background-color:#454545;
+    display: flex;
+    justify-content: space-around;
+  }
+.derechos p {
+    font-size: 12px;
+    color: white;
+  }
+
+/* FIN DERECHOS */
+
+html {
+  height: 100%;
+}
+
+body, .vista-principal {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer{
+    background-color: rgba(0, 0, 0, .3);
+    flex-shrink: 0;
+}

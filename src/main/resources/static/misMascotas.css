@@ -1,0 +1,30 @@
+body {
+	background-color: #454545;
+	color: rgb(253, 251, 247);
+	margin: 1%;
+	background-image: url(https://www.tuotrodiario.com/images/025c-0f2d43853899-b429df8f59c3-1000/horizontal-1150/perros-callejeros.jpg);
+    background-size: cover;
+    justify-content: space-between;
+}
+a.btn.boton {
+	vertical-align: unset !important;
+}
+.mascotas {
+	display:flex;
+	justify-content:center;
+	text-align: "center";
+	 background-color: rgba(0, 0, 0, .3);
+}
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer{
+    background-color: rgba(0, 0, 0, .3);
+    flex-shrink: 0;
+}
+

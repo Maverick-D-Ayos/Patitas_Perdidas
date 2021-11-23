@@ -1,0 +1,141 @@
+<head>
+	<meta charset="UTF-8">
+</head>
+<mascotasInicio class="color-inicio">
+	<modal th:replace="/fragments/modal :: modal"></modal>
+	<h2 class="text-white m-2">Últimas Mascotas Perdidas</h2>
+	<div class="row row-cols-1 row-cols-lg-4 g-3">
+		<div class="card flex m-4" style="width: 25rem;" th:each="mascota:${ultimasMascotasPerdidas}">
+			<img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" class="card-img-top p-2">
+			<div class="card-body">
+				<p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
+			</div>
+			<ul class="list-group list-group-flush ">
+				<li class="list-group-item">Nombre: <span th:text="${mascota.nombre}"></span></li>
+				<li class="list-group-item">Fecha en que se encontro: <span th:text="${mascota.fecha}"></span></li>
+				<li class="list-group-item">Zona en que se encontro: <span th:text="${mascota.zona}"></span></li>
+			</ul>
+
+
+
+			<a href="#" class="btn btn-info m-2 stretched-link" data-toggle="modal"
+				th:attr="data-target=${'#masInfo'+mascota.id}" data-mascota="${mascota}" role="button">
+				Más Info
+			</a>
+		</div>
+		<div class="modal fade" th:attr="id=${'masInfo'+mascota.id}" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true" th:each="mascota:${ultimasMascotasPerdidas}">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-light" id="exampleModalLabel">Más Info</h5>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="carousel row ">
+							<div class="col-md-6"><img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"
+									class="card-img-top"></div>
+							<div class="col-md-6 ms-auto">
+								<div class="list-group">
+									<p class="list-group-item rounded-top-right-20 rounded-bottom-20"><span
+											th:text="${mascota.descripcion}"></span></p>
+									<p class="list-group-item rounded-top-right-20 rounded-bottom-20">Especie: <span
+											th:text="${mascota.especie}"></span></p>
+									<p class="list-group-item rounded-top-right-20 rounded-bottom-20">Raza: <span
+											th:text="${mascota.raza}"></span></p>
+									<p class="list-group-item rounded-top-right-20 rounded-bottom-20">Color: <span
+											th:text="${mascota.color}"></span></p>
+									<h4>Contacta con el usuario que publico esta mascota:</h4>
+									<p id="texto-modal"><strong>Nombre de usuario:</strong> <span
+											th:text="${mascota.persona?.nombre}"></span></p>
+									<p id="texto-modal"><strong>Email: </strong><span
+											th:text="${mascota.persona?.mail}"></span></p>
+									<p id="texto-modal"><strong>Telefono/Cel: </strong><span
+											th:text="${mascota.persona?.telefono}"></span></p>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<h2 class="text-white m-2">Últimas Mascotas Encontradas</h2>
+	<div class="row row-cols-1 row-cols-lg-4 g-3">
+
+		<div class="card flex m-4" style="width: 25rem;" th:each="mascota:${ultimasMascotasEncontradas}">
+			<img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" class="card-img-top p-2">
+			<div class="card-body">
+				<p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
+			</div>
+			<ul class="list-group list-group-flush ">
+				<li class="list-group-item">Nombre: <span th:text="${mascota.nombre}"></span></li>
+				<li class="list-group-item">Fecha en que se encontro: <span th:text="${mascota.fecha}"></span></li>
+				<li class="list-group-item">Zona en que se encontro: <span th:text="${mascota.zona}"></span></li>
+			</ul>
+
+
+
+			<a href="#" class="btn btn-info m-2 stretched-link" data-toggle="modal"
+				th:attr="data-target=${'#masInfo'+mascota.id}" data-mascota="${mascota}" role="button">
+				Más Info
+			</a>
+		</div>
+		<div class="modal fade" th:attr="id=${'masInfo'+mascota.id}" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true" th:each="mascota:${ultimasMascotasEncontradas}">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-light" id="exampleModalLabel">Más Info</h5>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="carousel row ">
+							<div class="col-md-6"><img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"
+									class="card-img-top"></div>
+							<div class="col-md-6 ms-auto">
+								<div class="list-group">
+									<p class="list-group-item rounded-top-right-20 rounded-bottom-20"><span
+											th:text="${mascota.descripcion}"></span></p>
+									<p class="list-group-item rounded-top-right-20 rounded-bottom-20">Especie: <span
+											th:text="${mascota.especie}"></span></p>
+									<p class="list-group-item rounded-top-right-20 rounded-bottom-20">Raza: <span
+											th:text="${mascota.raza}"></span></p>
+									<p class="list-group-item rounded-top-right-20 rounded-bottom-20">Color: <span
+											th:text="${mascota.color}"></span></p>
+									<h4>Contacta con el usuario que publico esta mascota:</h4>
+									<p id="texto-modal"><strong>Nombre de usuario:</strong> <span
+											th:text="${mascota.persona?.nombre}"></span></p>
+									<p id="texto-modal"><strong>Email: </strong><span
+											th:text="${mascota.persona?.mail}"></span></p>
+									<p id="texto-modal"><strong>Telefono/Cel: </strong><span
+											th:text="${mascota.persona?.telefono}"></span></p>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</mascotasInicio>

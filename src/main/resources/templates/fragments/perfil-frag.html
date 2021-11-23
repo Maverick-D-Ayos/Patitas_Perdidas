@@ -1,0 +1,63 @@
+<!-- HEADER SIN LOGUEARSE -->
+<head><meta charset="UTF-8"></head>
+<div class="col-md-8" th:fragment="perfil" th:if="${pass == null}">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                        <h6><a href="/inicio" style="text-decoration: none;color: white;">← Atras</a></h6>
+                        
+                    </div>
+                    <h6><a th:href="@{/persona/modificar-pass/{id}(id = ${session.clientesession.id})}" style="text-decoration: none;color:white;">Cambiar Contraseña →</a></h6>
+                </div>
+                <form class="form" method="POST" th:action="@{/persona/modificar/{id}(id = ${session.clientesession.id})}">
+                <div class="row mt-2 text-black">
+                    <div class="form-floating col-md-6 ">
+               			<input type="text" class="form-control" id="nombre" th:value="${usuario.nombre}" placeholder="Nombre" name="nombre" maxlength="255" required readonly>
+						<label for="floatingInput ">Nombre Completo</label>            
+       				 </div>
+                    <div class="form-floating col-md-6">
+               			<input type="number" class="form-control" id="tel" th:value="${usuario.telefono}" placeholder="Telefono" name="telefono" maxlength="255" required readonly>
+						<label for="floatingInput">Telefono</label>            
+       				 </div>
+       				 </div>
+                <div class="row mt-3 text-black">
+                    <div class="form-floating">
+               			<input type="email" class="form-control" id="mail" th:value="${usuario.mail}" placeholder="name@example.com" name="mail" maxlength="255" required readonly>
+						<label for="floatingInput">E-mail</label>            
+       				 </div>
+                </div>
+                
+                <div class="mt-4 text-start"><button class="btn btn-primary" type="button" id="editar">Editar Perfil</button></div>
+                <div class="form-group text-start"><button class="btn btn-warning" type="submit" id="guardar">Guardar Perfil</button>
+                
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8" th:fragment="perfil" th:unless="${pass == null}">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1">←</i>
+                        <h6><a th:href="@{/persona/perfil/{id}(id = ${session.clientesession.id})}" style="text-decoration: none;color: black;">Atras</a></h6>
+                        
+                    </div>
+                    
+                </div>
+                <form class="form" method="POST" th:action="@{/persona/modificar-pass/{id}(id = ${session.clientesession.id})}">
+                <div class="row mt-2">
+                    <div class="form-floating col-md-6">
+               			<input type="password" class="form-control" placeholder="clave" name="clave1" maxlength="255" required>
+						<label for="floatingInput">Ingrese nueva clave</label>            
+       				 </div>
+                    <div class="form-floating col-md-6">
+               			<input type="password" class="form-control" placeholder="Password" name="clave2" maxlength="255" required>
+						<label for="floatingInput">Reingrese clave</label>            
+       				 </div>
+       				 </div>
+                
+                <div class="mt-4 text-start"><button class="btn btn-warning" type="submit">Actualizar contraseña</button>
+                
+                </div>
+                </form>
+            </div>
+</div>

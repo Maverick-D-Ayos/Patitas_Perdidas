@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es"
+>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patitas perdidas</title>
+<link href="/index.css" rel="stylesheet">
+<link rel="icon" href="/imagenes/favicon.ico" type="image/x-icon">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+	rel="stylesheet">
+<link href="/headers.css" rel="stylesheet">
+
+<link rel="icon" href="/imagenes/favicon.ico" type="image/x-icon">
+<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+<link href="/dashboard.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript"
+    src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+		
+		<!-- HEADER -->
+			<header th:replace = "/fragments/header :: header"></header>
+		<!-- FIN HEADER -->
+
+		
+		<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">Categorias</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"><img src="/imagenes/homedash.png" width="24" height="24">
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard/usuarios"><img src="/imagenes/users.png" width="24" height="24">
+             Usuarios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard/mascotas"><img src="/imagenes/pet.png" width="24" height="24">
+              Mascotas
+            </a>
+          </li>
+          
+        </ul>
+
+        
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Panel de Control</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+<!--           <div class="btn-group me-2"> -->
+<!--             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button> -->
+<!--             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
+<!--           </div> -->
+			<form th:replace = "/fragments/dias :: diasform"></form>
+        </div>
+      </div>
+      <div class="container-fluid text-center" align="center">
+        <h2 class="p-3" th:text="'Nuevos usuarios en los ultimos __${dias}__ dias'"></h2>
+        <div class="row-fluid d-flex">
+        <div class="card flex m-4" style="width: 18rem;">
+			<img src="/imagenes/newuser.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			<div class="card-body text-center">
+				<h5 class="card-title" th:text="'Nuevos usuarios en los ultimos __${dias}__ dias'"></h5>
+			    <h2 class="card-text" th:text="${countUserWeek}"></h2>
+			</div>
+		</div>
+        <div class="card m-3" style="pointer-events:none; width: 100%;">
+        <div id="chart_div" style="height: 400px"></div>
+        </div>
+        </div>
+        
+        <h2 class="p-3" th:text="'Nuevas publicaciones en los ultimos __${dias}__ dias'"></h2>
+        <div class="row-fluid d-flex">
+        <div class="card flex m-4" style="width: 18rem;">
+			<img src="/imagenes/mascota2.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			<div class="card-body text-center">
+				<h5 class="card-title" th:text="'Nuevas publicaciones en los ultimos __${dias}__ dias'"></h5>
+			    <h2 class="card-text" th:text="${countMascotaWeek}"></h2>
+			</div>
+		</div>
+        <div class="card m-3" style="pointer-events:none; width: 100%">
+        <div id="chart_div2" style="height: 400px"></div>
+        </div>
+        </div>
+        <h2 class="p-3">Tipos de mascotas en el sitio</h2>
+        <div class="card m-3" style="pointer-events:none">
+        <div id="piechart" align="center" style=" height: 500px;"></div>
+        </div>
+    
+    <script th:inline="javascript">
+        var real_data = /*[[${chartData}]]*/'noValue';
+        var real_data3 = /*[[${chartData3}]]*/'noValue';
+        $(document).ready(function() {
+            google.charts.load('current', {
+                packages : [ 'corechart', 'bar' ]
+            });
+            google.charts.setOnLoadCallback(drawColumnChart);
+            google.charts.setOnLoadCallback(drawColumnChart2);
+           
+        });
+        function drawColumnChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Fecha');
+            data.addColumn('number', 'Registros');
+            Object.keys(real_data).forEach(function(key) {
+                data.addRow([ key, real_data[key] ]);
+            });
+            var options = {
+                title : 'Cantidad de registros',
+                hAxis : {
+                    title : 'Fecha',
+                },
+                vAxis : {
+                    title : 'Registros'
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document
+                    .getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+        function drawColumnChart2() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Fecha');
+            data.addColumn('number', 'Publicaciones');
+            Object.keys(real_data3).forEach(function(key) {
+                data.addRow([ key, real_data3[key] ]);
+            });
+            var options = {
+                title : 'Cantidad de publicaciones',
+                hAxis : {
+                    title : 'Fecha',
+                },
+                vAxis : {
+                    title : 'Publicaciones'
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document
+                    .getElementById('chart_div2'));
+            chart.draw(data, options);
+        }
+        
+    </script>
+    <script th:inline="javascript">
+        var real_data2 = /*[[${chartData2}]]*/'noValue';
+        $(document).ready(function() {
+            google.charts.load('current', {
+                packages : [ 'corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+        });
+        
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Year');
+            data.addColumn('number', 'Views');
+            Object.keys(real_data2).forEach(function(key) {
+                data.addRow([ key, real_data2[key] ]);
+            });
+            var options = {
+                title : 'Tipo de mascotas',
+                pieHole: 0.5,
+                width: 800,
+  				height: 500,
+            };
+            var chart = new google.visualization.PieChart(document
+                    .getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+<!--       <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1248" height="526" style="display: block; width: 1248px; height: 526px;"></canvas> -->
+		<h2 class="p-4 text-start">Activos</h2>
+		<div class="row">
+			<div class="card flex m-4" style="width: 18rem;">
+			  <img src="/imagenes/pet2.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			  <div class="card-body text-center">
+			    <h5 class="card-title">Mascotas activas</h5>
+			    <h2 class="card-text" th:text="${countMasc}"></h2>
+			    </div>
+			</div>
+			<div class="card flex m-4" style="width: 18rem;">
+			  <img src="/imagenes/grupo.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			  <div class="card-body text-center">
+			    <h5 class="card-title">Usuarios activos</h5>
+			    <h2 class="card-text" th:text="${countPers}"></h2>
+			    </div>
+			</div>
+			<div class="card flex m-4" style="width: 18rem;">
+			  <img src="/imagenes/admin.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			  <div class="card-body text-center">
+			    <h5 class="card-title">Administradores</h5>
+			    <h2 class="card-text" th:text="${countAdmin}"></h2>
+			    </div>
+			</div>
+			</div>
+			<h2 class="p-4 text-start">Dados de baja</h2>
+		<div class="row">
+			<div class="card flex m-4" style="width: 18rem; background-color:#d3d3d3 ; opacity: 0.7;">
+			  <img src="/imagenes/pet2.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			  <div class="card-body text-center">
+			    <h5 class="card-title">Mascotas dadas de baja</h5>
+			    <h2 class="card-text" th:text="${countMascBaja}"></h2>
+			    </div>
+			</div>
+			<div class="card flex m-4" style="width: 18rem; background-color:#d3d3d3; opacity: 0.6;">
+			  <img src="/imagenes/grupo.png" height="auto" width="64" class="card-img-top p-3" alt="...">
+			  <div class="card-body text-center">
+			    <h5 class="card-title">Usuarios dados de baja</h5>
+			    <h2 class="card-text" th:text="${countPersBaja}"></h2>
+			    </div>
+			</div>
+			</div>
+
+     </div>
+    </main>
+  </div>
+</div>
+<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+<script src="dashboard.js"></script>
+
+		
+		
+		<!-- Fin Carousel -->
+	<footer th:replace= "/fragments/footer :: footer"></footer>
+	<script src="index.js"></script>
+</body>
+
+</html>

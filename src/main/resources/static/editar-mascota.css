@@ -1,0 +1,23 @@
+.btn {
+	vertical-align: unset !important;
+}
+body{
+	background-image: url(/imagenes/pataFondo.png);
+    background-size: cover;
+}
+
+/* html, body { */
+/*   height: 100%; */
+/* } */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer{
+    background-color: rgba(0, 0, 0, .3);
+    flex-shrink: 0;
+}
+.derechos p{
+	color: white;
+}

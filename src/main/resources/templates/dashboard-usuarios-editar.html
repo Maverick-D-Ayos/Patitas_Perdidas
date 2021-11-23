@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es"
+>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patitas perdidas</title>
+<link href="/index.css" rel="stylesheet">
+<link rel="icon" href="/imagenes/favicon.ico" type="image/x-icon">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+	rel="stylesheet">
+<link href="/headers.css" rel="stylesheet">
+
+<link rel="icon" href="/imagenes/favicon.ico" type="image/x-icon">
+<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+<link href="/dashboard.css" rel="stylesheet">
+
+<body>
+		
+		<!-- HEADER -->
+			<header th:replace = "/fragments/header :: header"></header>
+		<!-- FIN HEADER -->
+
+		
+		<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">Categorias</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/dashboard"><img src="/imagenes/homedash.png" width="24" height="24">
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/dashboard/usuarios"><img src="/imagenes/users.png" width="24" height="24">
+             Usuarios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard/mascotas"><img src="/imagenes/pet.png" width="24" height="24">
+              Mascotas
+            </a>
+          </li>
+          
+        </ul>
+
+        
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2" th:text="'Editar usuario ' + ${usuario.nombre}"></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            This week
+          </button>
+        </div>
+      </div>
+	
+	<form class="form" th:href="@{/dashboard/usuarios/editar(id=__${usuario?.id}__)}" method="POST">
+      <div class="form-floating mb-3">
+				<input type="text" class="form-control" id="nombre"
+					placeholder="name" name="nombre" th:value=${usuario?.nombre} required> 
+					<label for="floatingInput">Nombre</label>
+			</div>
+
+			<div class="form-floating mb-3">
+				<input type="number" class="form-control" id="floatingInput"
+					placeholder="Telefono/Celular" name="telefono" th:value=${usuario?.telefono} required
+				> <label for="floatingInput">Telefono/Celular</label>
+			</div>
+
+			<div class="form-floating mb-3">
+				<input type="email" class="form-control" id="floatingInput"
+					placeholder="name@example.com" name="mail" th:value=${usuario?.mail} required>
+				 <label for="floatingInput">E-mail</label>
+			</div>
+			<div class="form-floating" th:if="${usuario?.id != session.clientesession.id}">
+			  <select class="form-select" name="rol" id="floatingSelect" aria-label="Floating label select example" th:value="${usuario?.rol}">
+			    <option selected th:text="${usuario?.rol}" th:value="${usuario.rol}">
+			    <option th:if="${usuario.rol?.toString() != 'USER'}" th:text="'USER'"></option>
+			    <option th:if="${usuario.rol?.toString() != 'ADMIN'}" th:text="'ADMIN'"></option>
+			   </select>
+			  <label for="floatingSelect">Rol</label>
+			</div>
+
+			<button class="btn btn-primary m-2" type="submit">Guardar</button>
+			<a class="btn btn-danger" href="/dashboard/usuarios" role="button">Volver</a>
+			</form>
+			 </main>
+        </div>
+      
+   
+  </div>
+
+<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+<script src="dashboard.js"></script>
+
+		
+		
+		<!-- Fin Carousel -->
+	<footer th:replace= "/fragments/footer :: footer"></footer>
+	<script src="index.js"></script>
+</body>
+
+</html>
