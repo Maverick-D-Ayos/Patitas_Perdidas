@@ -46,7 +46,9 @@ public class IndexControlador {
 	@GetMapping("/inicio")
 	public String inicio(@RequestParam(required = false) String error, ModelMap model) {
 		List<Mascota> ultimasMascotasEncontradas=this.ms.listarMascotasActivasEncontradas();
+		List<Mascota> ultimasPerdidas = this.ms.listarUltimasMascotasPerdidas();
 		model.addAttribute("ultimasMascotasEncontradas",ultimasMascotasEncontradas);
+		model.addAttribute("ultimasMascotasPerdidas",ultimasPerdidas);
 		if(error != null)
 		{
 			model.put("error", "Usuario o clave incorrectos");

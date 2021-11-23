@@ -1,8 +1,18 @@
  .vista-principal{
    	background-image: url(https://www.tuotrodiario.com/images/025c-0f2d43853899-b429df8f59c3-1000/horizontal-1150/perros-callejeros.jpg);
     background-size:cover;
+    background-repeat:no-repeat;
+    height:100%;
     padding: 0.1px;
     
+}
+.vista-principal-index{
+	background-image: url(https://www.tuotrodiario.com/images/025c-0f2d43853899-b429df8f59c3-1000/horizontal-1150/perros-callejeros.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    height:100%;
+    padding: 0.1px;
+    padding-bottom:20%;
 }
 .vista-principal.dark{
 	background-image:unset;
@@ -85,13 +95,18 @@ body, .vista-principal {
 }
 
 /*FIN MENU*/
-
+.color-inicio{
+	border-top:solid black;
+	background-color:#595957;
+}
 /*INICIO BUSCADOR*/
 .lupita{
+	
 	width:70%;
 }
 .buscador{
-    margin-bottom: 30%;
+	margin-left:2%;
+    margin-bottom: 1%;
     margin-top: 10%;
     border-radius: 30px 30px 30px 30px;
     background-color: rgba(0, 0, 0, .3);
@@ -374,4 +389,10 @@ button.btn.btn-outline-success.boton a{
 	background-image: url(/imagenes/pataFondo.png);
     background-size: cover;
 }
-  
+/*MIS MASCOTAS*/
+.vista-principal-mascotas {
+	background-image: url(https://www.tuotrodiario.com/images/025c-0f2d43853899-b429df8f59c3-1000/horizontal-1150/perros-callejeros.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    padding: 0.1px;
+}  
