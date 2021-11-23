@@ -1,9 +1,9 @@
 <head>
 	<meta charset="UTF-8">
 </head>
-<mascotasInicio>
+<mascotasInicio class="color-inicio">
 	<modal th:replace="/fragments/modal :: modal"></modal>
-	<h2>Mascotas Perdidas</h2>
+	<h2 class="text-white m-2">Últimas Mascotas Perdidas</h2>
 	<div class="row row-cols-1 row-cols-lg-4 g-3">
 		<div class="card flex m-4" style="width: 25rem;" th:each="mascota:${ultimasMascotasPerdidas}">
 			<img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" class="card-img-top p-2">
@@ -69,7 +69,7 @@
 			</div>
 		</div>
 	</div>
-	<h2>Mascotas Encontradas</h2>
+	<h2 class="text-white m-2">Últimas Mascotas Encontradas</h2>
 	<div class="row row-cols-1 row-cols-lg-4 g-3">
 
 		<div class="card flex m-4" style="width: 25rem;" th:each="mascota:${ultimasMascotasEncontradas}">
