@@ -115,7 +115,6 @@ button.btn.btn-outline-success.boton{
 /* CARD */
 .card-img-top {
     width: 100%;
-    height: 28vw;
     object-fit: cover;
 }
 .card-group {
