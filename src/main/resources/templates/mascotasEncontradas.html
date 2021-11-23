@@ -40,7 +40,7 @@
 
  <div class="card flex m-4" style="width: 25rem;" th:each="mascota:${listaMascotasEncontradas}">
   <img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}"
-   class="card-img-top p-2">
+   class="card-img-top p-2" style="max-height: 15em;object-fit: cover">
   <div class="card-body">
     <p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
   </div>
