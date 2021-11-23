@@ -85,7 +85,6 @@ public class PersonaControlador {
 		}
 		redirAttrs.addFlashAttribute("exito", "Se ha registrado sastifactoriamente. Por favor verifique su cuenta con el link que enviamos por mail.");
 		return ("redirect:/");
-
 	}
 	
 	
