@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
  xmlns:th="http://www.thymeleaf.org">
-    <head> 
-    <title>Exito al actualizar contraseña</title> 
+<head> 
+    <title>El Email no existe</title> 
     <link href="/index.css" rel="stylesheet">
     <link rel="icon" href="/imagenes/favicon.ico" type="image/x-icon">
 	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
@@ -16,24 +16,21 @@
     	<!-- HEADER -->
 		<header th:replace = "/fragments/header :: header"></header>		
 		<!-- FIN HEADER -->	
-			<h2 class="text-white m-2">¡La contraseña se ha actualizado correctamente!</h2>
-            <h5 class="text-white m-2">Ya puede volver al inicio e iniciar sesión con su nueva clave!</h5>
-           
-            </form>
-              <br>
-               <br>
-                <br>
-                 <br>
-                  <br>
-                   <br>
-                    <br>
-                     <br>
-                       <br>
-                     	<br>
-                     	 <br>
-                     	  <br>
-                     	  	<br>
-                           
+			<h2 class="text-white m-2">La dirección de correo electrónico ingresada no se encuentra</h2>
+			<h2 class="text-white m-2">registrada en la página!</h2>
+            <h5 class="text-white m-2">Revise haber escrito de forma correcta su dirección</h5>
+            <h5 class="text-white m-2">de correo electrónico, y de no haberlo hecho vuelva</h5>
+            <h5 class="text-white m-2">a intentar el proceso.</h5>
+            <br>
+            	<div>
+            		<a href="/persona/forgot-password" button type="submit" class="btn btn-primary btn-lg">Volver a intentarlo</a>
+            	</div>
+             
+               		<br>
+                		<br>
+                 			<br>
+                  				<br>
+                   				                        
      
      	<footer th:replace= "/fragments/footer :: footer"></footer>
           
