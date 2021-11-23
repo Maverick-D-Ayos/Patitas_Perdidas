@@ -83,7 +83,7 @@ public class PersonaControlador {
 			redirAttrs.addFlashAttribute("errorReg", e.getMessage());
 			return ("redirect:./registro");
 		}
-		redirAttrs.addFlashAttribute("exito", "Se ha registrado sastifactoriamente. Por favor verifique su cuenta con el link que enviamos por mail.");
+		redirAttrs.addFlashAttribute("exitoIndex", "Se ha registrado sastifactoriamente. Por favor verifique su cuenta con el link que enviamos por mail.");
 		return ("redirect:/");
 
 	}
@@ -117,7 +117,7 @@ public class PersonaControlador {
         else
         {
             modelAndView.addObject("message","The link is invalid or broken!");
-            modelAndView.setViewName("error");
+            modelAndView.setViewName("error-index");
         }
 
         return modelAndView;
