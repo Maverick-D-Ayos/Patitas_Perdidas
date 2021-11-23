@@ -21,10 +21,10 @@ public class IndexControlador {
 	@GetMapping()
 	public String index(@RequestParam(required = false) String error, ModelMap model)
 	{
-		/* List<Mascota> ultimasEncontradas=this.ms.listarUltimasMascotasEncontradas();
+		List<Mascota> ultimasEncontradas=this.ms.listarUltimasMascotasEncontradas();
 		List<Mascota> ultimasPerdidas = this.ms.listarUltimasMascotasPerdidas();
 		model.addAttribute("ultimasMascotasEncontradas",ultimasEncontradas);
-		model.addAttribute("ultimasMascotasPerdidas",ultimasPerdidas); */
+		model.addAttribute("ultimasMascotasPerdidas",ultimasPerdidas);
 		if(error != null)
 		{
 			System.out.println("usuario incorrecto");
@@ -45,8 +45,8 @@ public class IndexControlador {
 	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 	@GetMapping("/inicio")
 	public String inicio(@RequestParam(required = false) String error, ModelMap model) {
-		//List<Mascota> ultimasMascotasEncontradas=this.ms.listarMascotasActivasEncontradas();
-		//model.addAttribute("ultimasMascotasEncontradas",ultimasMascotasEncontradas);
+		List<Mascota> ultimasMascotasEncontradas=this.ms.listarMascotasActivasEncontradas();
+		model.addAttribute("ultimasMascotasEncontradas",ultimasMascotasEncontradas);
 		if(error != null)
 		{
 			model.put("error", "Usuario o clave incorrectos");
