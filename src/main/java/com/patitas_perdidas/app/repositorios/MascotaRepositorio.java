@@ -62,6 +62,10 @@ public interface MascotaRepositorio extends JpaRepository<Mascota, String> {
 	@Query(nativeQuery = true ,value = "SELECT COUNT(id) FROM mascota WHERE creado >= date_sub(now(),INTERVAL :n DAY)")
 	public int masclastWeek(@Param("n") Integer numero);
 	
+	@Query(nativeQuery = true ,value = "SELECT * FROM Mascota WHERE alta = true AND encontrado = false ORDER BY creado DESC LIMIT 4")
+	public List<Mascota> ultimasMascotas();
+	
+	
 
 	// Buscar segun filtro todas las activas
 	@Query("SELECT m FROM Mascota m WHERE m.alta = true and (m.zona LIKE %:atributo%" + " OR m.tamanio LIKE %:atributo%"

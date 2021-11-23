@@ -30,7 +30,7 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter{
 
 				.antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll().and().formLogin().loginPage("/")
 				.loginProcessingUrl("/logincheck").usernameParameter("mail").passwordParameter("clave")
-				.defaultSuccessUrl("/inicio").permitAll().and().logout().logoutUrl("/logout")
+				.defaultSuccessUrl("/").permitAll().and().logout().logoutUrl("/logout")
 				.logoutSuccessUrl("/").permitAll().and().csrf().disable();
 	}
 

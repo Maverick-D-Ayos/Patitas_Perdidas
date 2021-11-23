@@ -5,8 +5,8 @@
 	<modal th:replace="/fragments/modal :: modal"></modal>
 	<h2 class="text-white m-2">Últimas Mascotas Perdidas</h2>
 	<div class="row row-cols-1 row-cols-lg-4 g-3">
-		<div class="card flex m-4" style="width: 25rem;" th:each="mascota:${ultimasMascotasPerdidas}">
-			<img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" class="card-img-top p-2">
+		<div class="card flex m-4 card-masc" style="width: 25rem;" th:each="mascota:${ultimasMascotasPerdidas}">
+			<img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" class="card-img-top p-2" style="max-height: 15em;object-fit: cover">
 			<div class="card-body">
 				<p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
 			</div>
@@ -72,8 +72,8 @@
 	<h2 class="text-white m-2">Últimas Mascotas Encontradas</h2>
 	<div class="row row-cols-1 row-cols-lg-4 g-3">
 
-		<div class="card flex m-4" style="width: 25rem;" th:each="mascota:${ultimasMascotasEncontradas}">
-			<img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" class="card-img-top p-2">
+		<div class="card flex m-4 card-masc" style="width: 25rem;" th:each="mascota:${ultimasMascotasEncontradas}">
+			<img alt="" th:src="@{'data:image/jpeg;base64,'+${mascota.image}}" class="card-img-top p-2" style="max-height: 15em;object-fit: cover">
 			<div class="card-body">
 				<p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
 			</div>
