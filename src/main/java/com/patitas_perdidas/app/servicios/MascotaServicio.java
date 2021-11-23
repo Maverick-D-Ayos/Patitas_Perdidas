@@ -142,20 +142,8 @@ public class MascotaServicio {
 	
 	@Transactional(readOnly = true)
 	public List<Mascota> listarUltimasMascotasPerdidas() {
-		List<Mascota> m = mr.buscarListaPerdidos();
-		List<Mascota> lm = new ArrayList<>();
-		int cantMascotas = m.size();
+		List<Mascota> m = mr.ultimasMascotas();
 		
-		if (cantMascotas > 3) {
-			
-			for (int i = (cantMascotas-1); i > (cantMascotas-4) ; i--) {
-				lm.add(m.get(i));
-			}
-			
-			return lm;
-			
-		}
-			
 		return m;
 		
 	}
