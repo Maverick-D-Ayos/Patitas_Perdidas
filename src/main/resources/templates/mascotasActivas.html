@@ -39,7 +39,9 @@
    <p class="card-text"><span th:text="${mascota.descripcion}"></span></p>
   </div>
   <ul class="list-group list-group-flush ">
-  <li class="list-group-item">Nombre: <span th:text="${mascota.nombre}"></span></li> 
+   
+  <li class="list-group-item" th:if="${!mascota.encontrado}">Nombre: <span th:text="${mascota.nombre}"></span></li> 
+
     
   	<li class="list-group-item" th:if="${!mascota.encontrado}">Fecha en que se perdio: <span th:text="${mascota.fecha}"></span></li>
   	<li class="list-group-item" th:unless="${!mascota.encontrado}">Fecha en que se encontro: <span th:text="${mascota.fecha}"></span></li>
